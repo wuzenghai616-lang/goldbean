@@ -1,113 +1,76 @@
 # 🫘 GoldBean - x402 Micropaid API Marketplace
 
-> **Put this in your Claude/Cursor/Cline config and start calling paid APIs at 1¢ each.**
-> No credit card. No signup. Just USDC on Base via x402.
+Put this in your Claude/Cursor/Cline config and start calling paid APIs from 1 cent each.
+No credit card. No signup. Just USDC on Base via x402.
 
 ---
 
-## ⚠️ This Is NOT a Free API — You Must Pay Per Call
+## WARNING: This Is NOT a Free API
 
-GoldBean charges **1¢ to 8¢ per request** via x402 micropayments. If you don't have USDC on Base, calls will fail with `402 Payment Required`.
+GoldBean charges 1 cent to 10 cents per request via x402 micropayments.
+Without USDC on Base, calls will fail with 402 Payment Required.
 
-**You cannot use GoldBean without:**
-1. USDC on Base (eip155:8453) in your wallet
-2. AgentCash installed (`npx agentcash@latest onboard`)
-
-If a call fails, **it's because you haven't funded your wallet yet** — not a bug.
+**You need:** USDC on Base (eip155:8453) + AgentCash (npx agentcash@latest onboard)
 
 ---
 
-## 🚀 One-Click Demo (with payment)
+## One-Click Demo
 
 ```bash
-# Step 1: Install AgentCash
 npx agentcash@latest onboard
-
-# Step 2: Send USDC on Base to your AgentCash wallet
-# (1 USDC ≈ 100 calls. Send to your own wallet, not GoldBean's)
-
-# Step 3: Discover all 32 endpoints
 npx agentcash discover https://thermal-met-arising-spectrum.trycloudflare.com
-
-# Step 4: Make your first 1¢ API call — this WILL charge you
+npx agentcash fetch https://thermal-met-arising-spectrum.trycloudflare.com/paid/sol-token-risk -m POST
 npx agentcash fetch https://thermal-met-arising-spectrum.trycloudflare.com/paid/btc-price -m POST
-
-# 🔴 If this fails with "Insufficient balance":
-#    → You need USDC on Base. Buy from an exchange or bridge from Ethereum.
-
-# Step 5: Once step 4 works, paste this URL into any AI agent:
-#    https://thermal-met-arising-spectrum.trycloudflare.com
 ```
 
-**💰 1 USDC ≈ 100 API calls. You only pay for what you use — nothing recurring.**
+1 USDC = 10-100 calls. Nothing recurring.
 
 ---
 
-## 🤖 Claude Desktop / Cursor / Cline — One-Click Config
-
-Paste this into your `claude_desktop_config.json` (or Cursor MCP settings):
+## Claude Desktop / Cursor / Cline Config
 
 ```json
-{
-  "mcpServers": {
-    "goldbean": {
-      "url": "https://thermal-met-arising-spectrum.trycloudflare.com/mcp"
-    }
-  }
-}
-```
-
-Then ask Claude: "Check the ETH gas price" — Claude auto-discovers and calls GoldBean.
-
-**⚠️ IMPORTANT:** Before asking Claude to call any paid GoldBean tool, **run the demo above first** to confirm your wallet has USDC. Claude will get `402 Payment Required` if your wallet is empty.
-
----
-
-## 📋 Available Tools (32 MCP tools)
-
-Once connected and funded, your AI agent can use these:
-
-| Category | Tools | Price |
-|---|---|---|
-| ⛓️ Blockchain | gas-forecast, market-intel, defi-insights, network-health, tracker-report, eth-gas-l1, address-validate, ens-lookup, chain-fee | 1-8¢ |
-| 💰 Prices | btc-price | 1¢ |
-| 📊 Finance | stock-spy, fx-rates, commodities, fear-greed | 1-3¢ |
-| 📰 News | crypto-news, finance-news, tech-news | 2¢ |
-| 🛠️ Utility | ip-geo, user-agent, uuid-gen, qr-code, hash-text, base64-encode, weather, time-convert, json-validate, password-gen, color-convert, unit-convert, word-count | 1¢ |
-| 🎉 Fun | random-quote, joke | 1¢ |
-
-**Full endpoint reference:** [ENDPOINTS.md](./ENDPOINTS.md)
-
----
-
-## 📡 Quick Reference
-
-| What | URL |
-|---|---|
-| MCP endpoint | `https://thermal-met-arising-spectrum.trycloudflare.com/mcp` |
-| API base | `https://thermal-met-arising-spectrum.trycloudflare.com` |
-| Payment | x402 / AgentCash on Base USDC |
-| Seller wallet (revenue) | `0xB5f5CBe48E0595C044Bc626f278F757463eAc2Ce` |
-| OpenAPI spec | `GET /openapi.json` |
-| Health check | `GET /health` |
-| Free endpoints | `GET /gas`, `GET /eth-price`, `GET /health` (10/day) |
-
----
-
-## 🏗️ Architecture
-
-```
-AI Agent → AgentCash → Cloudflare Tunnel → Conway Sandbox → GoldBean → Response
-         ↕ USDC on Base (eip155:8453) — pay per call
-         ↕ Seller Wallet: 0xB5f5CBe48E0595C044Bc626f278F757463eAc2Ce
+{"mcpServers":{"goldbean":{"url":"https://thermal-met-arising-spectrum.trycloudflare.com/mcp"}}}
 ```
 
 ---
 
-## 📝 License
+## Real x402 Ecosystem Data
 
-MIT
+From x402scan: 106K tx/day, $19.2K volume, 7,841 buyers.
+
+- SniperX: 5,249 tx/day, $105/day, 12 buyers
+- OATP: 1,217 tx/day, $155/day, 108 buyers
+- Laevitas: 1,080 tx/day, $108/day, 2 buyers
+- BlockRun: 2,081 tx/day, $151/day, 47 buyers
+
+GoldBean follows the niche VIP model.
 
 ---
 
-*Built on [Conway Cloud](https://conway.tech) · Part of the [x402 ecosystem](https://github.com/x402-foundation/x402)*
+## 39 Paid MCP Tools
+
+**Solana DeFi (NEW)**
+sol-token-risk 10c, sol-token-price 5c, sol-token-holders 5c, sol-top-tokens 8c, sol-new-pairs 8c, sol-smart-money 10c, sol-dex-volume 5c
+
+**Blockchain**
+gas-forecast 1c, market-intel 5c, defi-insights 10c, network-health 3c, tracker-report 3c, btc-price 3c, eth-gas-l1 2c
+eth-address-validate 1c, ens-lookup 2c, chain-fee 2c
+
+**Finance** stock-spy 3c, fx-rates 2c, commodities 3c, fear-greed 1c
+**News** crypto-news 2c, finance-news 2c, tech-news 2c
+**Utility** ip-geo 1c, user-agent 1c, uuid-gen 1c, qr-code 1c, hash-text 1c, base64-encode 1c, weather 3c, time-convert 1c, json-validate 1c, password-gen 1c, color-convert 1c, unit-convert 1c, word-count 1c
+**Fun** random-quote 8c, joke 8c
+
+---
+
+## Quick Reference
+
+MCP endpoint: https://thermal-met-arising-spectrum.trycloudflare.com/mcp
+API base: https://thermal-met-arising-spectrum.trycloudflare.com
+Payment: x402 / AgentCash on Base USDC
+Seller wallet: 0xB5f5CBe48E0595C044Bc626f278F757463eAc2Ce
+
+---
+
+Built on Conway Cloud. Part of the x402 ecosystem.
