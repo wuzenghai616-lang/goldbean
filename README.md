@@ -1,146 +1,148 @@
-<h1>🫘 GoldBean — x402 Micropaid API Marketplace</h1>
+# 🫘 GoldBean - x402 Micropaid API Marketplace
 
-<p><strong>32 endpoints, 1–8¢ each. Pay with USDC on Base via x402. AI Agent ready.</strong></p>
+**32 endpoints, 1-8¢ each. Pay with USDC on Base via x402. AI Agent ready.**
 
-<p>GoldBean is a 3-in-1 revenue engine running on Conway Cloud:</p>
-<ul>
-<li><strong>Mode 1:</strong> Data API — 32 paid endpoints across 6 categories</li>
-<li><strong>Mode 2:</strong> MCP Tool Provider — 32 tools for AI Agent auto-discovery</li>
-<li><strong>Mode 3:</strong> Self-Operating Engine — auto-pricing, monitoring, revenue tracking</li>
-</ul>
+GoldBean is a 3-in-1 revenue engine running on Conway Cloud:
+- **Mode 1:** Data API — 32 paid endpoints across 6 categories
+- **Mode 2:** MCP Tool Provider — 32 tools for AI Agent auto-discovery
+- **Mode 3:** Self-Operating Engine — auto-pricing, monitoring, revenue tracking
 
-<hr>
+---
 
-<h2>Quick Start</h2>
+## ⚡ Quick Start
 
-<pre><code># 1. Install AgentCash (one-time)
+```bash
+# 1. Install AgentCash (one-time)
 npx agentcash@latest onboard
 
-# 2. Top up with USDC on Base
-#    Wallet: 0x5FF9d210112A62b53E75AFdebb5e9EA6e7dD427B
+# 2. Top up with USDC on Base (1 USDC = ~100 calls)
+#    Deposit to: 0x5FF9d210112A62b53E75AFdebb5e9EA6e7dD427B
 
 # 3. Discover GoldBean endpoints
 npx agentcash discover https://thermal-met-arising-spectrum.trycloudflare.com
 
 # 4. Make your first paid call (1¢)
 npx agentcash fetch https://thermal-met-arising-spectrum.trycloudflare.com/paid/btc-price -m POST
-</code></pre>
+```
 
-<hr>
+---
 
-<h2>Endpoints</h2>
+## 📡 Endpoints (32 total)
 
-<h3>Blockchain (1–8¢)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/gas-forecast</td><td>1¢</td><td>ETH gas price forecast</td></tr>
-<tr><td>POST /paid/market-intel</td><td>3¢</td><td>Market intelligence data</td></tr>
-<tr><td>POST /paid/defi-insights</td><td>8¢</td><td>DeFi protocol insights</td></tr>
-<tr><td>POST /paid/network-health</td><td>3¢</td><td>Blockchain network health</td></tr>
-<tr><td>POST /paid/tracker-report</td><td>3¢</td><td>On-chain tracker report</td></tr>
-<tr><td>POST /paid/eth-gas-l1</td><td>2¢</td><td>L1 gas prices</td></tr>
-<tr><td>POST /paid/eth-address-validate</td><td>1¢</td><td>Validate ETH address</td></tr>
-<tr><td>POST /paid/ens-lookup</td><td>2¢</td><td>ENS name resolution</td></tr>
-<tr><td>POST /paid/chain-fee</td><td>2¢</td><td>Chain fee estimation</td></tr>
-</table>
+### ⛓️ Blockchain (1-8¢)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/gas-forecast | 1¢ | ETH gas price forecast |
+| POST /paid/market-intel | 3¢ | Market intelligence |
+| POST /paid/defi-insights | 8¢ | DeFi protocol insights |
+| POST /paid/network-health | 3¢ | Network health status |
+| POST /paid/tracker-report | 3¢ | On-chain tracker report |
+| POST /paid/eth-gas-l1 | 2¢ | L1 gas prices |
+| POST /paid/eth-address-validate | 1¢ | Validate ETH address |
+| POST /paid/ens-lookup | 2¢ | ENS name resolution |
+| POST /paid/chain-fee | 2¢ | Chain fee estimation |
 
-<h3>Prices (1¢)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/btc-price</td><td>1¢</td><td>Bitcoin price in USD</td></tr>
-</table>
+### 💰 Prices (1¢)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/btc-price | 1¢ | Bitcoin price in USD |
 
-<h3>Finance (1–3¢)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/stock-spy</td><td>3¢</td><td>S&amp;P 500 (SPY) price</td></tr>
-<tr><td>POST /paid/fx-rates</td><td>2¢</td><td>Forex exchange rates</td></tr>
-<tr><td>POST /paid/commodities</td><td>3¢</td><td>Commodity prices</td></tr>
-<tr><td>POST /paid/fear-greed</td><td>1¢</td><td>Fear &amp; Greed Index</td></tr>
-</table>
+### 📊 Finance (1-3¢)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/stock-spy | 3¢ | S&P 500 (SPY) price |
+| POST /paid/fx-rates | 2¢ | Forex exchange rates |
+| POST /paid/commodities | 3¢ | Commodity prices |
+| POST /paid/fear-greed | 1¢ | Fear & Greed Index |
 
-<h3>News (2¢ each)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/crypto-news</td><td>2¢</td><td>Crypto news headlines</td></tr>
-<tr><td>POST /paid/finance-news</td><td>2¢</td><td>Finance news headlines</td></tr>
-<tr><td>POST /paid/tech-news</td><td>2¢</td><td>Tech news headlines</td></tr>
-</table>
+### 📰 News (2¢ each)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/crypto-news | 2¢ | Crypto news headlines |
+| POST /paid/finance-news | 2¢ | Finance news headlines |
+| POST /paid/tech-news | 2¢ | Tech news headlines |
 
-<h3>Utility (1¢ each)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/ip-geo</td><td>1¢</td><td>IP geolocation</td></tr>
-<tr><td>POST /paid/user-agent</td><td>1¢</td><td>Parse user agent</td></tr>
-<tr><td>POST /paid/uuid-gen</td><td>1¢</td><td>Generate UUID v4</td></tr>
-<tr><td>POST /paid/qr-code</td><td>1¢</td><td>Generate QR code</td></tr>
-<tr><td>POST /paid/hash-text</td><td>1¢</td><td>Hash text (SHA-256)</td></tr>
-<tr><td>POST /paid/base64-encode</td><td>1¢</td><td>Base64 encode/decode</td></tr>
-<tr><td>POST /paid/weather</td><td>1¢</td><td>Weather by city</td></tr>
-<tr><td>POST /paid/time-convert</td><td>1¢</td><td>Timezone conversion</td></tr>
-<tr><td>POST /paid/json-validate</td><td>1¢</td><td>Validate JSON</td></tr>
-<tr><td>POST /paid/password-gen</td><td>1¢</td><td>Generate password</td></tr>
-<tr><td>POST /paid/color-convert</td><td>1¢</td><td>Color format conversion</td></tr>
-<tr><td>POST /paid/unit-convert</td><td>1¢</td><td>Unit conversion</td></tr>
-<tr><td>POST /paid/word-count</td><td>1¢</td><td>Word/char count</td></tr>
-</table>
+### 🛠️ Utility (1¢ each)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/ip-geo | 1¢ | IP geolocation |
+| POST /paid/user-agent | 1¢ | Parse user agent |
+| POST /paid/uuid-gen | 1¢ | Generate UUID v4 |
+| POST /paid/qr-code | 1¢ | Generate QR code |
+| POST /paid/hash-text | 1¢ | Hash text (SHA-256) |
+| POST /paid/base64-encode | 1¢ | Base64 encode/decode |
+| POST /paid/weather | 1¢ | Weather by city |
+| POST /paid/time-convert | 1¢ | Timezone conversion |
+| POST /paid/json-validate | 1¢ | Validate JSON |
+| POST /paid/password-gen | 1¢ | Generate password |
+| POST /paid/color-convert | 1¢ | Color format conversion |
+| POST /paid/unit-convert | 1¢ | Unit conversion |
+| POST /paid/word-count | 1¢ | Word/char count |
 
-<h3>Fun (1¢ each)</h3>
-<table>
-<tr><th>Endpoint</th><th>Price</th><th>Description</th></tr>
-<tr><td>POST /paid/random-quote</td><td>1¢</td><td>Random quote</td></tr>
-<tr><td>POST /paid/joke</td><td>1¢</td><td>Random joke</td></tr>
-</table>
+### 🎉 Fun (1¢ each)
+| Endpoint | Price | Description |
+|---|---|---|
+| POST /paid/random-quote | 1¢ | Random quote |
+| POST /paid/joke | 1¢ | Random joke |
 
-<h3>Free Endpoints (10/day)</h3>
-<ul>
-<li>GET /gas — Live ETH gas prices</li>
-<li>GET /eth-price — ETH/USD price</li>
-<li>GET /health — Server status</li>
-</ul>
+### 🆓 Free Endpoints (10/day rate limit)
+| Endpoint | Description |
+|---|---|
+| GET /gas | Live ETH gas prices |
+| GET /eth-price | ETH/USD price |
+| GET /health | Server status |
 
-<hr>
+---
 
-<h2>MCP Tools (Mode 2)</h2>
+## 🔧 MCP Tools (Mode 2)
 
-<p>All 32 endpoints are available as MCP-compatible tools:</p>
-<pre><code>GET /mcp/tools</code></pre>
-<p>Returns a full MCP manifest for AI Agent auto-discovery.</p>
+All 32 endpoints are available as MCP-compatible tools for AI Agent auto-discovery:
 
-<hr>
+```bash
+GET /mcp/tools
+```
 
-<h2>Self-Operating Engine (Mode 3)</h2>
+Returns a full MCP manifest. Agents can auto-discover and call any endpoint.
 
-<pre><code>GET /engine/report</code></pre>
-<p>Real-time revenue tracking, auto-pricing, and monitor status.</p>
+---
 
-<hr>
+## 🤖 Self-Operating Engine (Mode 3)
 
-<h2>API References</h2>
-<ul>
-<li>OpenAPI 3.1.0: <code>GET /openapi.json</code></li>
-<li>x402 Discovery: <code>GET /.well-known/x402</code></li>
-<li>Metrics: <code>GET /metrics</code></li>
-<li>AgentCash: <code>GET /.well-known/agentcash</code></li>
-</ul>
+```bash
+GET /engine/report
+```
 
-<hr>
+Real-time revenue tracking, auto-pricing, and status monitoring.
 
-<h2>Architecture</h2>
+---
 
-<pre><code>AI Agent → AgentCash → Cloudflare Tunnel → Conway Sandbox → GoldBean → Response
+## 📖 API References
+
+| Endpoint | Description |
+|---|---|
+| GET /openapi.json | OpenAPI 3.1.0 spec |
+| GET /.well-known/x402 | x402 discovery manifest |
+| GET /.well-known/agentcash | AgentCash discovery |
+| GET /metrics | Prometheus metrics |
+
+---
+
+## 🏗️ Architecture
+
+```
+AI Agent → AgentCash → Cloudflare Tunnel → Conway Sandbox → GoldBean → Response
                    ↕
             USDC on Base (eip155:8453)
                    ↕
            Seller Wallet: 0xB5f5CBe48E0595C044Bc626f278F757463eAc2Ce
-</code></pre>
+```
 
-<hr>
+---
 
-<h2>License</h2>
+## 📝 License
 
-<p>MIT</p>
+MIT
 
-<hr>
+---
 
-<p><em>Built on Conway Cloud · Part of the x402 ecosystem</em></p>
+*Built on [Conway Cloud](https://conway.tech) · Part of the [x402 ecosystem](https://github.com/x402-foundation/x402)*
