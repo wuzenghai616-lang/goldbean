@@ -1,0 +1,17 @@
+# Smithery.ai configuration for GoldBean
+# Auto-detected by Smithery from this file
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+    required: []
+  commandFunction:
+    # A JS function that returns the command to start the MCP server
+    |-
+      function(config) {
+        return {
+          command: 'npx',
+          args: ['goldbean-mcp']
+        };
+      }
