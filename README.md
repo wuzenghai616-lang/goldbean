@@ -1,5 +1,7 @@
 # 🫘 GoldBean — x402 Micropaid API Marketplace
 
+[![Smithery](https://smithery.ai/badge/wuzenghai616/goldbean)](https://smithery.ai/servers/wuzenghai616/goldbean)
+
 **10 AI tools, 1 command, pay-per-call with USDC on Base.**
 
 GoldBean is an x402-powered MCP server for AI Agents. No API keys, no registration, no subscription — just install and pay a few cents per call.
