@@ -1,0 +1,30 @@
+# Smithery.ai configuration for GoldBean MCP Server
+# https://smithery.ai/docs/build/project-config
+runtime: "container"
+
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
+
+startCommand:
+  type: "stdio"
+  configSchema:
+    # No user-configurable options needed - the server runs on its own
+    type: "object"
+    properties: {}
+    required: []
+  exampleConfig: {}
+  commandFunction:
+    |-
+      function(config) {
+        return {
+          command: 'goldbean-mcp',
+          args: []
+        };
+      }
+
+# Protocol and deployment metadata
+description: |
+  GoldBean MCP Server provides 10 paid APIs for AI Agents via x402 micropayments.
+  Includes: eth_price, btc_price, crypto_price, weather, web_search, image_gen,
+  translate, summarize, ai_chat, code_run. Pay-per-call with USDC on Base.
