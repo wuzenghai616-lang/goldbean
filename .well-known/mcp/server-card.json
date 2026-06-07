@@ -1,0 +1,104 @@
+{
+  "mcp": {
+    "name": "goldbean-mcp",
+    "version": "0.2.3",
+    "description": "GoldBean MCP Server provides paid APIs for AI Agents via x402 micropayments.",
+    "capabilities": {
+      "tools": [
+        {
+          "name": "eth_price",
+          "description": "Get real-time ETH price",
+          "inputSchema": {"type": "object", "properties": {}}
+        },
+        {
+          "name": "btc_price",
+          "description": "Get real-time BTC price",
+          "inputSchema": {"type": "object", "properties": {}}
+        },
+        {
+          "name": "crypto_price",
+          "description": "Get crypto price by symbol",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "symbol": {"type": "string", "description": "Crypto symbol (e.g., ETH, BTC)"}
+            }
+          }
+        },
+        {
+          "name": "weather",
+          "description": "Get weather forecast for a city",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "city": {"type": "string", "description": "City name"}
+            }
+          }
+        },
+        {
+          "name": "web_search",
+          "description": "Search the web",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "query": {"type": "string", "description": "Search query"}
+            }
+          }
+        },
+        {
+          "name": "image_gen",
+          "description": "Generate an image from a prompt",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "prompt": {"type": "string", "description": "Image generation prompt"}
+            }
+          }
+        },
+        {
+          "name": "translate",
+          "description": "Translate text between languages",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "text": {"type": "string", "description": "Text to translate"},
+              "from": {"type": "string", "description": "Source language"},
+              "to": {"type": "string", "description": "Target language"}
+            }
+          }
+        },
+        {
+          "name": "summarize",
+          "description": "Summarize long text",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "text": {"type": "string", "description": "Text to summarize"}
+            }
+          }
+        },
+        {
+          "name": "ai_chat",
+          "description": "AI chat assistant",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "message": {"type": "string", "description": "Message to send"}
+            }
+          }
+        },
+        {
+          "name": "code_run",
+          "description": "Execute code snippet",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "code": {"type": "string", "description": "Code to execute"},
+              "language": {"type": "string", "description": "Programming language"}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

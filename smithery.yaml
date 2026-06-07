@@ -28,3 +28,6 @@ description: |
   GoldBean MCP Server provides 10 paid APIs for AI Agents via x402 micropayments.
   Includes: eth_price, btc_price, crypto_price, weather, web_search, image_gen,
   translate, summarize, ai_chat, code_run. Pay-per-call with USDC on Base.
+
+# Server card for discovery (reduces scanning dependency)
+serverCardUrl: "https://raw.githubusercontent.com/wuzenghai616-lang/goldbean/master/.well-known/mcp/server-card.json"

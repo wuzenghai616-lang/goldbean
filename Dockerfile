@@ -4,9 +4,10 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Pre-install goldbean-mcp for faster startup
+# Pre-install goldbean-mcp so it's available as a command inside the container
 RUN npm install -g goldbean-mcp@0.2.3
 
-# Smithery expects the startCommand to run inside the container
-# The command is defined in smithery.yaml (commandFunction)
-CMD ["npx", "-y", "goldbean-mcp"]
+# CMD must match the commandFunction in smithery.yaml:
+# commandFunction returns: { command: 'goldbean-mcp', args: [] }
+# Smithery starts the container and then connects to stdio
+CMD ["goldbean-mcp"]
