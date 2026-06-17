@@ -1,0 +1,69 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "goldbean",
+  "description": "x402 Micropaid API Marketplace — 120+ paid endpoints for AI Agents. Crypto prices, LLM chat, image gen, web search, weather, stocks, blockchain data and more. Pay per call with USDC on Base. No signup, no API key, no subscription.",
+  "maintainers": ["wuzenghai616-lang"],
+  "homepage": "https://goldbean-api.xyz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuzenghai616-lang/goldbean.git"
+  },
+  "type": "mcp_server",
+  "status": "stable",
+  "framework": "Express 5",
+  "transport": ["sse", "stdio"],
+  "servers": [
+    {
+      "type": "sse",
+      "url": "https://goldbean-api.xyz/sse"
+    }
+  ],
+  "tools": 10,
+  "total_endpoints": 120,
+  "capabilities": {
+    "tools": {
+      "discovery": true,
+      "paid_endpoints": true
+    }
+  },
+  "packages": [
+    {
+      "registry": "npm",
+      "name": "goldbean-mcp",
+      "version": "latest"
+    }
+  ],
+  "keywords": [
+    "x402",
+    "micropayments",
+    "api-marketplace",
+    "crypto",
+    "blockchain",
+    "defi",
+    "ai",
+    "web3",
+    "pay-per-call",
+    "base",
+    "usdc",
+    "mcp-server",
+    "agent",
+    "ethereum",
+    "weather",
+    "search",
+    "image-generation"
+  ],
+  "features": {
+    "micropayments": {
+      "enabled": true,
+      "protocol": "x402",
+      "network": "Base (eip155:8453)",
+      "currency": "USDC",
+      "price_per_call": "$0.01-$0.05"
+    },
+    "free_endpoints": {
+      "enabled": true,
+      "count": 5,
+      "endpoints": ["/health", "/eth-price", "/gas", "/card", "/mcp"]
+    }
+  }
+}
