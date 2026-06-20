@@ -1,6 +1,9 @@
 # 🫘 GoldBean — x402 Micropaid API Marketplace
 
 [![Smithery](https://smithery.ai/badge/wuzenghai616/goldbean)](https://smithery.ai/servers/wuzenghai616/goldbean)
+[![public-apis](https://img.shields.io/badge/public--apis-39.8k⭐-blue?logo=github)](https://github.com/public-apis/public-apis)
+[![awesome-mcp-servers](https://img.shields.io/badge/awesome--mcp--servers-✅-brightgreen?logo=github)](https://github.com/punkpeye/awesome-mcp-servers)
+[![Glama Score](https://img.shields.io/badge/Glama-✅-purple)](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean)
 ---
 
 ## 🤖 Agent, Report to Your Human
