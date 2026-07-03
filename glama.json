@@ -1,7 +1,8 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "goldbean",
-  "description": "x402 Micropaid API Marketplace — 120+ paid endpoints for AI Agents. Crypto prices, LLM chat, image gen, web search, weather, stocks, blockchain data and more. Pay per call with USDC on Base. No signup, no API key, no subscription.",
+  "version": "0.1.1",
+  "description": "GoldBean — Pay-per-Use AI API Marketplace. 27 endpoints: 13 Baidu AI APIs (OCR, TTS, ASR, Translation, LLM, Image, Face, Body, NLP, HelixFold3) + PayPal/Alipay/x402 + Bitcoin/Gas/Weather. Free tier. Pay-per-call via x402 micropayments with USDC on Base.",
   "maintainers": ["wuzenghai616-lang"],
   "homepage": "https://goldbean-api.xyz",
   "repository": {
@@ -18,8 +19,8 @@
       "url": "https://goldbean-api.xyz/sse"
     }
   ],
-  "tools": 10,
-  "total_endpoints": 120,
+  "tools": 27,
+  "total_endpoints": 27,
   "capabilities": {
     "tools": {
       "discovery": true,
@@ -30,7 +31,7 @@
     {
       "registry": "npm",
       "name": "goldbean-mcp",
-      "version": "latest"
+      "version": "0.1.1"
     }
   ],
   "keywords": [
@@ -50,7 +51,9 @@
     "ethereum",
     "weather",
     "search",
-    "image-generation"
+    "image-generation",
+    "Fintech",
+    "Agent Commerce"
   ],
   "features": {
     "micropayments": {
@@ -58,12 +61,21 @@
       "protocol": "x402",
       "network": "Base (eip155:8453)",
       "currency": "USDC",
-      "price_per_call": "$0.01-$0.05"
+      "price_per_call": "$0.01-$0.02"
     },
     "free_endpoints": {
       "enabled": true,
       "count": 5,
-      "endpoints": ["/health", "/eth-price", "/gas", "/card", "/mcp"]
+      "endpoints": ["/health", "/eth-price", "/btc-price", "/weather", "/mcp"]
+    },
+    "docker": {
+      "optimized": true,
+      "image_size": "<200MB",
+      "compatible": ["Claude Desktop", "Cursor", "Windsurf"]
     }
+  },
+  "compatibility": {
+    "clients": ["Claude Desktop", "Cursor", "Windsurf", "Continue"],
+    "platforms": ["macOS", "Linux", "Windows"]
   }
 }

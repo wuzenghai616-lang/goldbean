@@ -1,5 +1,8 @@
 # 🫘 GoldBean - x402 Micropaid API Marketplace
 
+[![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.wuzenghai616--lang%2Fgoldbean-blue)](https://github.com/wuzenghai616-lang/goldbean)
+[![npm](https://img.shields.io/npm/v/goldbean-mcp)](https://npmjs.com/goldbean-mcp)
+
 > Pay per request with USDC on Base. No signup, no API key, no monthly subscription.
 > Every call costs $0.02 USDC via the [x402](https://x402.org) protocol.
 
