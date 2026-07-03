@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "xyz.goldbean-api/goldbean-mcp",
+  "title": "GoldBean MCP Server",
+  "description": "49 pay-per-use APIs for AI agents via x402. AI, crypto, DeFi, blockchain, weather, search, security.",
+  "version": "0.3.3",
+  "websiteUrl": "https://goldbean-api.xyz",
+  "repository": {
+    "url": "https://github.com/wuzenghai616-lang/goldbean",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "goldbean-mcp",
+      "version": "0.3.3",
+      "transport": {
+        "type": "stdio"
+      },
+      "runtimeHint": "npx -y goldbean-mcp"
+    }
+  ],
+  "categories": [
+    "ai",
+    "data-enrichment",
+    "developer-tools",
+    "crypto",
+    "finance",
+    "weather",
+    "search"
+  ]
+}
