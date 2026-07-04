@@ -1,5 +1,8 @@
 # 🫘 GoldBean — Payment-Powered AI API Gateway
 
+> **Access Baidu AI (OCR, Translation, TTS, ASR, LLM) from anywhere — no Chinese phone number required**
+
+[![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![public-apis](https://img.shields.io/badge/public--apis-39.8k%20%E2%AD%90-blue?logo=github)](https://github.com/public-apis/public-apis)
 [![awesome-mcp-servers](https://img.shields.io/badge/awesome--mcp--servers-%E2%9C%85-brightgreen?logo=github)](https://github.com/punkpeye/awesome-mcp-servers)
 [![Glama Score](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean/badges/score.svg)](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean)
@@ -23,6 +26,22 @@
 | **MCP Compatible** | Works with Cursor, Claude Desktop, Cline, Codex, Continue |
 | **Baidu AI Powered** | Enterprise-grade AI from China's leading AI platform |
 | **HelixFold3** | Nature-published, AlphaFold3-class protein/RNA structure prediction |
+
+---
+
+## 🤔 Why GoldBean?
+
+> **Need Baidu OCR but don't have a Chinese phone number?**
+
+GoldBean is the easiest way for overseas developers to use Baidu AI APIs **without a Chinese phone number, real-name verification, or WeChat Pay**.
+
+- ✅ **Use Baidu API without registration** — no Chinese ID, no real-name auth
+- ✅ **Baidu OCR API without Chinese phone** — just sign up with any email
+- ✅ **No KYC, no subscription** — pay cents per call via USDC, PayPal, or Alipay
+- ✅ **Free credits to start** — 20 free API calls, no wallet required
+- ✅ **Works globally** — no mainland China restrictions for foreign users
+
+Whether you need Baidu OCR for document scanning, Baidu Translation for multilingual text, or Baidu ASR/TTS for voice processing — GoldBean unlocks it all without the registration barriers.
 
 ---
 
