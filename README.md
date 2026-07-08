@@ -5,11 +5,14 @@
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![public-apis](https://img.shields.io/badge/public--apis-39.8k%20%E2%AD%90-blue?logo=github)](https://github.com/public-apis/public-apis)
 [![awesome-mcp-servers](https://img.shields.io/badge/awesome--mcp--servers-%E2%9C%85-brightgreen?logo=github)](https://github.com/punkpeye/awesome-mcp-servers)
+[![awesome-x402](https://img.shields.io/badge/awesome--x402-%E2%9A%A1-yellow?logo=github)](https://github.com/xpaysh/awesome-x402)
 [![Glama Score](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean/badges/score.svg)](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean)
+[![MCPize](https://img.shields.io/badge/MCPize-monetized-blueviolet?logo=codefactor)](https://mcpize.com/mcp/goldbean)
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 **GoldBean** is a pay-per-use AI API gateway. Access **Baidu AI products** (OCR, TTS, ASR, Translation, NLP, Face Detection, Image Analysis) and **HelixFold3** protein structure prediction — all through a unified API with **x402 USDC micropayments**.
+> x402 is the open standard for crypto micropayments over HTTP. Learn more at [x402.org](https://x402.org)
 
 **No subscription. No KYC. Pay cents per call.**
 
@@ -171,9 +174,11 @@ Powered by the [x402 protocol](https://x402.org) — decentralized micropayments
 | **awesome-mcp-servers** (76k⭐) | ✅ Listed | [View](https://github.com/punkpeye/awesome-mcp-servers) |
 | **Glama.ai** | ✅ Active | [Score →](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean) |
 | **Smithery.ai** | ✅ Deployed | [View](https://smithery.ai/servers/wuzenghai616/goldbean) |
-| **MCP.Directory** | ✅ Submitted | Pending review |
 | **npm** | ✅ Published | `goldbean-mcp` |
 | **Dev.to** | ✅ 6 articles | [Profile](https://dev.to/goldbean) |
+| **awesome-x402** | ✅ Listed | [View](https://github.com/xpaysh/awesome-x402) |
+| **MCPize** | ✅ Monetized | [View](https://mcpize.com/mcp/goldbean) |
+| **MCP.Directory** | ⏳ Pending | Submitted |
 
 ---
 
