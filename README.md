@@ -207,3 +207,5 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 **GoldBean (GB) — Wishing You Good Fortune & Prosperity 🫘** <br>
 Pay-per-use AI for everyone.
+
+- [JMT x402 Agent Tools](https://jmt-x402-proxy.jmthomasofficial.workers.dev) — 25 paid x402 endpoints on Base mainnet: web search, AI analysis, crypto/stock data, SEC filings, company intel, news, sentiment, macro dashboard. $0.001-$0.15/call USDC. Local LLM-powered.
