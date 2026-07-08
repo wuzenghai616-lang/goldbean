@@ -1,30 +1,22 @@
 # Smithery.ai configuration for GoldBean MCP Server
 # https://smithery.ai/docs/build/project-config
-runtime: "container"
 
-build:
-  dockerfile: "Dockerfile"
-  dockerBuildPath: "."
-
+# GoldBean is hosted remotely at https://goldbean-api.xyz
+# Use URL mode for external hosting
 startCommand:
-  type: "stdio"
+  type: "url"
+  url: "https://goldbean-api.xyz/sse"
   configSchema:
-    # No user-configurable options needed - the server runs on its own
     type: "object"
     properties: {}
     required: []
-  exampleConfig: {}
-  commandFunction:
-    |-
-      function(config) {
-        return {
-          command: 'npx',
-          args: ['-y', 'goldbean-mcp']
-        };
-      }
 
-# Protocol and deployment metadata
+# Alternative: URL-based server card for static metadata
+# Supports x402 micropayments via Base USDC
 description: |
-  GoldBean MCP Server provides 10 paid APIs for AI Agents via x402 micropayments.
-  Includes: eth_price, btc_price, crypto_price, weather, web_search, image_gen,
-  translate, summarize, ai_chat, code_run. Pay-per-call with USDC on Base.
+  GoldBean MCP Server — Pay-per-call AI API gateway with 100+ tools.
+  Access Baidu AI (OCR, TTS, ASR, Translation, LLM Chat, HelixFold3, Image Recognition),
+  web search, crypto prices, weather, and more via a single SSE endpoint.
+  Payment: x402 micropayments (Base USDC), PayPal, Alipay.
+  Free tier: 50 calls/day. Starting at $0.01/call. No KYC.
+  Docs: https://goldbean-api.xyz
