@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "goldbean",
-  "description": "x402 Micropaid API Marketplace — 120+ paid endpoints for AI Agents. Crypto prices, LLM chat, image gen, web search, weather, stocks, blockchain data and more. Pay per call with USDC on Base. No signup, no API key, no subscription.",
+  "description": "x402 Micropayment API Marketplace — 47 paid endpoints for AI Agents. Baidu AI (OCR, TTS, ASR, Translation, LLM Chat, Image Generation), web search, crypto prices, weather, stocks, and more. Pay per call with USDC on Base. No signup, no API key, no subscription.",
   "maintainers": ["wuzenghai616-lang"],
   "homepage": "https://goldbean-api.xyz",
   "repository": {
@@ -18,8 +18,9 @@
       "url": "https://goldbean-api.xyz/sse"
     }
   ],
-  "tools": 10,
-  "total_endpoints": 120,
+  "tools": 47,
+  "total_endpoints": 47,
+  "license": "MIT",
   "capabilities": {
     "tools": {
       "discovery": true,
