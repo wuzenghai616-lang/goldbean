@@ -2,13 +2,14 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "xyz.goldbean-api/goldbean-mcp",
   "title": "GoldBean MCP Server",
-  "description": "16 paid Baidu AI endpoints (OCR, TTS, ASR, Translation, NLP, LLM Chat, HelixFold3, Face/Body/Image AI) with x402 USDC micropayments, PayPal, Alipay. MCP server for AI agent integration.",
+  "description": "47 paid AI API endpoints (OCR, TTS, ASR, Translation, NLP, LLM Chat, HelixFold3, Image Recognition, web search, crypto prices, weather) with x402 USDC micropayments, PayPal, Alipay. MCP server for AI agent integration.",
   "version": "0.3.5",
   "websiteUrl": "https://goldbean-api.xyz",
   "repository": {
     "url": "https://github.com/wuzenghai616-lang/goldbean",
     "source": "github"
   },
+  "license": "MIT",
   "packages": [
     {
       "registryType": "npm",
