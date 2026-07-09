@@ -88,6 +88,32 @@ curl "https://goldbean-api.xyz/paid/baidu-ocr?image=https://example.com/doc.jpg"
 
 ---
 
+
+## 📚 Code Examples
+
+We provide ready-to-use code examples in the [`examples/`](examples/) directory:
+
+| Example | Language | Description |
+|---------|----------|-------------|
+| [`claude-desktop-config.md`](examples/claude-desktop-config.md) | Config | Claude Desktop MCP configuration guide |
+| [`python-integration.py`](examples/python-integration.py) | Python | MCP SDK + x402 payment integration |
+| [`nodejs-x402-example.js`](examples/nodejs-x402-example.js) | Node.js | Batch calls with @goldbean/x402-sdk |
+
+```bash
+git clone https://github.com/wuzenghai616-lang/goldbean.git
+cd goldbean/examples
+
+# Python: Install deps and run
+pip install mcp web3
+python python-integration.py
+
+# Node.js: Install deps and run
+npm install @modelcontextprotocol/sdk @goldbean/x402-sdk
+node nodejs-x402-example.js
+```
+
+---
+
 ## 📡 API Endpoints
 
 ### 🆓 Free System Endpoints
