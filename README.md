@@ -22,7 +22,7 @@
 
 | Feature | Details |
 |---------|---------|
-| **23+ API Routes** | OCR, TTS, ASR, Translation, LLM Chat, Face Detection, NLP, Image, HelixFold3 |
+| **47 API Routes (26 paid + 21 free)** | OCR, TTS, ASR, Translation, LLM Chat, Face Detection, NLP, Image, HelixFold3 |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
 | **Free Tier** | 20 free API calls per registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
