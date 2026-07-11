@@ -1,6 +1,6 @@
-# 🫘 GoldBean — Payment-Powered AI API Gateway
+# 🫘 GoldBean — Baidu AI APIs for Global Developers
 
-> **Access Baidu AI (OCR, Translation, TTS, ASR, LLM) from anywhere — no Chinese phone number required**
+> **Access Baidu AI (OCR, Translation, TTS, ASR, ERNIE LLM, HelixFold) from anywhere — no Chinese phone number, no Baidu Cloud account required**
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![public-apis](https://img.shields.io/badge/public--apis-39.8k%20%E2%AD%90-blue?logo=github)](https://github.com/public-apis/public-apis)
@@ -11,10 +11,11 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is a pay-per-use AI API gateway. Access **Baidu AI products** (OCR, TTS, ASR, Translation, NLP, Face Detection, Image Analysis) and **HelixFold3** protein structure prediction — all through a unified API with **x402 USDC micropayments**.
-> x402 is the open standard for crypto micropayments over HTTP. Learn more at [x402.org](https://x402.org)
+**GoldBean** is the easiest way for global developers to access **13 Baidu AI endpoints** — OCR (general + high-accuracy), TTS, ASR, ERNIE LLM, translation, image recognition, face/body analysis, NLP, and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
 
-**No subscription. No KYC. Pay cents per call.**
+Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
+
+**No Chinese phone number. No Baidu account. No subscription. Pay per call.**
 
 ---
 
@@ -24,7 +25,7 @@
 |---------|---------|
 | **47 API Routes (26 paid + 21 free)** | OCR, TTS, ASR, Translation, LLM Chat, Face Detection, NLP, Image, HelixFold3 |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
-| **Free Tier** | 20 free API calls per registration — no wallet needed |
+| **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
 | **MCP Compatible** | Works with Cursor, Claude Desktop, Cline, Codex, Continue |
 | **Baidu AI Powered** | Enterprise-grade AI from China's leading AI platform |
@@ -41,7 +42,7 @@ GoldBean is the easiest way for overseas developers to use Baidu AI APIs **witho
 - ✅ **Use Baidu API without registration** — no Chinese ID, no real-name auth
 - ✅ **Baidu OCR API without Chinese phone** — just sign up with any email
 - ✅ **No KYC, no subscription** — pay cents per call via USDC, PayPal, or Alipay
-- ✅ **Free credits to start** — 20 free API calls, no wallet required
+- ✅ **Free credits to start** — 5 calls/day per IP (no signup) + 20 credits on registration
 - ✅ **Works globally** — no mainland China restrictions for foreign users
 
 Whether you need Baidu OCR for document scanning, Baidu Translation for multilingual text, or Baidu ASR/TTS for voice processing — GoldBean unlocks it all without the registration barriers.
@@ -131,13 +132,13 @@ node nodejs-x402-example.js
 
 | Endpoint | Price | Description |
 |----------|:-----:|-------------|
-| `GET /paid/baidu-ocr` | $0.01 | General text OCR |
+| `GET /paid/baidu-ocr` | $0.02 | General text OCR |
 | `GET /paid/baidu-ocr-accurate` | $0.02 | High-accuracy OCR |
 | `GET /paid/baidu-idcard` | $0.02 | ID card recognition |
-| `GET /paid/baidu-tts?text=...` | $0.01 | Text-to-Speech (Chinese) |
+| `GET /paid/baidu-tts?text=...` | $0.02 | Text-to-Speech (Chinese) |
 | `GET /paid/baidu-translate?text=...` | $0.01 | Multi-language translation |
-| `GET /paid/baidu-llm-chat?prompt=...` | $0.03 | ERNIE chat (GPT-class LLM) |
-| `GET /paid/baidu-asr?audio=...` | $0.03 | Speech-to-Text |
+| `GET /paid/baidu-llm-chat?prompt=...` | $0.002/1K tokens | ERNIE chat (GPT-class LLM) |
+| `GET /paid/baidu-asr?audio=...` | $0.02 | Speech-to-Text |
 | `GET /paid/baidu-image-recognition?image=...` | $0.02 | Object/scene recognition |
 | `GET /paid/baidu-image-enhance?image=...` | $0.02 | Image enhancement |
 | `GET /paid/baidu-face-detect?image=...` | $0.02 | Face detection & analysis |
@@ -237,4 +238,4 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 **GoldBean (GB) — Wishing You Good Fortune & Prosperity 🫘** <br>
-Pay-per-use AI for everyone.
+Baidu AI APIs for Global Developers — Pay-per-Use.
