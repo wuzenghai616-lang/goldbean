@@ -2,8 +2,8 @@
   "": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.wuzenghai616-lang/goldbean",
   "title": "GoldBean API - Pay-per-call Baidu AI Marketplace",
-  "description": "47 AI endpoints (OCR, TTS, LLM, Translation) with x402 USDC micropayments on Base.",
-  "version": "0.4.1",
+  "description": "86 AI routes (61 paid + 25 free): Baidu OCR, TTS, ASR, LLM (ERNIE/DeepSeek), Vision, Embedding, Reranker, Image Gen/Edit, DeepSeek-OCR, PaddleOCR-VL, Translation, NLP, HelixFold. OpenAI-compatible. x402 USDC micropayments on Base.",
+  "version": "9.3.0",
   "websiteUrl": "https://goldbean-api.xyz",
   "repository": {
     "url": "https://github.com/wuzenghai616-lang/goldbean",
