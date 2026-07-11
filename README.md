@@ -11,7 +11,7 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is the easiest way for global developers to access **56 Baidu AI endpoints** — OCR (general, high-accuracy, table, handwriting, VIN), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), HelixFold protein structure prediction, and MuseSteamer video generation — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
+**GoldBean** is the easiest way for global developers to access **57 Baidu AI endpoints** — OCR (general, high-accuracy, table, handwriting, VIN, Qianfan-OCR), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), HelixFold protein structure prediction, MuseSteamer video generation, and PP-StructureV3 document parsing — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
 
 Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
 
@@ -23,7 +23,7 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 
 | Feature | Details |
 |---------|---------|
-| **88 API Routes (63 paid + 25 free)** | OCR (10 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold, Video Generation (MuseSteamer) |
+| **89 API Routes (64 paid + 25 free)** | OCR (11 types incl. Qianfan-OCR & PP-StructureV3), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold, Video Generation (MuseSteamer) |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
 | **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
@@ -128,7 +128,7 @@ node nodejs-x402-example.js
 | `GET /.well-known/x402-bazaar` | x402 payment discovery |
 | `GET /api/routes` | Full route registry |
 
-### 🎯 Baidu AI Endpoints (Pay-per-Call) — 36 APIs
+### 🎯 Baidu AI Endpoints (Pay-per-Call) — 37 APIs
 
 | Endpoint | Price | Description |
 |----------|:-----:|-------------|
@@ -186,6 +186,7 @@ node nodejs-x402-example.js
 | `GET /paid/baidu-image-edit?image=...&prompt=...` | $0.05 | Image editing (Qwen-Image-Edit, multi-image fusion) |
 | `GET /paid/baidu-deepseek-ocr?image=...` | $0.02 | Advanced OCR (DeepSeek-OCR, complex layouts) |
 | `GET /paid/baidu-paddleocr-vl?image=...` | $0.02 | Document parsing (PaddleOCR-VL, layout analysis) |
+| `GET /paid/baidu-qianfan-ocr?image=...` | $0.02 | General-purpose OCR (Qianfan-OCR, 32k context) |
 | `GET /paid/baidu-video-gen?prompt=...&image=...` | $0.10 | Video generation (MuseSteamer, text/image-to-video) |
 | `GET /paid/baidu-video-query?task_id=...` | $0.01 | Query video generation task status |
 
@@ -223,7 +224,7 @@ Powered by the [x402 protocol](https://x402.org) — decentralized micropayments
 ```
 ┌──────────────┐    HTTPS    ┌──────────────────────┐
 │  MCP Client   │ ──────────→ │  GoldBean API Server  │
-│  (Claude,     │ ←────────── │  v9.4.0 on VPS       │
+│  (Claude,     │ ←────────── │  v9.5.0 on VPS       │
 │   Cursor,     │    402/200  │  port 9879            │
 │   Cline)      │             │                      │
 └──────────────┘             ├── Baidu AI (OCR/TTS)  │
