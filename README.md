@@ -11,7 +11,7 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is the easiest way for global developers to access **50 Baidu AI endpoints** — OCR (general, high-accuracy, table, bankcard, passport, handwriting, train ticket, VIN, household register), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
+**GoldBean** is the easiest way for global developers to access **46 Baidu AI endpoints** — OCR (general, high-accuracy, table, handwriting, VIN), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
 
 Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
 
@@ -23,7 +23,7 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 
 | Feature | Details |
 |---------|---------|
-| **82 API Routes (57 paid + 25 free)** | OCR (10 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold |
+| **78 API Routes (53 paid + 25 free)** | OCR (10 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
 | **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
@@ -169,11 +169,7 @@ node nodejs-x402-example.js
 | `GET /paid/baidu-redwine?image=...` | $0.02 | Red wine label recognition |
 | `GET /paid/baidu-logo?image=...` | $0.02 | Brand logo recognition |
 | `GET /paid/baidu-ocr-handwrite?image=...` | $0.02 | Handwritten text OCR |
-| `GET /paid/baidu-ocr-bankcard?image=...` | $0.02 | Bank card OCR |
-| `GET /paid/baidu-ocr-train-ticket?image=...` | $0.02 | Train ticket OCR |
 | `GET /paid/baidu-ocr-vin?image=...` | $0.02 | VIN code OCR |
-| `GET /paid/baidu-ocr-household?image=...` | $0.02 | Household register OCR |
-| `GET /paid/baidu-ocr-passport?image=...` | $0.02 | Passport OCR |
 | `GET /paid/baidu-image-colorize?image=...` | $0.02 | B&W photo colorization |
 | `GET /paid/baidu-style-trans?image=...` | $0.02 | Artistic style transfer |
 | `GET /paid/baidu-selfie-anime?image=...` | $0.02 | Portrait to anime conversion |
