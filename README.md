@@ -1,6 +1,6 @@
 # 🫘 GoldBean — Baidu AI APIs for Global Developers
 
-> **Access Baidu AI (OCR, Translation, TTS, ASR, ERNIE LLM, HelixFold) from anywhere — no Chinese phone number, no Baidu Cloud account required**
+> **Access Baidu AI (OCR, Translation, TTS, ASR, ERNIE LLM, HelixFold, Video Generation) from anywhere — no Chinese phone number, no Baidu Cloud account required**
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![public-apis](https://img.shields.io/badge/public--apis-39.8k%20%E2%AD%90-blue?logo=github)](https://github.com/public-apis/public-apis)
@@ -11,7 +11,7 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is the easiest way for global developers to access **54 Baidu AI endpoints** — OCR (general, high-accuracy, table, handwriting, VIN), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
+**GoldBean** is the easiest way for global developers to access **56 Baidu AI endpoints** — OCR (general, high-accuracy, table, handwriting, VIN), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, red wine, logo), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity), HelixFold protein structure prediction, and MuseSteamer video generation — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
 
 Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
 
@@ -23,7 +23,7 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 
 | Feature | Details |
 |---------|---------|
-| **86 API Routes (61 paid + 25 free)** | OCR (10 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold |
+| **88 API Routes (63 paid + 25 free)** | OCR (10 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold, Video Generation (MuseSteamer) |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
 | **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
@@ -128,7 +128,7 @@ node nodejs-x402-example.js
 | `GET /.well-known/x402-bazaar` | x402 payment discovery |
 | `GET /api/routes` | Full route registry |
 
-### 🎯 Baidu AI Endpoints (Pay-per-Call) — 34 APIs
+### 🎯 Baidu AI Endpoints (Pay-per-Call) — 36 APIs
 
 | Endpoint | Price | Description |
 |----------|:-----:|-------------|
@@ -186,6 +186,8 @@ node nodejs-x402-example.js
 | `GET /paid/baidu-image-edit?image=...&prompt=...` | $0.05 | Image editing (Qwen-Image-Edit, multi-image fusion) |
 | `GET /paid/baidu-deepseek-ocr?image=...` | $0.02 | Advanced OCR (DeepSeek-OCR, complex layouts) |
 | `GET /paid/baidu-paddleocr-vl?image=...` | $0.02 | Document parsing (PaddleOCR-VL, layout analysis) |
+| `GET /paid/baidu-video-gen?prompt=...&image=...` | $0.10 | Video generation (MuseSteamer, text/image-to-video) |
+| `GET /paid/baidu-video-query?task_id=...` | $0.01 | Query video generation task status |
 
 ### 💳 Account & Payment
 
@@ -221,7 +223,7 @@ Powered by the [x402 protocol](https://x402.org) — decentralized micropayments
 ```
 ┌──────────────┐    HTTPS    ┌──────────────────────┐
 │  MCP Client   │ ──────────→ │  GoldBean API Server  │
-│  (Claude,     │ ←────────── │  v9.3.0 on VPS       │
+│  (Claude,     │ ←────────── │  v9.4.0 on VPS       │
 │   Cursor,     │    402/200  │  port 9879            │
 │   Cline)      │             │                      │
 └──────────────┘             ├── Baidu AI (OCR/TTS)  │
