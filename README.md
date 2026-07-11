@@ -11,7 +11,7 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is the easiest way for global developers to access **13 Baidu AI endpoints** — OCR (general + high-accuracy), TTS, ASR, ERNIE LLM, translation, image recognition, face/body analysis, NLP, and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
+**GoldBean** is the easiest way for global developers to access **26 Baidu AI endpoints** — OCR (general, high-accuracy, table, license plate, business license, receipt), TTS, ASR, ERNIE LLM, translation, image recognition, face detection & comparison, gesture, object detection, landmark recognition, content moderation, NLP (sentiment, summary, word embedding), and HelixFold protein structure prediction — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
 
 Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
 
@@ -23,7 +23,7 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 
 | Feature | Details |
 |---------|---------|
-| **47 API Routes (26 paid + 21 free)** | OCR, TTS, ASR, Translation, LLM Chat, Face Detection, NLP, Image, HelixFold3 |
+| **60 API Routes (34 paid + 21 free)** | OCR (7 types), TTS, ASR, Translation, LLM Chat, Face (detect + compare), Gesture, Object Detect, Landmark, Content Moderation, NLP (4 types), HelixFold |
 | **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
 | **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
@@ -128,12 +128,16 @@ node nodejs-x402-example.js
 | `GET /.well-known/x402-bazaar` | x402 payment discovery |
 | `GET /api/routes` | Full route registry |
 
-### 🎯 Baidu AI Endpoints (Pay-per-Call)
+### 🎯 Baidu AI Endpoints (Pay-per-Call) — 26 APIs
 
 | Endpoint | Price | Description |
 |----------|:-----:|-------------|
 | `GET /paid/baidu-ocr` | $0.02 | General text OCR |
 | `GET /paid/baidu-ocr-accurate` | $0.02 | High-accuracy OCR |
+| `GET /paid/baidu-ocr-table` | $0.02 | Table structure OCR |
+| `GET /paid/baidu-ocr-license-plate` | $0.02 | License plate recognition |
+| `GET /paid/baidu-ocr-business-license` | $0.02 | Business license OCR |
+| `GET /paid/baidu-ocr-receipt` | $0.02 | Receipt/invoice OCR |
 | `GET /paid/baidu-idcard` | $0.02 | ID card recognition |
 | `GET /paid/baidu-tts?text=...` | $0.02 | Text-to-Speech (Chinese) |
 | `GET /paid/baidu-translate?text=...` | $0.01 | Multi-language translation |
@@ -141,9 +145,18 @@ node nodejs-x402-example.js
 | `GET /paid/baidu-asr?audio=...` | $0.02 | Speech-to-Text |
 | `GET /paid/baidu-image-recognition?image=...` | $0.02 | Object/scene recognition |
 | `GET /paid/baidu-image-enhance?image=...` | $0.02 | Image enhancement |
+| `GET /paid/baidu-object-detect?image=...` | $0.02 | Object detection with bounding boxes |
+| `GET /paid/baidu-landmark?image=...` | $0.02 | Landmark recognition |
 | `GET /paid/baidu-face-detect?image=...` | $0.02 | Face detection & analysis |
+| `GET /paid/baidu-face-compare?image1=...&image2=...` | $0.02 | 1:1 face comparison |
 | `GET /paid/baidu-body-analysis?image=...` | $0.02 | Body/gesture analysis |
-| `GET /paid/baidu-nlp?text=...` | $0.02 | NLP (lexer, sentiment, etc.) |
+| `GET /paid/baidu-gesture?image=...` | $0.02 | Hand gesture recognition |
+| `GET /paid/baidu-nlp?text=...` | $0.01 | NLP (lexer, sentiment, etc.) |
+| `GET /paid/baidu-sentiment?text=...` | $0.01 | Sentiment analysis |
+| `GET /paid/baidu-summary?text=...` | $0.01 | Text summarization |
+| `GET /paid/baidu-word-embedding?text=...` | $0.01 | Word vector embedding |
+| `GET /paid/baidu-text-review?text=...` | $0.01 | Text content moderation |
+| `GET /paid/baidu-image-review?image=...` | $0.01 | Image content moderation |
 | `GET /paid/baidu-helixfold?seq=...` | $0.05 | Protein structure prediction |
 
 ### 💳 Account & Payment
