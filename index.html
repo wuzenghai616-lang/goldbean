@@ -1,435 +1,134 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoldBean OCR Demo — 中文识别演示</title>
+<title>GoldBean API — 67 Baidu AI Endpoints, One REST API, Pay Per Call</title>
+<meta name="description" content="Access 67 Baidu AI endpoints through a single REST API. No Baidu account needed. Pay per call with USDC, PayPal, or Alipay. MCP-compatible.">
+<meta property="og:title" content="GoldBean API — 67 Baidu AI Endpoints, One REST API">
+<meta property="og:description" content="Pay-per-call AI API marketplace. No Baidu account needed. USDC, PayPal, Alipay.">
+<meta property="og:image" content="https://api.goldbean.io/og-image.png">
+<meta property="og:url" content="https://wuzenghai616-lang.github.io/goldbean/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GoldBean API — 67 Baidu AI Endpoints, One REST API">
+<meta name="twitter:description" content="Pay-per-call AI API marketplace. No Baidu account needed.">
+<meta name="twitter:image" content="https://api.goldbean.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫘</text></svg>">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0a0a0f;
-  --card:#12121a;
-  --border:#1e1e2e;
-  --text:#e4e4e7;
-  --text-muted:#71717a;
-  --primary:#8b5cf6;
-  --primary-glow:rgba(139,92,246,0.25);
-  --accent:#06b6d4;
-  --success:#22c55e;
-  --radius:12px;
-  --font:'Inter','SF Pro','PingFang SC','-apple-system',system-ui,sans-serif;
-}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--text:#e4e4e7;--muted:#71717a;--primary:#8b5cf6;--accent:#06b6d4;--success:#22c55e;--radius:12px;--font:'Inter','SF Pro','PingFang SC',system-ui,sans-serif}
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;line-height:1.6}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,0.08),transparent);pointer-events:none;z-index:0}
-
-/* Layout */
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(139,92,246,.08),transparent);pointer-events:none;z-index:0}
 .container{max-width:960px;margin:0 auto;padding:24px 20px;position:relative;z-index:1}
-
-/* Header */
-header{text-align:center;padding:40px 0 32px}
-.logo{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
-h1{font-size:32px;font-weight:800;background:linear-gradient(135deg,#fff 0%,#a78bfa 50%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
-.subtitle{color:var(--text-muted);font-size:15px;max-width:500px;margin:0 auto}
+header{text-align:center;padding:48px 0 40px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-size:22px;font-weight:700;color:var(--text);margin-bottom:20px;text-decoration:none}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+h1{font-size:36px;font-weight:800;background:linear-gradient(135deg,#fff,#a78bfa 50%,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.subtitle{color:var(--muted);font-size:17px;max-width:560px;margin:0 auto 28px}
 .subtitle strong{color:var(--primary)}
-
-/* Card */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;backdrop-filter:blur(10px)}
-.card-title{font-size:14px;font-weight:600;color:var(--text-muted);margin-bottom:16px;letter-spacing:0.02em}
-
-/* Upload Zone */
-.upload-zone{position:relative;border:2px dashed var(--border);border-radius:12px;padding:48px 24px;text-align:center;cursor:pointer;transition:all .3s ease}
-.upload-zone:hover,.upload-zone.dragover{border-color:var(--primary);background:rgba(139,92,246,0.05)}
-.upload-zone.has-image{padding:0;border-style:solid;border-color:var(--border)}
-.upload-zone input{display:none}
-.upload-icon{font-size:48px;margin-bottom:12px;opacity:.5}
-.upload-text{font-size:15px;color:var(--text-muted)}
-.upload-text strong{color:var(--primary)}
-.upload-hint{font-size:12px;color:var(--text-muted);margin-top:6px;opacity:.6}
-.upload-zone img{max-width:100%;max-height:400px;border-radius:8px;display:block}
-
-/* Preview area */
-.preview-area{position:relative;display:none}
-.preview-area.active{display:block}
-.preview-area img{max-width:100%;max-height:400px;border-radius:8px}
-.overlay-clear{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.overlay-clear:hover{background:rgba(255,0,0,.7)}
-
-/* Status Bar */
-.status-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15);border-radius:8px;margin-bottom:16px;font-size:13px;color:var(--text-muted);display:none}
-.status-bar.active{display:flex}
-.status-bar.success{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.08)}
-.status-bar.error{border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.08)}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0}
-.status-bar.success .status-dot{background:var(--success)}
-.status-bar.error .status-dot{background:#ef4444}
-.status-bar.loading{background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2)}
-.status-bar.loading .status-dot{background:var(--accent);animation:pulse 1.2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* Result */
-.result-area{display:none}
-.result-area.active{display:block}
-.result-area h3{font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
-.result-text{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:15px;line-height:1.8;color:var(--text);font-family:var(--font);white-space:pre-wrap;word-break:break-all;max-height:300px;overflow-y:auto}
-
-/* API Key section */
-.api-section{display:flex;flex-direction:column;gap:8px}
-.api-key-row{display:flex;gap:8px;align-items:center}
-.api-key-row input{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;color:var(--text);font-size:13px;font-family:monospace;outline:none;transition:border-color .2s}
-.api-key-row input:focus{border-color:var(--primary)}
-.api-key-row input::placeholder{color:var(--text-muted);opacity:.5}
-.api-key-hint{font-size:12px;color:var(--text-muted);opacity:.6}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
-.btn-primary{background:linear-gradient(135deg,var(--primary),#7c3aed);color:#fff;box-shadow:0 0 20px var(--primary-glow)}
-.btn-primary:hover{box-shadow:0 0 30px var(--primary-glow);transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
-.btn-outline:hover{background:rgba(255,255,255,.05)}
-.btn-sm{padding:6px 12px;font-size:12px}
-.btn-success{background:var(--success);color:#fff}
-.btn-success:hover{filter:brightness(1.1)}
-
-/* Stats */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
-.stat-value{font-size:22px;font-weight:700;color:var(--text)}
-.stat-value.purple{color:var(--primary)}
-.stat-value.cyan{color:var(--accent)}
-.stat-value.green{color:var(--success)}
-.stat-label{font-size:11px;color:var(--text-muted);margin-top:2px;letter-spacing:.03em}
-
-/* Footer */
-footer{text-align:center;padding:32px 0;color:var(--text-muted);font-size:13px}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:32px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text);background:var(--card)}
+.badge span{color:var(--muted)}
+.cta-row{display:flex;gap:12px;justify-content:center;margin-bottom:48px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:var(--radius);font-size:15px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 4px 20px rgba(139,92,246,.3)}
+.btn-secondary{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:48px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.card p{color:var(--muted);font-size:14px}
+.card .price{font-size:13px;color:var(--accent);margin-top:8px;font-family:monospace}
+.section-title{font-size:20px;font-weight:700;margin-bottom:20px;text-align:center}
+.code-block{background:#0d1117;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin:24px 0;overflow-x:auto}
+.code-block pre{margin:0;font-family:'Fira Code',monospace;font-size:13px;color:#c9d1d9}
+.code-block .comment{color:#6a9955}
+.code-block .kw{color:#ff7b72}
+.code-block .str{color:#a5d6ff}
+footer{text-align:center;padding:32px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
 footer a{color:var(--primary);text-decoration:none}
 footer a:hover{text-decoration:underline}
-
-/* Samples */
-.samples{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.sample-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;transition:all .2s}
-.sample-btn:hover{background:rgba(139,92,246,0.08);border-color:var(--primary);color:var(--primary)}
-
-/* Responsive */
-@media(max-width:600px){
-  h1{font-size:24px}
-  .container{padding:16px 12px}
-  header{padding:24px 0}
-  .upload-zone{padding:32px 16px}
-  .stats-row{grid-template-columns:1fr}
-  .api-key-row{flex-direction:column}
-  .btn{width:100%;justify-content:center}
-}
+@media(max-width:640px){h1{font-size:28px}.grid{grid-template-columns:1fr}.cta-row{flex-direction:column}}
 </style>
 </head>
 <body>
-
 <div class="container">
-
-<!-- Header -->
 <header>
-  <a href="https://goldbean-api.xyz" class="logo">
-    <span class="logo-icon">🫘</span>
-    GoldBean
-  </a>
-  <h1>🖼️ OCR 中文识别</h1>
-  <p class="subtitle">
-    全球最便宜的<strong>中文 OCR API</strong> —— 上传图片，秒级识别中文文字<br>
-    基于百度 OCR · 每调用仅 $0.01 · 注册即送 <strong>20 次免费</strong>
-  </p>
+<a class="logo" href="https://github.com/wuzenghai616-lang/goldbean"><span class="logo-icon">🫘</span> GoldBean API</a>
+<h1>67 Baidu AI Endpoints.<br>One REST API. Pay Per Call.</h1>
+<p class="subtitle">Access <strong>ERNIE-4.5</strong>, <strong>DeepSeek-R1</strong>, <strong>OCR</strong>, <strong>NLP</strong>, <strong>image generation</strong>, <strong>protein folding</strong> and 60+ more — no Baidu account needed.</p>
+<div class="badges">
+<span class="badge">🛡️ MIT</span>
+<span class="badge">⚡ <span>67</span> endpoints</span>
+<span class="badge">💰 <span>x402 / PayPal / Alipay</span></span>
+<span class="badge">🔌 <span>MCP compatible</span></span>
+<span class="badge">🆓 <span>5 calls/day free</span></span>
+</div>
+<div class="cta-row">
+<a class="btn btn-primary" href="https://api.goldbean.io">🚀 Try Free — No Signup</a>
+<a class="btn btn-secondary" href="https://github.com/wuzenghai616-lang/goldbean">📦 GitHub</a>
+<a class="btn btn-secondary" href="https://api.goldbean.io/docs">📚 Docs</a>
+</div>
 </header>
 
-<!-- Stats -->
-<div class="stats-row">
-  <div class="stat-card">
-    <div class="stat-value purple">146+</div>
-    <div class="stat-label">API Endpoints</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value cyan">$0.01</div>
-    <div class="stat-label">/call</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value green">20</div>
-    <div class="stat-label">Free Credits</div>
-  </div>
+<div class="code-block">
+<pre><span class="comment"># No API key needed for free tier</span>
+<span class="kw">curl</span> https://api.goldbean.io/free/llm/chat \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{"messages":[{"role":"user","content":"Hello!"}]}'</span>
+
+<span class="comment"># Pay per call with x402/USDC</span>
+<span class="kw">curl</span> https://api.goldbean.io/paid/ocr \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -H <span class="str">"X-PAYMENT: 0x7484b0bca25d2ee56e9b0535572d4cf44a047d98"</span> \
+  -d <span class="str">'{"image":"https://example.com/receipt.jpg"}'</span>
+
+<span class="comment"># Or use with Claude Desktop via MCP</span>
+<span class="kw">npx</span> goldbean-mcp</pre>
 </div>
 
-<!-- API Key Card -->
-<div class="card">
-  <div class="card-title">🔑 API Key</div>
-  <div class="api-section">
-    <div class="api-key-row">
-      <input type="text" id="apiKey" placeholder="输入 x-user-id 或留空自动注册获取免费额度" spellcheck="false">
-      <button class="btn btn-primary" id="registerBtn" onclick="register()">获取免费额度</button>
-    </div>
-    <div class="api-key-hint" id="keyHint">免费注册送 20 次调用，无需信用卡</div>
-  </div>
+<h2 class="section-title">Endpoints by Category</h2>
+<div class="grid">
+<div class="card"><h3>🧠 LLM Chat</h3><p>ERNIE-4.5, DeepSeek-R1, Qwen3</p><div class="price">$0.002/1K tokens</div></div>
+<div class="card"><h3>📝 OCR</h3><p>19 OCR endpoints — general, table, formula, handwriting</p><div class="price">$0.02/call</div></div>
+<div class="card"><h3>👁️ Image Recognition</h3><p>Object detection, logo, animal, plant, dish</p><div class="price">$0.02/call</div></div>
+<div class="card"><h3>🎨 Image Gen & Edit</h3><p>AI image generation and inpainting</p><div class="price">$0.05/call</div></div>
+<div class="card"><h3>🎬 Video Gen</h3><p>MuseSteamer video generation + query</p><div class="price">$0.10/call</div></div>
+<div class="card"><h3>📊 NLP</h3><p>Sentiment, keyword extraction, summarization (9 endpoints)</p><div class="price">$0.01/call</div></div>
+<div class="card"><h3>🎙️ Speech</h3><p>ASR (speech-to-text) + TTS (text-to-speech)</p><div class="price">$0.03/call</div></div>
+<div class="card"><h3>🌐 Translation</h3><p>10 language pairs incl. Chinese↔English/JP/KR/FR/DE</p><div class="price">$0.02/call</div></div>
+<div class="card"><h3>🧬 Bio-compute</h3><p>HelixFold protein structure prediction</p><div class="price">$0.50/call</div></div>
 </div>
 
-<!-- Upload Card -->
-<div class="card">
-  <div class="card-title">📤 上传图片</div>
-
-  <!-- Sample images -->
-  <div class="samples">
-    <span style="font-size:12px;color:var(--text-muted);padding-right:4px">样例：</span>
-    <button class="sample-btn" onclick="loadSample('chinese1')">📜 古籍</button>
-    <button class="sample-btn" onclick="loadSample('chinese2')">🏪 招牌</button>
-    <button class="sample-btn" onclick="loadSample('chinese3')">📄 文档</button>
-  </div>
-
-  <!-- Status bar -->
-  <div class="status-bar" id="statusBar">
-    <span class="status-dot"></span>
-    <span id="statusText">就绪</span>
-  </div>
-
-  <!-- Upload Zone -->
-  <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-    <div class="upload-icon" id="uploadIcon">📷</div>
-    <div class="upload-text" id="uploadText">
-      拖拽图片到这里，或 <strong>点击上传</strong>
-    </div>
-    <div class="upload-hint">支持 JPG / PNG / WEBP</div>
-    <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])">
-    <div id="previewArea" class="preview-area">
-      <img id="previewImg" src="" alt="Preview">
-      <button class="overlay-clear" onclick="clearImage(event)">✕</button>
-    </div>
-  </div>
-
-  <!-- Buttons -->
-  <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-    <button class="btn btn-primary" id="ocrBtn" onclick="runOCR()" disabled>
-      ⚡ 开始识别
-    </button>
-  </div>
+<h2 class="section-title">Pricing</h2>
+<div class="grid">
+<div class="card"><h3>🆓 Free Tier</h3><p>5 calls/day/IP — no registration</p><div class="price">$0</div></div>
+<div class="card"><h3>💳 Pay Per Call</h3><p>Only pay for what you use</p><div class="price">$0.01–$0.50/call</div></div>
+<div class="card"><h3>📅 Monthly</h3><p>Unlimited Basic+Standard, $20 premium quota</p><div class="price">$20/month</div></div>
+<div class="card"><h3>📅 Quarterly</h3><p>Unlimited Basic+Standard, $60 premium quota</p><div class="price">$60/quarter</div></div>
+<div class="card"><h3>📅 Yearly</h3><p>Unlimited Basic+Standard, $200 premium quota</p><div class="price">$200/year</div></div>
+<div class="card"><h3>🎁 PH20OFF</h3><p>20% off all API credits</p><div class="price">Limited time</div></div>
 </div>
 
-<!-- Result Card -->
-<div class="card" id="resultCard" style="display:none">
-  <div class="card-title">📝 识别结果</div>
-  <div class="result-area active">
-    <h3>识别文字</h3>
-    <div class="result-text" id="resultText">等待识别...</div>
-    <div style="margin-top:12px">
-      <button class="btn btn-outline btn-sm" onclick="copyResult()">📋 复制结果</button>
-    </div>
-  </div>
-  <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px">
-      <div><span style="color:var(--text-muted)">API:</span> <span id="resultApi">baidu-ocr</span></div>
-      <div><span style="color:var(--text-muted)">耗时:</span> <span id="resultTime">-</span></div>
-      <div><span style="color:var(--text-muted)">字符数:</span> <span id="resultChars">-</span></div>
-      <div><span style="color:var(--text-muted)">费用:</span> <span id="resultCost">$0.01</span></div>
-    </div>
-  </div>
+<div class="code-block">
+<pre><span class="comment">// Install MCP server for Claude Desktop</span>
+<span class="kw">npm install</span> -g goldbean-mcp
+
+<span class="comment">// Add to claude_desktop_config.json</span>
+{
+  <span class="str">"mcpServers"</span>: {
+    <span class="str">"goldbean"</span>: {
+      <span class="str">"command"</span>: <span class="str">"npx"</span>,
+      <span class="str">"args"</span>: [<span class="str">"goldbean-mcp"</span>]
+    }
+  }
+}</pre>
 </div>
 
-<!-- Footer -->
 <footer>
-  Powered by <a href="https://goldbean-api.xyz">GoldBean API</a> · 
-  <a href="https://mcpize.com/mcp/goldbean">MCPize</a> · 
-  <a href="https://github.com/wuzenghai616-lang/goldbean">GitHub</a><br>
-  <span style="font-size:11px;opacity:.6">GoldBean (GB) — Wishing You Good Fortune & Prosperity 🫘</span>
+<p>GoldBean API — <a href="https://github.com/wuzenghai616-lang/goldbean">GitHub</a> · <a href="https://api.goldbean.io">API</a> · <a href="https://github.com/wuzenghai616-lang/goldbean/discussions">Discussions</a> · <a href="https://twitter.com/goldbean_api">Twitter</a></p>
+<p>MIT License · Baidu Cloud Service Provider · 2026</p>
 </footer>
-
 </div>
-
-<script>
-// ─── State ───
-let CURRENT_IMAGE_B64 = null;
-let CURRENT_API_KEY = localStorage.getItem('gb_ocr_key') || '';
-
-// ─── Init ───
-document.addEventListener('DOMContentLoaded', ()=>{
-  if(CURRENT_API_KEY){
-    document.getElementById('apiKey').value = CURRENT_API_KEY;
-    document.getElementById('keyHint').textContent = '✅ 已加载已保存的 API Key';
-  }
-});
-
-// ─── Drag & Drop ───
-const zone = document.getElementById('uploadZone');
-zone.addEventListener('dragover', e=>{e.preventDefault();zone.classList.add('dragover')});
-zone.addEventListener('dragleave', ()=>{zone.classList.remove('dragover')});
-zone.addEventListener('drop', e=>{e.preventDefault();zone.classList.remove('dragover'); handleFile(e.dataTransfer.files[0])});
-
-// ─── File Handling ───
-function handleFile(file){
-  if(!file) return;
-  if(!file.type.match(/image\/(png|jpeg|webp|gif|bmp)/)){
-    setStatus('error','不支持的文件格式。请上传图片。'); return;
-  }
-  if(file.size > 10*1024*1024){
-    setStatus('error','文件太大（超过 10MB）。请压缩后重试。'); return;
-  }
-  const reader = new FileReader();
-  reader.onload = function(e){
-    CURRENT_IMAGE_B64 = e.target.result;
-    document.getElementById('previewImg').src = CURRENT_IMAGE_B64;
-    document.getElementById('previewArea').classList.add('active');
-    document.getElementById('uploadIcon').style.display = 'none';
-    document.getElementById('uploadText').style.display = 'none';
-    document.getElementById('uploadZone').classList.add('has-image');
-    document.getElementById('ocrBtn').disabled = false;
-    setStatus('success',`已加载: ${file.name} (${(file.size/1024).toFixed(1)} KB)`);
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearImage(e){
-  if(e) {e.stopPropagation();}
-  CURRENT_IMAGE_B64 = null;
-  document.getElementById('previewArea').classList.remove('active');
-  document.getElementById('uploadIcon').style.display = '';
-  document.getElementById('uploadText').style.display = '';
-  document.getElementById('uploadZone').classList.remove('has-image');
-  document.getElementById('fileInput').value = '';
-  document.getElementById('ocrBtn').disabled = true;
-  document.getElementById('resultCard').style.display = 'none';
-  document.getElementById('statusBar').classList.remove('active');
-}
-
-// ─── Upload by URL ───
-function loadSample(type){
-  const samples = {
-    chinese1: 'https://pic1.zhimg.com/80/v2-b5179d1e5fb67374a3eee4f0a8a2efcb_1440w.webp',
-    chinese2: 'https://img95.699pic.com/element/40183/2882.png_860.png',
-    chinese3: 'https://img.51miz.com/meihua/202307/604cf1b3-9c96-49e8-994c-ffcf7bdbe34e.jpg'
-  };
-  const url = samples[type];
-  if(!url) return;
-  setStatus('loading','正在加载样例图片...');
-  fetch(url).then(r=>r.blob()).then(blob=>{
-    handleFile(new File([blob], 'sample.'+blob.type.split('/')[1], {type:blob.type}));
-  }).catch(()=>{
-    setStatus('error','加载样例图片失败，请直接上传本地图片');
-  });
-}
-
-// ─── Register ───
-function register(){
-  const btn = document.getElementById('registerBtn');
-  btn.disabled = true; btn.textContent = '注册中...';
-  document.getElementById('apiKey').value = '';
-  fetch('https://goldbean-api.xyz/paid/user/register', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({email:'user_' + Math.random().toString(36).substr(2,8) + '@demo.goldbean'})
-  }).then(r=>r.json()).then(data=>{
-    if(data.success && data.apiKey){
-      CURRENT_API_KEY = data.apiKey;
-      document.getElementById('apiKey').value = CURRENT_API_KEY;
-      localStorage.setItem('gb_ocr_key', CURRENT_API_KEY);
-      document.getElementById('keyHint').textContent = `✅ 注册成功！还有 ${data.freeCredits} 次免费调用`;
-      setStatus('success','🎉 注册成功！免费额度已到账');
-    } else {
-      setStatus('error','注册失败: ' + (data.error||'未知错误'));
-    }
-  }).catch(err=>{
-    setStatus('error','网络错误: ' + err.message);
-  }).finally(()=>{
-    btn.disabled = false; btn.textContent = '获取免费额度';
-  });
-}
-
-// ─── Run OCR ───
-function runOCR(){
-  const apiKey = document.getElementById('apiKey').value.trim();
-  if(!apiKey){ setStatus('error','请先获取 API Key（点击"获取免费额度"）'); return; }
-  if(!CURRENT_IMAGE_B64){ setStatus('error','请先上传图片'); return; }
-
-  const btn = document.getElementById('ocrBtn');
-  btn.disabled = true; btn.textContent = '🤔 识别中...';
-  setStatus('loading','正在调用 OCR API...');
-
-  const startTime = performance.now();
-
-  // Extract base64 data
-  const base64Data = CURRENT_IMAGE_B64.split(',')[1];
-
-  fetch('https://goldbean-api.xyz/paid/baidu-ocr', {
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-user-id': apiKey
-    },
-    body: JSON.stringify({image: base64Data})
-  }).then(r=>r.json()).then(data=>{
-    const elapsed = ((performance.now() - startTime)/1000).toFixed(1);
-
-    if(data.error && data.payment_options){
-      setStatus('error','需要付费调用。请先获取免费额度（点"获取免费额度"按钮）');
-      document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('resultText').textContent = '⚠️ 免费额度不足或未注册\n\n' + JSON.stringify(data.error, null, 2);
-      return;
-    }
-
-    if(data.error){
-      setStatus('error','API 错误: ' + data.error);
-      document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('resultText').textContent = '错误: ' + data.error;
-      return;
-    }
-
-    // Success - display results
-    let wordsResult = '';
-    let wordCount = 0;
-
-    if(data.words_result && data.words_result.length > 0){
-      wordsResult = data.words_result.map((w,i)=>`${String(i+1).padStart(2,' ')}. ${w.words}`).join('\n');
-      wordCount = data.words_result.reduce((sum,w)=>sum + w.words.length, 0);
-    } else if(data.result && data.result.length > 0){
-      wordsResult = data.result.map((w,i)=>`${String(i+1).padStart(2,' ')}. ${w}`).join('\n');
-      wordCount = data.result.reduce((sum,w)=>sum + w.length, 0);
-    } else {
-      wordsResult = JSON.stringify(data, null, 2);
-    }
-
-    document.getElementById('resultText').textContent = wordsResult || '未识别到文字';
-    document.getElementById('resultTime').textContent = elapsed + 's';
-    document.getElementById('resultChars').textContent = wordCount;
-    document.getElementById('resultCard').style.display = 'block';
-
-    // Check remaining credits
-    if(data.remaining_credits !== undefined){
-      document.getElementById('keyHint').textContent = `剩余免费调用: ${data.remaining_credits} 次`;
-    }
-
-    setStatus('success',`✅ 识别完成！共 ${wordCount} 个字符，耗时 ${elapsed}s`);
-  }).catch(err=>{
-    setStatus('error','网络错误: ' + err.message);
-  }).finally(()=>{
-    btn.disabled = false; btn.textContent = '⚡ 开始识别';
-  });
-}
-
-// ─── Copy ───
-function copyResult(){
-  const text = document.getElementById('resultText').textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    setStatus('success','已复制到剪贴板');
-  }).catch(()=>{
-    // fallback
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
-    setStatus('success','已复制到剪贴板');
-  });
-}
-
-// ─── Status ───
-function setStatus(type, msg){
-  const bar = document.getElementById('statusBar');
-  bar.className = 'status-bar';
-  if(type) bar.classList.add(type);
-  bar.classList.add('active');
-  document.getElementById('statusText').textContent = msg;
-  if(type === 'success') setTimeout(()=>bar.classList.remove('active'), 4000);
-}
-</script>
 </body>
 </html>
