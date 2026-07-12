@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "goldbean": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "goldbean-mcp@latest"
+      ],
+      "env": {
+        "GOLDBEAN_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
