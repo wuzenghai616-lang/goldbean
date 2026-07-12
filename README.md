@@ -49,6 +49,45 @@ Whether you need Baidu OCR for document scanning, Baidu Translation for multilin
 
 ---
 
+
+## 🏗️ Architecture
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │           GoldBean API Platform          │
+                    │            (api.goldbean.io)             │
+                    ├─────────────┬─────────────┬────────────┤
+  ┌─────────┐       │             │             │            │
+  │ Cursor  │──────▶│   Node.js   │   Payment   │   Baidu    │
+  │ Claude  │  MCP   │   Server    │   Layer     │   AI APIs │
+  │ Cline   │       │  (Express)  │             │            │
+  └─────────┘       │             │             │            │
+                    │  ┌────────┐ │ ┌─────────┐ │ ┌────────┐│
+  ┌─────────┐       │  │ Route  │ │ │ x402    │ │ │ OCR    ││
+  │  REST   │──────▶│  │ Layer  │ │ │ USDC   │ │ │ LLM    ││
+  │ Client  │ HTTP  │  │ 67 rts │ │ │ PayPal │ │ │ TTS/ASR││
+  └─────────┘       │  └────────┘ │ │ Alipay  │ │ │ Vision ││
+                    │       │      │ └─────────┘ │ │ NLP    ││
+                    │       ▼      │      │      │ │ Video  ││
+                    │  ┌────────┐ │      ▼      │ │ Protein ││
+                    │  │ User  │ │ ┌─────────┐ │ └────────┘│
+                    │  │ Store │ │ │Wallet   │ │     │     │
+                    │  │ (JSON)│ │ │(Coinbase)│ │     ▼     │
+                    │  └────────┘ │ └─────────┘ │  10 Apps │
+                    │             │             │  (AK/SK)  │
+                    └─────────────┴─────────────┴────────────┘
+                                                          
+  Payment Flow:  Client ──▶ 402 Response ──▶ Pay USDC ──▶ 200 OK
+                Client ──▶ PayPal/Alipay ──▶ Credits ──▶ 200 OK
+```
+
+**Key Components:**
+
+- **Route Layer**: 67 endpoints (57 paid + 10 free), JSON-based user store
+- **Payment Layer**: x402/USDC via Coinbase Facilitator, PayPal & Alipay prepaid credits
+- **Baidu AI Backend**: 10 Baidu apps with automatic token rotation (AK/SK management)
+- **MCP Server**: npm package (`goldbean-mcp`) for Cursor/Claude/Cline integration
+
 ## 🚀 Quick Start
 
 ### 1. Install the MCP Server
