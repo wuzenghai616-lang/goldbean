@@ -1,0 +1,78 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in GoldBean
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below.
+        Do not include API keys, wallet private keys, or payment credentials.
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint URL
+      description: The API route or MCP tool where the bug occurred
+      placeholder: e.g., GET /paid/baidu-ocr
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection Type
+      options:
+        - Local MCP (npx goldbean-mcp)
+        - Remote MCP Server
+        - REST API (curl / HTTP client)
+        - Python SDK
+        - Node.js SDK
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Minimal steps to trigger the bug
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened (include error messages or response body)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Logs, screenshots, environment info, or anything else relevant
+    validations:
+      required: false

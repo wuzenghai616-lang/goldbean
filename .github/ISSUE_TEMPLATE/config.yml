@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/wuzenghai616-lang/goldbean/discussions
+    about: Ask questions, share ideas, and discuss with the community.
+  - name: API Health Check
+    url: https://goldbean-api.xyz/health
+    about: Check if the GoldBean API is currently online before reporting bugs.
+  - name: API Documentation
+    url: https://goldbean-api.xyz/openapi.json
+    about: Full OpenAPI specification for all endpoints.

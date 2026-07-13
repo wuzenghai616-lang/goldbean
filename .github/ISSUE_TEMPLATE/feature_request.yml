@@ -1,0 +1,68 @@
+name: Feature Request
+description: Suggest a new endpoint, tool, or improvement for GoldBean
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe what you'd like and why.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this feature solve?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: What you'd like to see implemented
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - New Baidu AI Endpoint
+        - MCP Tool / Integration
+        - Payment Method
+        - Documentation
+        - Performance / Optimization
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches you've thought about
+    validations:
+      required: false
+
+  - type: dropdown
+    id: willing
+    attributes:
+      label: Willing to Implement?
+      options:
+        - "Yes, I can submit a PR"
+        - "Maybe, need guidance"
+        - "No, just suggesting"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other details, mockups, or references
+    validations:
+      required: false
