@@ -117,12 +117,12 @@ npx goldbean-mcp
 # Register for 20 free API calls
 curl -X POST https://goldbean-api.xyz/paid/user/register \
   -H "Content-Type: application/json" \
-  -d '{"userId": "your-user-id"}'
+  -d '{"email":"you@example.com"}'
 
-# Response: {"freeCredits": 20, "apiKey": "GB_XXXXXX"}
+# Response: {"success":true,"apiKey":"GB_XXXXXX","freeCredits":20}
 
 # Call an API with free credits
-curl "https://goldbean-api.xyz/paid/baidu-ocr?image=https://example.com/doc.jpg" \
+curl "https://goldbean-api.xyz/paid/baidu-ocr?url=https://example.com/doc.jpg" \
   -H "x-user-id: GB_XXXXXX"
 ```
 
@@ -135,9 +135,11 @@ We provide ready-to-use code examples in the [`examples/`](examples/) directory:
 
 | Example | Language | Description |
 |---------|----------|-------------|
+| [`quickstart.py`](examples/quickstart.py) | Python | Full SDK with all endpoints — best starting point |
+| [`quickstart.js`](examples/quickstart.js) | Node.js | Full SDK with all endpoints |
+| [`mcp-integration.py`](examples/mcp-integration.py) | Python | MCP SDK integration example |
 | [`claude-desktop-config.md`](examples/claude-desktop-config.md) | Config | Claude Desktop MCP configuration guide |
-| [`python-integration.py`](examples/python-integration.py) | Python | MCP SDK + x402 payment integration |
-| [`nodejs-x402-example.js`](examples/nodejs-x402-example.js) | Node.js | Batch calls with @goldbean/x402-sdk |
+| [`python-integration.py`](examples/python-integration.py) | Python | Legacy MCP + x402 example |
 
 ```bash
 git clone https://github.com/wuzenghai616-lang/goldbean.git

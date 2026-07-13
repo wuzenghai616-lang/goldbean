@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GoldBean API — Documentation & Playground</title>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--accent2:#3fb950;--danger:#f85149;--warning:#d29922;--mono:'SF Mono',Monaco,'Cascadia Code',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:24px 16px;overflow-y:auto;position:sticky;top:0;height:100vh}
+.sidebar h1{font-size:20px;margin-bottom:4px}
+.sidebar .tagline{font-size:12px;color:var(--text2);margin-bottom:20px}
+.search-box{width:100%;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;margin-bottom:16px}
+.search-box:focus{outline:none;border-color:var(--accent)}
+.nav-section{margin-bottom:16px}
+.nav-section h3{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text2);margin-bottom:8px;padding:0 8px}
+.nav-item{display:block;padding:6px 8px;border-radius:6px;font-size:13px;font-family:var(--mono);color:var(--text2);cursor:pointer;transition:all .15s}
+.nav-item:hover{background:rgba(88,166,255,0.1);color:var(--text)}
+.nav-item.active{background:rgba(88,166,255,0.15);color:var(--accent)}
+.nav-item .price{float:right;font-size:11px;color:var(--accent2)}
+.main{padding:32px 40px;max-width:1100px}
+.main h2{font-size:24px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.endpoint-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+.endpoint-card h3{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.method-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--mono)}
+.method-GET{background:rgba(63,185,80,0.15);color:var(--accent2);border:1px solid rgba(63,185,80,0.3)}
+.method-POST{background:rgba(210,153,34,0.15);color:var(--warning);border:1px solid rgba(210,153,34,0.3)}
+.endpoint-url{font-family:var(--mono);font-size:14px;color:var(--text2);margin-bottom:16px;word-break:break-all}
+.endpoint-url .base{color:var(--text2)}
+.param-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:13px}
+.param-table th{text-align:left;padding:8px 12px;background:var(--bg);color:var(--text2);font-weight:600;border-bottom:1px solid var(--border)}
+.param-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.param-table td:first-child{font-family:var(--mono);color:var(--accent)}
+.param-table .required{color:var(--danger);font-size:11px}
+.try-it{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.try-it h4{font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text2);margin-bottom:12px}
+.input-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.input-row label{font-size:12px;color:var(--text2);min-width:100px;padding-top:6px}
+.input-row input,.input-row select,.input-row textarea{flex:1;padding:6px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-family:var(--mono)}
+.input-row input:focus,.input-row select:focus,.input-row textarea:focus{outline:none;border-color:var(--accent)}
+.api-key-row{margin-bottom:12px}
+.api-key-row input{width:100%;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px}
+.btn-send{padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s}
+.btn-send:hover{background:#4493f8}
+.btn-send:disabled{opacity:0.5;cursor:not-allowed}
+.response-box{margin-top:16px}
+.response-meta{display:flex;gap:16px;margin-bottom:8px;font-size:12px}
+.response-meta .status-ok{color:var(--accent2)}
+.response-meta .status-err{color:var(--danger)}
+.response-meta .time{color:var(--text2)}
+.response-body{background:#010409;border:1px solid var(--border);border-radius:8px;padding:16px;font-family:var(--mono);font-size:12px;line-height:1.5;overflow-x:auto;max-height:500px;overflow-y:auto;white-space:pre-wrap;word-break:break-all}
+.response-body.empty{color:var(--text2)}
+.hero{background:linear-gradient(135deg,#1a0f2e,#0d1117);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:32px}
+.hero h1{font-size:28px;margin-bottom:8px}
+.hero p{color:var(--text2);font-size:14px}
+.hero .stats{display:flex;gap:24px;margin-top:16px}
+.hero .stat{text-align:center}
+.hero .stat .num{font-size:24px;font-weight:700;color:var(--accent)}
+.hero .stat .label{font-size:11px;color:var(--text2)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-left:4px}
+.badge-free{background:rgba(63,185,80,0.15);color:var(--accent2)}
+.badge-paid{background:rgba(210,153,34,0.15);color:var(--warning)}
+.badge-premium{background:rgba(248,81,73,0.15);color:var(--danger)}
+.quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:24px}
+.quick-link{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;cursor:pointer;transition:all .15s}
+.quick-link:hover{border-color:var(--accent);background:rgba(88,166,255,0.05)}
+.quick-link .icon{font-size:20px;margin-bottom:4px}
+.quick-link .desc{font-size:11px;color:var(--text2)}
+.curl-example{background:#010409;border:1px solid var(--border);border-radius:8px;padding:12px;font-family:var(--mono);font-size:12px;overflow-x:auto;margin-bottom:8px;color:var(--text2)}
+.curl-example .cmd{color:var(--accent2)}
+.curl-example .url{color:var(--accent)}
+.curl-example .flag{color:var(--warning)}
+.copy-btn{float:right;padding:2px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--text2);font-size:11px;cursor:pointer}
+.copy-btn:hover{color:var(--text)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
+.pricing-card .plan{font-size:14px;font-weight:600;margin-bottom:4px}
+.pricing-card .price{font-size:22px;font-weight:700;color:var(--accent)}
+.pricing-card .period{font-size:12px;color:var(--text2)}
+.pricing-card .features{font-size:11px;color:var(--text2);margin-top:8px;text-align:left;padding-left:12px}
+.pricing-card.popular{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+@media(max-width:768px){.container{grid-template-columns:1fr}.sidebar{position:relative;height:auto}}
+</style>
+</head>
+<body>
+<div class="container">
+<aside class="sidebar">
+<h1>🫘 GoldBean API</h1>
+<p class="tagline">Baidu AI for Global Developers</p>
+<input class="search-box" id="searchBox" placeholder="Search endpoints..." oninput="filterEndpoints()">
+<div id="navContent"></div>
+</aside>
+<main class="main">
+<div class="hero">
+<h1>GoldBean API Documentation</h1>
+<p>Access 60+ Baidu AI endpoints — OCR, TTS, ASR, Translation, LLM, Vision, NLP, Image Generation, Video Generation. Pay per call with USDC, PayPal, or Alipay. No Chinese phone number required.</p>
+<div class="stats">
+<div class="stat"><div class="num" id="statEndpoints">60+</div><div class="label">Endpoints</div></div>
+<div class="stat"><div class="num">$0.01</div><div class="label">Per Call</div></div>
+<div class="stat"><div class="num">5/day</div><div class="label">Free Tier</div></div>
+<div class="stat"><div class="num">20</div><div class="label">Free Credits</div></div>
+</div>
+</div>
+
+<div class="quick-links">
+<div class="quick-link" onclick="scrollToSection('quickstart')"><div class="icon">🚀</div>Quick Start<div class="desc">30 seconds to first call</div></div>
+<div class="quick-link" onclick="scrollToSection('auth')"><div class="icon">🔑</div>Authentication<div class="desc">API keys & free tier</div></div>
+<div class="quick-link" onclick="scrollToSection('pricing')"><div class="icon">💰</div>Pricing<div class="desc">Pay per call plans</div></div>
+<div class="quick-link" onclick="scrollToSection('mcp')"><div class="icon">🤖</div>MCP Integration<div class="desc">Cursor & Claude</div></div>
+</div>
+
+<div id="quickstart" class="endpoint-card">
+<h3>🚀 Quick Start</h3>
+<p style="color:var(--text2);margin-bottom:16px">Make your first API call in 30 seconds. No registration needed for free endpoints.</p>
+
+<h4 style="color:var(--text2);font-size:13px;margin-bottom:8px">1. Try a free endpoint (no auth needed):</h4>
+<div class="curl-example"><span class="cmd">curl</span> <span class="url">"https://goldbean-api.xyz/weather-now?city=London"</span></div>
+
+<h4 style="color:var(--text2);font-size:13px;margin:12px 0 8px">2. Register for 20 free credits:</h4>
+<div class="curl-example"><span class="cmd">curl</span> <span class="flag">-X POST</span> <span class="url">https://goldbean-api.xyz/paid/user/register</span> \
+  <span class="flag">-H</span> "Content-Type: application/json" \
+  <span class="flag">-d</span> '{"email":"you@example.com"}'</div>
+
+<h4 style="color:var(--text2);font-size:13px;margin:12px 0 8px">3. Call a Baidu AI endpoint:</h4>
+<div class="curl-example"><span class="cmd">curl</span> <span class="url">"https://goldbean-api.xyz/paid/baidu-ocr?url=https://example.com/doc.jpg"</span> \
+  <span class="flag">-H</span> "x-user-id: GB_YOUR_API_KEY"</div>
+</div>
+
+<div id="auth" class="endpoint-card">
+<h3>🔑 Authentication</h3>
+<p style="color:var(--text2);margin-bottom:12px">GoldBean uses a simple API key system. Pass your key in any of these headers:</p>
+<table class="param-table">
+<tr><th>Header</th><th>Format</th><th>Example</th></tr>
+<tr><td>x-user-id</td><td>GB_XXXXXXXX</td><td><code>x-user-id: GB_A1B2C3D4</code></td></tr>
+<tr><td>x-api-key</td><td>GB_XXXXXXXX</td><td><code>x-api-key: GB_A1B2C3D4</code></td></tr>
+<tr><td>Authorization</td><td>Bearer GB_XXXXXXXX</td><td><code>Authorization: Bearer GB_A1B2C3D4</code></td></tr>
+</table>
+<p style="color:var(--text2);font-size:13px;margin-top:8px">💡 No API key? You get <strong>5 free calls/day</strong> per IP address automatically. Register to get <strong>20 additional free credits</strong>.</p>
+</div>
+
+<div id="pricing" class="endpoint-card">
+<h3>💰 Pricing & Plans</h3>
+<p style="color:var(--text2);margin-bottom:12px">Pay only for what you use. No subscription required.</p>
+<div class="pricing-grid">
+<div class="pricing-card"><div class="plan">Free Tier</div><div class="price">$0</div><div class="period">5 calls/day per IP</div><div class="features">✓ No registration\n✓ 5 calls/day per IP\n✓ All free endpoints</div></div>
+<div class="pricing-card popular"><div class="plan">Starter</div><div class="price">$1</div><div class="period">100 credits</div><div class="features">✓ 100 API calls\n✓ All endpoints\n✓ PayPal / Alipay\n✓ No expiry</div></div>
+<div class="pricing-card"><div class="plan">Monthly</div><div class="price">$9.9</div><div class="period">per month</div><div class="features">✓ Unlimited Basic+Standard\n✓ $20 Premium quota\n✓ Priority support</div></div>
+<div class="pricing-card"><div class="plan">Annual</div><div class="price">$99</div><div class="period">per year</div><div class="features">✓ Unlimited Basic+Standard\n✓ $200 Premium quota/mo\n✓ Priority support</div></div>
+</div>
+<p style="color:var(--text2);font-size:13px">Premium endpoints (LLM Chat, Image Gen, Video Gen, DeepThink) have a monthly usage cap. Basic and Standard endpoints are unlimited for members.</p>
+</div>
+
+<div id="mcp" class="endpoint-card">
+<h3>🤖 MCP Integration (Cursor / Claude / Cline)</h3>
+<p style="color:var(--text2);margin-bottom:12px">GoldBean is an MCP-native server. Add it to your AI coding assistant in seconds:</p>
+<h4 style="font-size:13px;margin-bottom:8px">Option 1: URL-based (recommended for hosted server)</h4>
+<div class="curl-example">{
+  "mcpServers": {
+    "goldbean": {
+      "url": "https://goldbean-api.xyz/sse"
+    }
+  }
+}</div>
+<h4 style="font-size:13px;margin:12px 0 8px">Option 2: npx (local process)</h4>
+<div class="curl-example">{
+  "mcpServers": {
+    "goldbean": {
+      "command": "npx",
+      "args": ["goldbean-mcp"]
+    }
+  }
+}</div>
+<p style="color:var(--text2);font-size:13px;margin-top:8px">Config file locations:<br>
+• <strong>Cursor:</strong> Settings → MCP → Add new MCP Server<br>
+• <strong>Claude Desktop:</strong> ~/Library/Application Support/Claude/claude_desktop_config.json (macOS) or %APPDATA%\Claude\claude_desktop_config.json (Windows)</p>
+</div>
+
+<div id="endpoints"></div>
+
+</main>
+</div>
+
+<script>
+const API_BASE = 'https://goldbean-api.xyz';
+const ENDPOINTS = [
+  // Free endpoints
+  {cat:'Free',name:'weather-now',method:'GET',path:'/weather-now',price:'Free',desc:'Get current weather for any city',params:[{name:'city',type:'string',req:true,desc:'City name (e.g. London, Beijing)'}],example:{city:'London'}},
+  {cat:'Free',name:'btc-price',method:'GET',path:'/btc-price',price:'Free',desc:'Get current Bitcoin price in USD',params:[],example:{}},
+  {cat:'Free',name:'gas',method:'GET',path:'/gas',price:'Free',desc:'Get current Ethereum gas price',params:[],example:{}},
+  {cat:'Free',name:'health',method:'GET',path:'/health',price:'Free',desc:'Service health check',params:[],example:{}},
+  {cat:'Free',name:'info',method:'GET',path:'/info',price:'Free',desc:'API information and version',params:[],example:{}},
+
+  // Account
+  {cat:'Account',name:'user/register',method:'POST',path:'/paid/user/register',price:'Free',desc:'Register for 20 free API credits',params:[{name:'email',type:'string',req:true,desc:'Your email (used for account)'},{name:'name',type:'string',req:false,desc:'Optional display name'}],example:{email:'you@example.com'},body:true},
+  {cat:'Account',name:'user/credits',method:'GET',path:'/paid/user/credits',price:'Free',desc:'Check your remaining credits and usage',params:[],example:{},auth:true},
+  {cat:'Account',name:'my-balance',method:'GET',path:'/paid/my-balance',price:'Free',desc:'Check balance, membership, and IP free quota',params:[],example:{},auth:true},
+  {cat:'Account',name:'verify',method:'GET',path:'/paid/verify',price:'Free',desc:'Verify an on-chain USDC payment transaction',params:[{name:'tx',type:'string',req:true,desc:'Transaction hash (66 chars)'}],example:{tx:'0x...'}},
+
+  // OCR
+  {cat:'OCR',name:'baidu-ocr',method:'GET',path:'/paid/baidu-ocr',price:'$0.02',desc:'General text OCR — extract text from images',params:[{name:'url',type:'string',req:false,desc:'Image URL (use this OR image)'},{name:'image',type:'string',req:false,desc:'Base64-encoded image'}],example:{url:'https://goldbean-api.xyz/og-image.png'}},
+  {cat:'OCR',name:'baidu-ocr-accurate',method:'GET',path:'/paid/baidu-ocr-accurate',price:'$0.02',desc:'High-accuracy OCR for complex documents',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/doc.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-table',method:'GET',path:'/paid/baidu-ocr-table',price:'$0.02',desc:'Extract table structure from images',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/table.jpg'}},
+  {cat:'OCR',name:'baidu-idcard',method:'GET',path:'/paid/baidu-idcard',price:'$0.02',desc:'ID card recognition (front/back)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'side',type:'string',req:false,desc:'front or back'}],example:{url:'https://example.com/idcard.jpg',side:'front'}},
+  {cat:'OCR',name:'baidu-ocr-webimage',method:'GET',path:'/paid/baidu-ocr-webimage',price:'$0.02',desc:'OCR optimized for web images',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/screenshot.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-handwriting',method:'GET',path:'/paid/baidu-ocr-handwriting',price:'$0.02',desc:'Handwritten text recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/handwriting.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-qrcode',method:'GET',path:'/paid/baidu-ocr-qrcode',price:'$0.02',desc:'QR code recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/qr.png'}},
+  {cat:'OCR',name:'baidu-ocr-bankcard',method:'GET',path:'/paid/baidu-ocr-bankcard',price:'$0.02',desc:'Bank card number recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/card.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-business-license',method:'GET',path:'/paid/baidu-ocr-business-license',price:'$0.02',desc:'Business license recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/license.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-numbers',method:'GET',path:'/paid/baidu-ocr-numbers',price:'$0.02',desc:'Number recognition from images',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/numbers.jpg'}},
+  {cat:'OCR',name:'baidu-ocr-seal',method:'GET',path:'/paid/baidu-ocr-seal',price:'$0.02',desc:'Seal/stamp recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/seal.jpg'}},
+  {cat:'OCR',name:'baidu-deepseek-ocr',method:'GET',path:'/paid/baidu-deepseek-ocr',price:'$0.02',desc:'Advanced OCR with DeepSeek-OCR model for complex layouts',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'prompt',type:'string',req:false,desc:'Custom extraction prompt'}],example:{url:'https://example.com/complex.jpg',prompt:'Extract all text with layout'}},
+  {cat:'OCR',name:'baidu-paddleocr-vl',method:'GET',path:'/paid/baidu-paddleocr-vl',price:'$0.02',desc:'Document parsing with PaddleOCR-VL (layout analysis)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'prompt',type:'string',req:false,desc:'Custom instruction'}],example:{url:'https://example.com/document.jpg'}},
+  {cat:'OCR',name:'baidu-qianfan-ocr',method:'GET',path:'/paid/baidu-qianfan-ocr',price:'$0.02',desc:'General-purpose OCR with Qianfan-OCR (32k context)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'prompt',type:'string',req:false,desc:'Custom instruction'}],example:{url:'https://example.com/doc.jpg'}},
+
+  // Speech
+  {cat:'Speech',name:'baidu-tts',method:'GET',path:'/paid/baidu-tts',price:'$0.02',desc:'Text-to-Speech — convert Chinese text to audio',params:[{name:'text',type:'string',req:true,desc:'Text to convert (Chinese)'},{name:'per',type:'string',req:false,desc:'Voice: 0=female, 1=male, 3=emotional, 4=emotional female, 5=male(2)'}],example:{text:'你好，欢迎使用GoldBean',per:'0'},binary:true},
+  {cat:'Speech',name:'baidu-asr',method:'GET',path:'/paid/baidu-asr',price:'$0.02',desc:'Speech-to-Text — convert audio to text',params:[{name:'audio',type:'string',req:true,desc:'Base64-encoded audio'},{name:'format',type:'string',req:false,desc:'Audio format: pcm, wav, amr (default: pcm)'},{name:'rate',type:'number',req:false,desc:'Sample rate (default: 16000)'}],example:{audio:'',format:'pcm',rate:16000}},
+
+  // LLM
+  {cat:'LLM',name:'baidu-llm-chat',method:'GET',path:'/paid/baidu-llm-chat',price:'Premium',desc:'Chat with ERNIE LLM (Baidu\'s GPT-class model)',params:[{name:'message',type:'string',req:true,desc:'Your message/prompt'},{name:'model',type:'string',req:false,desc:'Model: ernie-5.1 (default), ernie-4.0-turbo, etc.'}],example:{message:'Explain quantum computing in 3 sentences',model:'ernie-5.1'}},
+  {cat:'LLM',name:'baidu-deepthink',method:'GET',path:'/paid/baidu-deepthink',price:'Premium',desc:'Deep reasoning with DeepSeek-R1 (chain-of-thought)',params:[{name:'message',type:'string',req:true,desc:'Your reasoning question'},{name:'model',type:'string',req:false,desc:'Model (default: deepseek-r1-250528)'}],example:{message:'If a train leaves Beijing at 300km/h and another leaves Shanghai at 250km/h...'}},
+  {cat:'LLM',name:'baidu-vision-chat',method:'GET',path:'/paid/baidu-vision-chat',price:'Premium',desc:'Vision LLM — describe and analyze images with ERNIE-4.5-VL',params:[{name:'image',type:'string',req:true,desc:'Image URL'},{name:'message',type:'string',req:false,desc:'Question about the image'},{name:'model',type:'string',req:false,desc:'Model (default: ernie-4.5-turbo-vl)'}],example:{image:'https://example.com/photo.jpg',message:'What is in this image?'}},
+
+  // OpenAI-compatible
+  {cat:'OpenAI-Compatible',name:'v1/chat/completions',method:'POST',path:'/v1/chat/completions',price:'Credit',desc:'OpenAI-compatible chat completions (DeepSeek backend)',params:[{name:'model',type:'string',req:false,desc:'Model: deepseek-chat (default), deepseek-coder'},{name:'messages',type:'array',req:true,desc:'Array of {role, content} messages'}],example:{model:'deepseek-chat',messages:[{role:'user',content:'Hello!'}]},body:true},
+  {cat:'OpenAI-Compatible',name:'v1/models',method:'GET',path:'/v1/models',price:'Free',desc:'List available models (OpenAI-compatible)',params:[],example:{}},
+  {cat:'OpenAI-Compatible',name:'v1/images/generations',method:'POST',path:'/v1/images/generations',price:'Credit',desc:'Generate images from text (OpenAI-compatible)',params:[{name:'prompt',type:'string',req:true,desc:'Image description'},{name:'size',type:'string',req:false,desc:'Image size (default: 1024x1024)'}],example:{prompt:'A cat sitting on a cloud',size:'1024x1024'},body:true},
+  {cat:'OpenAI-Compatible',name:'v1/embeddings',method:'POST',path:'/v1/embeddings',price:'Credit',desc:'Generate text embeddings (OpenAI-compatible)',params:[{name:'input',type:'string',req:true,desc:'Text to embed'},{name:'model',type:'string',req:false,desc:'Model (default: embedding-v1)'}],example:{input:'Hello world',model:'embedding-v1'},body:true},
+  {cat:'OpenAI-Compatible',name:'v1/audio/speech',method:'POST',path:'/v1/audio/speech',price:'Credit',desc:'Text-to-speech (OpenAI-compatible)',params:[{name:'input',type:'string',req:true,desc:'Text to convert'},{name:'voice',type:'string',req:false,desc:'Voice ID (default: 0)'}],example:{input:'Hello world',voice:'0'},body:true,binary:true},
+  {cat:'OpenAI-Compatible',name:'v1/audio/transcriptions',method:'POST',path:'/v1/audio/transcriptions',price:'Credit',desc:'Speech-to-text (OpenAI-compatible)',params:[{name:'audio',type:'string',req:true,desc:'Base64-encoded audio'}],example:{audio:''},body:true},
+
+  // Translation
+  {cat:'Translation',name:'baidu-translate',method:'GET',path:'/paid/baidu-translate',price:'$0.01',desc:'Multi-language translation (Baidu Translate)',params:[{name:'text',type:'string',req:true,desc:'Text to translate'},{name:'from',type:'string',req:false,desc:'Source language (default: auto)'},{name:'to',type:'string',req:false,desc:'Target language (default: en)'}],example:{text:'Hello world',from:'en',to:'zh'}},
+
+  // Vision & Recognition
+  {cat:'Vision',name:'baidu-image-recognition',method:'GET',path:'/paid/baidu-image-recognition',price:'$0.02',desc:'General image recognition — identify objects and scenes',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/scene.jpg'}},
+  {cat:'Vision',name:'baidu-object-detect',method:'GET',path:'/paid/baidu-object-detect',price:'$0.02',desc:'Object detection with bounding boxes',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/objects.jpg'}},
+  {cat:'Vision',name:'baidu-landmark',method:'GET',path:'/paid/baidu-landmark',price:'$0.02',desc:'Landmark recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/landmark.jpg'}},
+  {cat:'Vision',name:'baidu-plant',method:'GET',path:'/paid/baidu-plant',price:'$0.02',desc:'Plant species recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'baike',type:'string',req:false,desc:'Set "true" for Wikipedia info'}],example:{url:'https://example.com/plant.jpg',baike:'true'}},
+  {cat:'Vision',name:'baidu-animal',method:'GET',path:'/paid/baidu-animal',price:'$0.02',desc:'Animal species recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'baike',type:'string',req:false,desc:'Set "true" for Wikipedia info'}],example:{url:'https://example.com/animal.jpg',baike:'true'}},
+  {cat:'Vision',name:'baidu-dish',method:'GET',path:'/paid/baidu-dish',price:'$0.02',desc:'Dish/cuisine recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'baike',type:'string',req:false,desc:'Set "true" for Wikipedia info'}],example:{url:'https://example.com/food.jpg',baike:'true'}},
+  {cat:'Vision',name:'baidu-logo',method:'GET',path:'/paid/baidu-logo',price:'$0.02',desc:'Brand logo recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/logo.png'}},
+  {cat:'Vision',name:'baidu-car',method:'GET',path:'/paid/baidu-car',price:'$0.02',desc:'Car model recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'baike',type:'string',req:false,desc:'Set "true" for info'}],example:{url:'https://example.com/car.jpg',baike:'true'}},
+  {cat:'Vision',name:'baidu-ingredient',method:'GET',path:'/paid/baidu-ingredient',price:'$0.02',desc:'Fruit/vegetable recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/fruit.jpg'}},
+  {cat:'Vision',name:'baidu-vehicle-detect',method:'GET',path:'/paid/baidu-vehicle-detect',price:'$0.02',desc:'Vehicle detection (count and position)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/parking.jpg'}},
+
+  // Face & Body
+  {cat:'Face & Body',name:'baidu-face-detect',method:'GET',path:'/paid/baidu-face-detect',price:'$0.02',desc:'Face detection & analysis (age, gender, emotion, etc.)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'fields',type:'string',req:false,desc:'Fields to return (default: age,beauty,expression,gender,glasses,emotion,face_shape)'}],example:{url:'https://example.com/face.jpg'}},
+  {cat:'Face & Body',name:'baidu-face-compare',method:'GET',path:'/paid/baidu-face-compare',price:'$0.02',desc:'1:1 face comparison — verify identity',params:[{name:'url1',type:'string',req:false,desc:'First image URL'},{name:'url2',type:'string',req:false,desc:'Second image URL'},{name:'image1',type:'string',req:false,desc:'First base64 image'},{name:'image2',type:'string',req:false,desc:'Second base64 image'}],example:{url1:'https://example.com/face1.jpg',url2:'https://example.com/face2.jpg'}},
+  {cat:'Face & Body',name:'baidu-body-analysis',method:'GET',path:'/paid/baidu-body-analysis',price:'$0.02',desc:'Body analysis (gesture, posture, counting)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'type',type:'string',req:false,desc:'Analysis type (default: body_analysis)'}],example:{url:'https://example.com/people.jpg'}},
+  {cat:'Face & Body',name:'baidu-gesture',method:'GET',path:'/paid/baidu-gesture',price:'$0.02',desc:'Hand gesture recognition',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/gesture.jpg'}},
+
+  // Image Processing
+  {cat:'Image Processing',name:'baidu-image-enhance',method:'GET',path:'/paid/baidu-image-enhance',price:'$0.02',desc:'Image quality enhancement',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'type',type:'string',req:false,desc:'Enhancement type (default: image_quality_enhance)'}],example:{url:'https://example.com/low-quality.jpg'}},
+
+  // Image Generation
+  {cat:'Image Gen',name:'baidu-image-gen',method:'GET',path:'/paid/baidu-image-gen',price:'Premium',desc:'AI image generation (Qwen-Image, CJK support)',params:[{name:'prompt',type:'string',req:true,desc:'Image description'},{name:'model',type:'string',req:false,desc:'Model (default: qwen-image)'},{name:'n',type:'number',req:false,desc:'Number of images (default: 1)'}],example:{prompt:'A cat sitting on a cloud in Chinese ink painting style'}},
+  {cat:'Image Gen',name:'baidu-image-edit',method:'GET',path:'/paid/baidu-image-edit',price:'Premium',desc:'AI image editing (Qwen-Image-Edit)',params:[{name:'image',type:'string',req:true,desc:'Original image URL'},{name:'prompt',type:'string',req:true,desc:'Edit instruction'},{name:'model',type:'string',req:false,desc:'Model (default: qwen-image-edit)'}],example:{image:'https://example.com/photo.jpg',prompt:'Add a sunset background'}},
+
+  // Video
+  {cat:'Video',name:'baidu-video-gen',method:'GET',path:'/paid/baidu-video-gen',price:'Premium',desc:'AI video generation (MuseSteamer, image-to-video)',params:[{name:'prompt',type:'string',req:true,desc:'Video description'},{name:'image',type:'string',req:true,desc:'Reference image URL'},{name:'model',type:'string',req:false,desc:'Model (default: musesteamer-air-i2v)'}],example:{prompt:'Slow zoom in with gentle movement',image:'https://example.com/scene.jpg'}},
+  {cat:'Video',name:'baidu-video-query',method:'GET',path:'/paid/baidu-video-query',price:'$0.01',desc:'Query video generation task status',params:[{name:'task_id',type:'string',req:true,desc:'Task ID from video-gen'}],example:{task_id:'task_12345'}},
+
+  // NLP
+  {cat:'NLP',name:'baidu-nlp',method:'GET',path:'/paid/baidu-nlp',price:'$0.01',desc:'NLP lexical analysis (word segmentation, POS tagging)',params:[{name:'text',type:'string',req:true,desc:'Text to analyze'},{name:'type',type:'string',req:false,desc:'Analysis type: lexer, depparser, etc.'}],example:{text:'百度是一家伟大的人工智能公司',type:'lexer'}},
+  {cat:'NLP',name:'baidu-sentiment',method:'GET',path:'/paid/baidu-sentiment',price:'$0.01',desc:'Sentiment analysis (positive/negative/negative)',params:[{name:'text',type:'string',req:true,desc:'Text to analyze'}],example:{text:'This product is amazing!'}},
+  {cat:'NLP',name:'baidu-summary',method:'GET',path:'/paid/baidu-summary',price:'$0.01',desc:'Automatic text summarization',params:[{name:'text',type:'string',req:true,desc:'Long text to summarize'}],example:{text:'Paste a long article here...'}},
+  {cat:'NLP',name:'baidu-word-embedding',method:'GET',path:'/paid/baidu-word-embedding',price:'$0.01',desc:'Word vector embedding',params:[{name:'text',type:'string',req:true,desc:'Word or text'}],example:{text:'人工智能'}},
+  {cat:'NLP',name:'baidu-text-corrector',method:'GET',path:'/paid/baidu-text-corrector',price:'$0.01',desc:'Text error correction (Chinese)',params:[{name:'text',type:'string',req:true,desc:'Text with errors'}],example:{text:'今天天气真不错，我想出去玩'}},
+  {cat:'NLP',name:'baidu-keyword-extraction',method:'GET',path:'/paid/baidu-keyword-extraction',price:'$0.01',desc:'Keyword extraction from text',params:[{name:'text',type:'string',req:true,desc:'Article text'},{name:'num',type:'number',req:false,desc:'Number of keywords (default: 5)'}],example:{text:'Baidu AI provides powerful OCR capabilities...',num:5}},
+
+  // Embedding & Reranker
+  {cat:'Embedding',name:'baidu-embedding',method:'GET',path:'/paid/baidu-embedding',price:'$0.01',desc:'Text embedding (embedding-v1, BGE, Qwen3)',params:[{name:'text',type:'string',req:true,desc:'Text(s) to embed. Use || to separate multiple.'},{name:'model',type:'string',req:false,desc:'Model (default: embedding-v1)'}],example:{text:'Hello world||Goodbye world'}},
+  {cat:'Embedding',name:'baidu-reranker',method:'GET',path:'/paid/baidu-reranker',price:'$0.01',desc:'Document reranking (BCE / Qwen3 reranker)',params:[{name:'query',type:'string',req:true,desc:'Search query'},{name:'documents',type:'string',req:true,desc:'Documents separated by ||'},{name:'model',type:'string',req:false,desc:'Model (default: bce-reranker-base)'}],example:{query:'What is AI?',documents:'AI is artificial intelligence||AI is a technology||AI means machine learning'}},
+
+  // Content Moderation
+  {cat:'Moderation',name:'baidu-text-review',method:'GET',path:'/paid/baidu-text-review',price:'$0.01',desc:'Text content moderation (spam, porn, violence)',params:[{name:'text',type:'string',req:true,desc:'Text to review'}],example:{text:'Some text to check for inappropriate content'}},
+  {cat:'Moderation',name:'baidu-image-review',method:'GET',path:'/paid/baidu-image-review',price:'$0.01',desc:'Image content moderation',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'}],example:{url:'https://example.com/image.jpg'}},
+
+  // Image Processing
+  {cat:'Image Processing',name:'baidu-image-enhance',method:'GET',path:'/paid/baidu-image-enhance',price:'$0.02',desc:'Image quality enhancement (deblur, denoise)',params:[{name:'url',type:'string',req:false,desc:'Image URL'},{name:'image',type:'string',req:false,desc:'Base64 image'},{name:'type',type:'string',req:false,desc:'Type: image_quality_enhance, colorize, dehaze, etc.'}],example:{url:'https://example.com/low-quality.jpg',type:'image_quality_enhance'}},
+
+  // Science
+  {cat:'Science',name:'baidu-helixfold',method:'GET',path:'/paid/baidu-helixfold',price:'Premium',desc:'Protein structure prediction (HelixFold3, AlphaFold-class)',params:[{name:'seq',type:'string',req:true,desc:'Protein amino acid sequence'},{name:'name',type:'string',req:false,desc:'Target name'}],example:{seq:'MKTFIVLALALVLLMAGVADGDQ'}},
+
+  // Payment
+  {cat:'Payment',name:'paypal/create-order',method:'POST',path:'/paid/paypal/create-order',price:'—',desc:'Create a PayPal payment order to buy credits',params:[{name:'amount',type:'number',req:true,desc:'Amount in USD (min $1)'},{name:'userId',type:'string',req:true,desc:'Your API key'}],example:{amount:5,userId:'GB_XXXX'},body:true},
+  {cat:'Payment',name:'paypal/capture',method:'POST',path:'/paid/paypal/capture',price:'—',desc:'Capture a PayPal payment (complete the transaction)',params:[{name:'orderId',type:'string',req:true,desc:'PayPal order ID from create-order'},{name:'userId',type:'string',req:true,desc:'Your API key'}],example:{orderId:'PAYPAL-ORDER-ID',userId:'GB_XXXX'},body:true},
+];
+
+const CAT_ORDER = ['Free','Account','OCR','Speech','LLM','OpenAI-Compatible','Translation','Vision','Face & Body','Image Processing','Image Gen','Video','NLP','Embedding','Moderation','Science','Payment'];
+const CAT_ICONS = {'Free':'🆓','Account':'👤','OCR':'📝','Speech':'🔊','LLM':'🧠','OpenAI-Compatible':'🔌','Translation':'🌐','Vision':'👁️','Face & Body':'😀','Image Processing':'🎨','Image Gen':'🖼️','Video':'🎬','NLP':'📖','Embedding':'📐','Moderation':'🛡️','Science':'🧬','Payment':'💳'};
+
+function buildNav(){
+  const nav=document.getElementById('navContent');
+  let html='';
+  CAT_ORDER.forEach(cat=>{
+    const eps=ENDPOINTS.filter(e=>e.cat===cat);
+    if(!eps.length)return;
+    html+=`<div class="nav-section"><h3>${CAT_ICONS[cat]||''} ${cat}</h3>`;
+    eps.forEach(e=>{
+      const priceBadge = e.price==='Free'?'<span class="price">FREE</span>':e.price==='Premium'?'<span class="price" style="color:var(--danger)">PRO</span>':'';
+      html+=`<a class="nav-item" data-ep="${e.name}" onclick="showEndpoint('${e.name}')">${e.method} ${e.name} ${priceBadge}</a>`;
+    });
+    html+='</div>';
+  });
+  nav.innerHTML=html;
+}
+
+function showEndpoint(name){
+  const e=ENDPOINTS.find(x=>x.name===name);
+  if(!e)return;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`[data-ep="${name}"]`)?.classList.add('active');
+  const container=document.getElementById('endpoints');
+  const isPost=e.method==='POST';
+  const priceBadge = e.price==='Free'?'<span class="badge badge-free">FREE</span>':e.price==='Premium'?'<span class="badge badge-premium">PREMIUM</span>':e.price==='Credit'?'<span class="badge badge-paid">CREDIT</span>':'<span class="badge badge-paid">'+e.price+'</span>';
+  let paramRows='';
+  if(e.params.length===0){
+    paramRows='<tr><td colspan="4" style="text-align:center;color:var(--text2)">No parameters required</td></tr>';
+  } else {
+    e.params.forEach(p=>{
+      paramRows+=`<tr><td>${p.name}${p.req?' <span class="required">required</span>':''}</td><td>${p.type}</td><td>${p.desc}</td><td>${p.req?'Yes':'No'}</td></tr>`;
+    });
+  }
+  let inputsHtml='';
+  if(e.auth||e.price!=='Free'){
+    inputsHtml+=`<div class="api-key-row"><input type="text" id="apiKey_${name}" placeholder="Your API key (GB_xxxx) — optional for free endpoints" onkeydown="if(event.key==='Enter')sendRequest('${name}')"></div>`;
+  }
+  e.params.forEach(p=>{
+    const val = e.example[p.name]!==undefined ? JSON.stringify(e.example[p.name]) : '';
+    inputsHtml+=`<div class="input-row"><label>${p.name}${p.req?' *':''}</label><input type="text" id="param_${name}_${p.name}" placeholder="${p.type}: ${p.desc}" value="${val.replace(/"/g,'&quot;')}" onkeydown="if(event.key==='Enter')sendRequest('${name}')"></div>`;
+  });
+  const curlCmd = buildCurl(e);
+  container.innerHTML=`
+    <div class="endpoint-card" id="ep_${name}">
+      <h3><span class="method-badge method-${e.method}">${e.method}</span> ${e.path} ${priceBadge}</h3>
+      <p style="color:var(--text2);margin-bottom:16px">${e.desc}</p>
+      <table class="param-table">
+        <tr><th>Parameter</th><th>Type</th><th>Description</th><th>Required</th></tr>
+        ${paramRows}
+      </table>
+      <div style="margin:12px 0">
+        <h4 style="font-size:13px;color:var(--text2);margin-bottom:6px">Example (cURL)</h4>
+        <div class="curl-example">${curlCmd}</div>
+      </div>
+      <div class="try-it">
+        <h4>🧪 Try it yourself</h4>
+        ${inputsHtml}
+        <button class="btn-send" id="btn_${name}" onclick="sendRequest('${name}')">Send Request</button>
+        <div class="response-box" id="resp_${name}" style="display:none">
+          <div class="response-meta">
+            <span class="status" id="status_${name}"></span>
+            <span class="time" id="time_${name}"></span>
+          </div>
+          <div class="response-body" id="body_${name}">Loading...</div>
+        </div>
+      </div>
+    </div>
+  `;
+  container.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function buildCurl(e){
+  const isPost=e.method==='POST';
+  let url=API_BASE+e.path;
+  let cmd=`<span class="cmd">curl</span>`;
+  if(isPost)cmd+=` <span class="flag">-X POST</span>`;
+  if(e.auth||e.price!=='Free')cmd+=` <span class="flag">-H</span> "x-user-id: GB_YOUR_KEY"`;
+  if(isPost&&e.body){
+    const bodyJson=JSON.stringify(e.example);
+    cmd+=` <span class="flag">-H</span> "Content-Type: application/json" <span class="flag">-d</span> '${bodyJson}'`;
+    cmd+=` <span class="url">${url}</span>`;
+  } else {
+    const qs=Object.entries(e.example).map(([k,v])=>k+'='+encodeURIComponent(String(v))).join('&');
+    if(qs)url+='?'+qs;
+    cmd+=` <span class="url">"${url}"</span>`;
+  }
+  return cmd;
+}
+
+async function sendRequest(name){
+  const e=ENDPOINTS.find(x=>x.name===name);
+  if(!e)return;
+  const btn=document.getElementById('btn_'+name);
+  const respBox=document.getElementById('resp_'+name);
+  const statusEl=document.getElementById('status_'+name);
+  const timeEl=document.getElementById('time_'+name);
+  const bodyEl=document.getElementById('body_'+name);
+  btn.disabled=true;btn.textContent='Sending...';
+  respBox.style.display='block';
+  bodyEl.textContent='Loading...';
+  bodyEl.className='response-body';
+  statusEl.textContent='';statusEl.className='';
+  const start=Date.now();
+  try{
+    const apiKey=document.getElementById('apiKey_'+name)?.value?.trim()||'';
+    const headers={};
+    if(apiKey)headers['x-user-id']=apiKey;
+    let url=API_BASE+e.path;
+    let opts={method:e.method,headers};
+    if(e.method==='POST'&&e.body){
+      headers['Content-Type']='application/json';
+      const body={};
+      e.params.forEach(p=>{
+        const el=document.getElementById('param_'+name+'_'+p.name);
+        if(el&&el.value.trim()){
+          try{body[p.name]=JSON.parse(el.value);}catch{body[p.name]=el.value;}
+        }
+      });
+      opts.body=JSON.stringify(body);
+    } else {
+      const params=new URLSearchParams();
+      e.params.forEach(p=>{
+        const el=document.getElementById('param_'+name+'_'+p.name);
+        if(el&&el.value.trim())params.append(p.name,el.value.trim());
+      });
+      if(params.toString())url+='?'+params.toString();
+    }
+    const res=await fetch(url,opts);
+    const elapsed=Date.now()-start;
+    timeEl.textContent='⏱ '+elapsed+'ms';
+    if(res.ok){
+      statusEl.textContent='✓ '+res.status+' '+res.statusText;
+      statusEl.className='status-ok';
+    } else {
+      statusEl.textContent='✗ '+res.status+' '+res.statusText;
+      statusEl.className='status-err';
+    }
+    const ct=res.headers.get('content-type')||'';
+    if(ct.includes('json')){
+      const data=await res.json();
+      bodyEl.textContent=JSON.stringify(data,null,2);
+    } else if(ct.includes('audio')||ct.includes('octet-stream')){
+      const blob=await res.blob();
+      const audioUrl=URL.createObjectURL(blob);
+      bodyEl.innerHTML=`<audio controls src="${audioUrl}" style="width:100%"></audio><br><br>Audio received (${(blob.size/1024).toFixed(1)} KB)`;
+    } else {
+      const text=await res.text();
+      bodyEl.textContent=text.substring(0,5000);
+    }
+  } catch(err){
+    const elapsed=Date.now()-start;
+    timeEl.textContent='⏱ '+elapsed+'ms';
+    statusEl.textContent='✗ Error: '+err.message;
+    statusEl.className='status-err';
+    bodyEl.textContent=err.stack||err.message;
+  }
+  btn.disabled=false;btn.textContent='Send Request';
+}
+
+function filterEndpoints(){
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  document.querySelectorAll('.nav-item').forEach(item=>{
+    const text=item.textContent.toLowerCase();
+    item.style.display=text.includes(q)?'':'none';
+  });
+}
+
+function scrollToSection(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+buildNav();
+// Show first free endpoint by default
+showEndpoint('weather-now');
+</script>
+</body>
+</html>
