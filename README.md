@@ -15,7 +15,7 @@
 
 Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
 
-**No Chinese phone number. No Baidu account. No subscription. Pay per call.**
+**No Chinese phone number. No Baidu account. Pay per call or subscribe for bulk discounts.**
 
 ---
 
@@ -24,8 +24,8 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 | Feature | Details |
 |---------|---------|
 | **67 API Routes (57 paid + 10 free)** | OCR (19 types incl. Qianfan-OCR & PP-StructureV3), TTS, ASR, Translation, LLM Chat, Face (detect + compare + liveness), Gesture, Object Detect, Landmark, Plant/Animal/Dish/Ingredient/Currency/Car/RedWine/Logo Recognition, Image Processing (colorize, style transfer, selfie anime, dehaze), Content Moderation, NLP (10 types), HelixFold, Video Generation (MuseSteamer) |
-| **x402 Micropayments** | Pay $0.01–$0.05 per call with USDC on Base network |
-| **Free Tier** | 5 free calls/day per IP + 20 credits on registration — no wallet needed |
+| **x402 Micropayments** | Pay $0.001–$0.08 per call with USDC on Base network |
+| **Free Tier** | 50 free calls/day per IP + 100 credits on registration — no wallet needed |
 | **PayPal & Alipay** | Also supported for prepaid credits |
 | **MCP Compatible** | Works with Cursor, Claude Desktop, Cline, Codex, Continue |
 | **Baidu AI Powered** | Enterprise-grade AI from China's leading AI platform |
@@ -114,12 +114,12 @@ npx goldbean-mcp
 ### 3. Use Free Credits (No Wallet)
 
 ```bash
-# Register for 20 free API calls
+# Register for 100 free API calls
 curl -X POST https://goldbean-api.xyz/paid/user/register \
   -H "Content-Type: application/json" \
   -d '{"email":"you@example.com"}'
 
-# Response: {"success":true,"apiKey":"GB_XXXXXX","freeCredits":20}
+# Response: {"success":true,"apiKey":"GB_XXXXXX","freeCredits":100}
 
 # Call an API with free credits
 curl "https://goldbean-api.xyz/paid/baidu-ocr?url=https://example.com/doc.jpg" \
@@ -173,69 +173,81 @@ node nodejs-x402-example.js
 
 | Endpoint | Price | Description |
 |----------|:-----:|-------------|
-| `GET /paid/baidu-ocr` | $0.02 | General text OCR |
-| `GET /paid/baidu-ocr-accurate` | $0.02 | High-accuracy OCR |
-| `GET /paid/baidu-ocr-table` | $0.02 | Table structure OCR |
-| `GET /paid/baidu-idcard` | $0.02 | ID card recognition |
-| `GET /paid/baidu-tts?text=...` | $0.02 | Text-to-Speech (Chinese) |
-| `GET /paid/baidu-translate?text=...` | $0.01 | Multi-language translation |
+| `GET /paid/baidu-ocr` | $0.001 | General text OCR |
+| `GET /paid/baidu-ocr-accurate` | $0.001 | High-accuracy OCR |
+| `GET /paid/baidu-ocr-table` | $0.001 | Table structure OCR |
+| `GET /paid/baidu-idcard` | $0.001 | ID card recognition |
+| `GET /paid/baidu-tts?text=...` | $0.001 | Text-to-Speech (Chinese) |
+| `GET /paid/baidu-translate?text=...` | $0.001 | Multi-language translation |
 | `GET /paid/baidu-llm-chat?prompt=...` | $0.002/1K tokens | ERNIE chat (GPT-class LLM) |
-| `GET /paid/baidu-asr?audio=...` | $0.02 | Speech-to-Text |
-| `GET /paid/baidu-image-recognition?image=...` | $0.02 | Object/scene recognition |
-| `GET /paid/baidu-image-enhance?image=...` | $0.02 | Image enhancement |
-| `GET /paid/baidu-object-detect?image=...` | $0.02 | Object detection with bounding boxes |
-| `GET /paid/baidu-landmark?image=...` | $0.02 | Landmark recognition |
-| `GET /paid/baidu-face-detect?image=...` | $0.02 | Face detection & analysis |
-| `GET /paid/baidu-face-compare?image1=...&image2=...` | $0.02 | 1:1 face comparison |
-| `GET /paid/baidu-body-analysis?image=...` | $0.02 | Body/gesture analysis |
-| `GET /paid/baidu-gesture?image=...` | $0.02 | Hand gesture recognition |
-| `GET /paid/baidu-nlp?text=...` | $0.01 | NLP (lexer, sentiment, etc.) |
-| `GET /paid/baidu-sentiment?text=...` | $0.01 | Sentiment analysis |
-| `GET /paid/baidu-summary?text=...` | $0.01 | Text summarization |
-| `GET /paid/baidu-word-embedding?text=...` | $0.01 | Word vector embedding |
-| `GET /paid/baidu-text-correction?text=...` | $0.01 | Text error correction |
-| `GET /paid/baidu-comment-tag?text=...` | $0.01 | Comment opinion tag extraction |
-| `GET /paid/baidu-emotion?text=...` | $0.01 | Emotion detection in text |
-| `GET /paid/baidu-keyword?text=...` | $0.01 | Article keyword extraction |
-| `GET /paid/baidu-address?text=...` | $0.01 | Address parsing & structuring |
-| `GET /paid/baidu-text-similarity?text1=...&text2=...` | $0.01 | Short text similarity score |
-| `GET /paid/baidu-text-review?text=...` | $0.01 | Text content moderation |
-| `GET /paid/baidu-image-review?image=...` | $0.01 | Image content moderation |
-| `GET /paid/baidu-plant?image=...` | $0.02 | Plant species recognition |
-| `GET /paid/baidu-animal?image=...` | $0.02 | Animal species recognition |
-| `GET /paid/baidu-dish?image=...` | $0.02 | Dish/cuisine recognition |
-| `GET /paid/baidu-ingredient?image=...` | $0.02 | Fruit/vegetable recognition |
-| `GET /paid/baidu-currency?image=...` | $0.02 | Banknote/currency recognition |
-| `GET /paid/baidu-car-type?image=...` | $0.02 | Car make/model recognition |
-| `GET /paid/baidu-redwine?image=...` | $0.02 | Red wine label recognition |
-| `GET /paid/baidu-logo?image=...` | $0.02 | Brand logo recognition |
-| `GET /paid/baidu-ocr-handwrite?image=...` | $0.02 | Handwritten text OCR |
-| `GET /paid/baidu-ocr-vin?image=...` | $0.02 | VIN code OCR |
-| `GET /paid/baidu-image-colorize?image=...` | $0.02 | B&W photo colorization |
-| `GET /paid/baidu-style-trans?image=...` | $0.02 | Artistic style transfer |
-| `GET /paid/baidu-selfie-anime?image=...` | $0.02 | Portrait to anime conversion |
-| `GET /paid/baidu-dehaze?image=...` | $0.02 | Image dehazing |
-| `GET /paid/baidu-body-count?image=...` | $0.02 | People counting |
-| `GET /paid/baidu-body-keypoints?image=...` | $0.02 | Body skeleton keypoints |
-| `GET /paid/baidu-face-liveness?image=...` | $0.02 | Face liveness (anti-spoofing) |
-| `GET /paid/baidu-helixfold?seq=...` | $0.05 | Protein structure prediction |
-| `GET /paid/baidu-vision-chat?image=...&message=...` | $0.02 | Vision understanding (ERNIE-4.5-VL / Qwen3-VL) |
-| `GET /paid/baidu-deepthink?message=...` | $0.005 | Deep reasoning (DeepSeek-R1, chain-of-thought) |
-| `GET /paid/baidu-embedding?text=...` | $0.01 | Text embedding (embedding-v1, BGE, Qwen3) |
-| `GET /paid/baidu-reranker?query=...&documents=...` | $0.01 | Document reranking (BCE / Qwen3 reranker) |
-| `GET /paid/baidu-image-gen?prompt=...` | $0.05 | Text-to-image (Qwen-Image, CJK text rendering) |
-| `GET /paid/baidu-image-edit?image=...&prompt=...` | $0.05 | Image editing (Qwen-Image-Edit, multi-image fusion) |
-| `GET /paid/baidu-deepseek-ocr?image=...` | $0.02 | Advanced OCR (DeepSeek-OCR, complex layouts) |
-| `GET /paid/baidu-paddleocr-vl?image=...` | $0.02 | Document parsing (PaddleOCR-VL, layout analysis) |
-| `GET /paid/baidu-qianfan-ocr?image=...` | $0.02 | General-purpose OCR (Qianfan-OCR, 32k context) |
-| `GET /paid/baidu-video-gen?prompt=...&image=...` | $0.10 | Video generation (MuseSteamer, text/image-to-video) |
-| `GET /paid/baidu-video-query?task_id=...` | $0.01 | Query video generation task status |
+| `GET /paid/baidu-asr?audio=...` | $0.001 | Speech-to-Text |
+| `GET /paid/baidu-image-recognition?image=...` | $0.001 | Object/scene recognition |
+| `GET /paid/baidu-image-enhance?image=...` | $0.001 | Image enhancement |
+| `GET /paid/baidu-object-detect?image=...` | $0.001 | Object detection with bounding boxes |
+| `GET /paid/baidu-landmark?image=...` | $0.001 | Landmark recognition |
+| `GET /paid/baidu-face-detect?image=...` | $0.001 | Face detection & analysis |
+| `GET /paid/baidu-face-compare?image1=...&image2=...` | $0.001 | 1:1 face comparison |
+| `GET /paid/baidu-body-analysis?image=...` | $0.001 | Body/gesture analysis |
+| `GET /paid/baidu-gesture?image=...` | $0.001 | Hand gesture recognition |
+| `GET /paid/baidu-nlp?text=...` | $0.001 | NLP (lexer, sentiment, etc.) |
+| `GET /paid/baidu-sentiment?text=...` | $0.001 | Sentiment analysis |
+| `GET /paid/baidu-summary?text=...` | $0.001 | Text summarization |
+| `GET /paid/baidu-word-embedding?text=...` | $0.001 | Word vector embedding |
+| `GET /paid/baidu-text-correction?text=...` | $0.001 | Text error correction |
+| `GET /paid/baidu-comment-tag?text=...` | $0.001 | Comment opinion tag extraction |
+| `GET /paid/baidu-emotion?text=...` | $0.001 | Emotion detection in text |
+| `GET /paid/baidu-keyword?text=...` | $0.001 | Article keyword extraction |
+| `GET /paid/baidu-address?text=...` | $0.001 | Address parsing & structuring |
+| `GET /paid/baidu-text-similarity?text1=...&text2=...` | $0.001 | Short text similarity score |
+| `GET /paid/baidu-text-review?text=...` | $0.001 | Text content moderation |
+| `GET /paid/baidu-image-review?image=...` | $0.001 | Image content moderation |
+| `GET /paid/baidu-plant?image=...` | $0.001 | Plant species recognition |
+| `GET /paid/baidu-animal?image=...` | $0.001 | Animal species recognition |
+| `GET /paid/baidu-dish?image=...` | $0.001 | Dish/cuisine recognition |
+| `GET /paid/baidu-ingredient?image=...` | $0.001 | Fruit/vegetable recognition |
+| `GET /paid/baidu-currency?image=...` | $0.001 | Banknote/currency recognition |
+| `GET /paid/baidu-car-type?image=...` | $0.001 | Car make/model recognition |
+| `GET /paid/baidu-redwine?image=...` | $0.001 | Red wine label recognition |
+| `GET /paid/baidu-logo?image=...` | $0.001 | Brand logo recognition |
+| `GET /paid/baidu-ocr-handwrite?image=...` | $0.001 | Handwritten text OCR |
+| `GET /paid/baidu-ocr-vin?image=...` | $0.001 | VIN code OCR |
+| `GET /paid/baidu-image-colorize?image=...` | $0.001 | B&W photo colorization |
+| `GET /paid/baidu-style-trans?image=...` | $0.001 | Artistic style transfer |
+| `GET /paid/baidu-selfie-anime?image=...` | $0.001 | Portrait to anime conversion |
+| `GET /paid/baidu-dehaze?image=...` | $0.001 | Image dehazing |
+| `GET /paid/baidu-body-count?image=...` | $0.001 | People counting |
+| `GET /paid/baidu-body-keypoints?image=...` | $0.001 | Body skeleton keypoints |
+| `GET /paid/baidu-face-liveness?image=...` | $0.001 | Face liveness (anti-spoofing) |
+| `GET /paid/baidu-helixfold?seq=...` | $0.03 | Protein structure prediction |
+| `GET /paid/baidu-vision-chat?image=...&message=...` | $0.001 | Vision understanding (ERNIE-4.5-VL / Qwen3-VL) |
+| `GET /paid/baidu-deepthink?message=...` | $0.003 | Deep reasoning (DeepSeek-R1, chain-of-thought) |
+| `GET /paid/baidu-embedding?text=...` | $0.001 | Text embedding (embedding-v1, BGE, Qwen3) |
+| `GET /paid/baidu-reranker?query=...&documents=...` | $0.001 | Document reranking (BCE / Qwen3 reranker) |
+| `GET /paid/baidu-image-gen?prompt=...` | $0.03 | Text-to-image (Qwen-Image, CJK text rendering) |
+| `GET /paid/baidu-image-edit?image=...&prompt=...` | $0.03 | Image editing (Qwen-Image-Edit, multi-image fusion) |
+| `GET /paid/baidu-deepseek-ocr?image=...` | $0.001 | Advanced OCR (DeepSeek-OCR, complex layouts) |
+| `GET /paid/baidu-paddleocr-vl?image=...` | $0.001 | Document parsing (PaddleOCR-VL, layout analysis) |
+| `GET /paid/baidu-qianfan-ocr?image=...` | $0.001 | General-purpose OCR (Qianfan-OCR, 32k context) |
+| `GET /paid/baidu-video-gen?prompt=...&image=...` | $0.08 | Video generation (MuseSteamer, text/image-to-video) |
+| `GET /paid/baidu-video-query?task_id=...` | $0.001 | Query video generation task status |
+
+### 💳 Subscription Plans
+
+| Plan | Price | Calls | Per Call |
+|------|-------|-------|----------|
+| Free Tier | $0 | 50/day per IP | $0 |
+| Starter | $5 one-time | 500 calls | $0.01 |
+| Developer Monthly | $9.9/month | 5,000 calls | $0.002 |
+| Developer Quarterly | $25/quarter | 20,000 calls | $0.0013 |
+| Developer Yearly | $89/year | 100,000 calls | $0.0009 |
+
+> Or pay per call without subscription — starting at **$0.001/call**.
 
 ### 💳 Account & Payment
 
 | Endpoint | Description |
 |----------|-------------|
-| `POST /paid/user/register` | Register for 20 free credits |
+| `POST /paid/user/register` | Register for 100 free credits |
 | `GET /paid/plans` | Prepaid plans & pricing |
 | `POST /paid/paypal/create-order` | Create PayPal payment |
 | `POST /paid/paypal/capture` | Capture PayPal payment |
@@ -265,7 +277,7 @@ Powered by the [x402 protocol](https://x402.org) — decentralized micropayments
 ```
 ┌──────────────┐    HTTPS    ┌──────────────────────┐
 │  MCP Client   │ ──────────→ │  GoldBean API Server  │
-│  (Claude,     │ ←────────── │  v9.6.0 on VPS       │
+│  (Claude,     │ ←────────── │  v9.8.0 on VPS       │
 │   Cursor,     │    402/200  │  port 9879            │
 │   Cline)      │             │                      │
 └──────────────┘             ├── Baidu AI (OCR/TTS)  │
