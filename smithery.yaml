@@ -11,15 +11,21 @@ startCommand:
     properties: {}
     required: []
 
-# Alternative: URL-based server card for static metadata
-# Supports x402 micropayments via Base USDC
 description: |
-  GoldBean MCP Server — Pay-per-call AI API gateway with 50+ tools.
-  Access Baidu AI (OCR, TTS, ASR, Translation, LLM Chat, Vision, NLP,
-  Image Generation, Video Generation, Embedding, Reranker, Content Moderation,
-  HelixFold3 protein prediction) via a single SSE endpoint.
+  GoldBean MCP Server — Pay-per-call AI API gateway with 67 endpoints.
+  Access Baidu AI (OCR, TTS, ASR, Translation, ERNIE LLM, DeepSeek-R1, NLP,
+  Vision Recognition, Image Generation, Video Generation, HelixFold protein prediction)
+  via a single SSE endpoint. No Chinese phone number or Baidu Cloud account required.
   Also OpenAI-compatible (/v1/chat/completions, /v1/embeddings, /v1/images/generations).
-  Payment: x402 micropayments (Base USDC), PayPal, Alipay.
-  Free tier: 5 calls/day per IP + 20 free credits on registration. Starting at $0.01/call. No KYC.
+  
+  Pricing: Starting at $0.001/call. Free tier: 50 calls/day per IP + 100 credits on registration.
+  Subscription plans: Starter $5, Monthly $9.9, Quarterly $25, Yearly $89.
+  Payment: x402 USDC micropayments (Base), PayPal, Alipay. No KYC.
+  
+  67 endpoints: 57 paid (Baidu AI + Premium LLM) + 10 free (health, weather, crypto, docs).
+  Categories: OCR (19 types), NLP (9), Vision (10), Image Processing (4), Face/Body (4),
+  Voice (2), Translation (1), Video Gen (2), LLM (3), Bio (1), Free (10).
+  
   Docs: https://goldbean-api.xyz
+  npm: goldbean-mcp
 license: MIT
