@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "goldbean",
-  "description": "x402 Micropayment API Marketplace — 47 paid endpoints for AI Agents. Baidu AI (OCR, TTS, ASR, Translation, LLM Chat, Image Generation), web search, crypto prices, weather, stocks, and more. Pay per call with USDC on Base. No signup, no API key, no subscription.",
+  "description": "Pay-per-call AI API gateway with 67 endpoints. Access Baidu AI (OCR, TTS, ASR, Translation, ERNIE LLM, DeepSeek-R1, NLP, Vision, Image Gen, Video Gen, HelixFold) from anywhere — no Chinese phone number needed. Starting at $0.001/call. Free tier: 50 calls/day. Subscription plans from $9.9/mo. Payment: x402 USDC, PayPal, Alipay.",
   "maintainers": ["wuzenghai616-lang"],
   "homepage": "https://goldbean-api.xyz",
   "repository": {
@@ -18,8 +18,8 @@
       "url": "https://goldbean-api.xyz/sse"
     }
   ],
-  "tools": 47,
-  "total_endpoints": 47,
+  "tools": 67,
+  "total_endpoints": 67,
   "license": "MIT",
   "capabilities": {
     "tools": {
@@ -38,9 +38,16 @@
     "x402",
     "micropayments",
     "api-marketplace",
+    "baidu-ai",
+    "ocr",
+    "tts",
+    "asr",
+    "llm",
+    "ernie",
+    "deepseek",
+    "chinese-ai",
     "crypto",
     "blockchain",
-    "defi",
     "ai",
     "web3",
     "pay-per-call",
@@ -51,7 +58,11 @@
     "ethereum",
     "weather",
     "search",
-    "image-generation"
+    "image-generation",
+    "video-generation",
+    "helixfold",
+    "nlp",
+    "translation"
   ],
   "features": {
     "micropayments": {
@@ -59,12 +70,16 @@
       "protocol": "x402",
       "network": "Base (eip155:8453)",
       "currency": "USDC",
-      "price_per_call": "$0.01-$0.05"
+      "price_per_call": "$0.001-$0.08"
     },
     "free_endpoints": {
       "enabled": true,
-      "count": 5,
-      "endpoints": ["/health", "/eth-price", "/gas", "/card", "/mcp"]
+      "count": 10,
+      "endpoints": ["/health", "/btc-price", "/weather-now", "/gas", "/api/routes", "/openapi.json", "/.well-known/x402-bazaar", "/.well-known/mcp.json", "/.well-known/x402.json", "/llms.txt"]
+    },
+    "subscription": {
+      "enabled": true,
+      "plans": ["Starter $5", "Monthly $9.9", "Quarterly $25", "Yearly $89"]
     }
   }
 }
