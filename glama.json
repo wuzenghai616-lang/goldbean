@@ -1,85 +1,51 @@
 {
-  "$schema": "https://glama.ai/mcp/schemas/server.json",
-  "name": "goldbean",
-  "description": "Pay-per-call AI API gateway with 67 endpoints. Access Baidu AI (OCR, TTS, ASR, Translation, ERNIE LLM, DeepSeek-R1, NLP, Vision, Image Gen, Video Gen, HelixFold) from anywhere — no Chinese phone number needed. Starting at $0.001/call. Free tier: 50 calls/day. Subscription plans from $9.9/mo. Payment: x402 USDC, PayPal, Alipay.",
-  "maintainers": ["wuzenghai616-lang"],
-  "homepage": "https://goldbean-api.xyz",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wuzenghai616-lang/goldbean.git"
+  "name": "GoldBean",
+  "description": "50 Baidu AI MCP tools — OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day.",
+  "version": "9.8.0",
+  "npm": "goldbean-mcp@1.0.0",
+  "tools": 51,
+  "pricing": {
+    "basic": "$0.001/call",
+    "llm": "$0.002/1K tokens",
+    "deepthink": "$0.003/call",
+    "image_gen": "$0.03/call",
+    "video_gen": "$0.08/call",
+    "free_tier": "50 calls/day per IP, no registration needed"
   },
-  "type": "mcp_server",
-  "status": "stable",
-  "framework": "Express 5",
-  "transport": ["sse", "stdio"],
-  "servers": [
-    {
-      "type": "sse",
-      "url": "https://goldbean-api.xyz/sse"
-    }
-  ],
-  "tools": 67,
-  "total_endpoints": 67,
-  "license": "MIT",
-  "capabilities": {
-    "tools": {
-      "discovery": true,
-      "paid_endpoints": true
-    }
+  "subscription": {
+    "starter": "$5/500 calls",
+    "monthly": "$9.9/5000 calls",
+    "quarterly": "$25/20000 calls",
+    "yearly": "$89/100000 calls"
   },
-  "packages": [
-    {
-      "registry": "npm",
-      "name": "goldbean-mcp",
-      "version": "latest"
-    }
+  "categories": [
+    "ai-and-machine-learning",
+    "ocr",
+    "speech",
+    "vision",
+    "nlp",
+    "image-generation",
+    "video-generation",
+    "translation"
   ],
   "keywords": [
-    "x402",
-    "micropayments",
-    "api-marketplace",
     "baidu-ai",
+    "ernie",
     "ocr",
     "tts",
     "asr",
-    "llm",
-    "ernie",
     "deepseek",
-    "chinese-ai",
-    "crypto",
-    "blockchain",
-    "ai",
-    "web3",
-    "pay-per-call",
-    "base",
-    "usdc",
-    "mcp-server",
-    "agent",
-    "ethereum",
-    "weather",
-    "search",
+    "paddleocr",
+    "helixfold",
     "image-generation",
     "video-generation",
-    "helixfold",
-    "nlp",
-    "translation"
+    "vision-llm",
+    "embedding",
+    "reranker",
+    "translation",
+    "content-moderation"
   ],
-  "features": {
-    "micropayments": {
-      "enabled": true,
-      "protocol": "x402",
-      "network": "Base (eip155:8453)",
-      "currency": "USDC",
-      "price_per_call": "$0.001-$0.08"
-    },
-    "free_endpoints": {
-      "enabled": true,
-      "count": 10,
-      "endpoints": ["/health", "/btc-price", "/weather-now", "/gas", "/api/routes", "/openapi.json", "/.well-known/x402-bazaar", "/.well-known/mcp.json", "/.well-known/x402.json", "/llms.txt"]
-    },
-    "subscription": {
-      "enabled": true,
-      "plans": ["Starter $5", "Monthly $9.9", "Quarterly $25", "Yearly $89"]
-    }
-  }
+  "repository": "https://github.com/wuzenghai616-lang/goldbean",
+  "homepage": "https://goldbean-api.xyz",
+  "license": "MIT"
 }
