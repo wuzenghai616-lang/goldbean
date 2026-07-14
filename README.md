@@ -1,6 +1,6 @@
-# 🫘 GoldBean — Baidu AI APIs for Global Developers
+# 🫘 GoldBean — China AI Gateway for Global Developers
 
-> **Access Baidu AI (OCR, Translation, TTS, ASR, ERNIE LLM, HelixFold, Video Generation) from anywhere — no Chinese phone number, no Baidu Cloud account required**
+> **Access 67 Baidu AI endpoints (OCR, Translation, TTS, ASR, ERNIE LLM, HelixFold, Video Generation) from anywhere — no Chinese phone number, no Baidu Cloud account, no real-name verification required**
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![public-apis](https://img.shields.io/badge/public--apis-39.8k%20%E2%AD%90-blue?logo=github)](https://github.com/public-apis/public-apis)
@@ -11,11 +11,11 @@
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**GoldBean** is the easiest way for global developers to access **51 Baidu AI MCP tools** — OCR (general, high-accuracy, webimage, handwriting, qrcode, bankcard, business license, numbers, seal, doc-office, table, VIN, Qianfan-OCR), TTS, ASR, ERNIE LLM, translation, image recognition (plant, animal, dish, ingredient, currency, car type, car detection, red wine, logo, vehicle detect), face detection, comparison & liveness, gesture, object detection, landmark, image processing (colorize, style transfer, selfie anime, dehaze), content moderation, NLP (sentiment, summary, word embedding, text correction, comment tag, emotion, keyword, address, text similarity, keyword extraction), HelixFold protein structure prediction, MuseSteamer video generation, and PP-StructureV3 document parsing — all through a unified API with **PayPal, Alipay, or x402 USDC micropayments**.
+**GoldBean** is the only standardized gateway for global developers to access **67 Baidu AI endpoints** via MCP protocol — OCR (19 types including Qianfan-OCR & PP-StructureV3), TTS, ASR, ERNIE LLM, translation, image recognition, face detection, gesture, object detection, landmark, image processing, content moderation, NLP (10 types), HelixFold protein structure prediction, MuseSteamer video generation — all with **pay-per-call pricing from $0.001 via x402 USDC micropayments, PayPal, or Alipay**.
 
-Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account. GoldBean removes that barrier.
+Baidu AI is world-class at Chinese text, voice, and image processing. But using it directly requires a Chinese phone number, real-name verification, and a Baidu Cloud account — barriers that exclude most overseas developers. GoldBean removes all of them.
 
-**No Chinese phone number. No Baidu account. Pay per call or subscribe for bulk discounts.**
+**No Chinese phone number. No Baidu account. No real-name verification. Pay per call or subscribe for bulk discounts.**
 
 ---
 
@@ -35,17 +35,17 @@ Baidu AI is world-class at Chinese text, voice, and image processing. But using 
 
 ## 🤔 Why GoldBean?
 
-> **Need Baidu OCR but don't have a Chinese phone number?**
+> **Need Baidu OCR but can't register Baidu Cloud?**
 
-GoldBean is the easiest way for overseas developers to use Baidu AI APIs **without a Chinese phone number, real-name verification, or WeChat Pay**.
+GoldBean is the **only China AI Gateway** that lets overseas developers access Baidu AI APIs **without a Chinese phone number, real-name verification, or WeChat Pay**.
 
-- ✅ **Use Baidu API without registration** — no Chinese ID, no real-name auth
-- ✅ **Baidu OCR API without Chinese phone** — just sign up with any email
-- ✅ **No KYC, no subscription** — pay cents per call via USDC, PayPal, or Alipay
-- ✅ **Free credits to start** — 50 calls/day per IP (no signup) + 100 credits on registration
-- ✅ **Works globally** — no mainland China restrictions for foreign users
+- ✅ **Zero barriers** — no Chinese ID, no phone number, no enterprise account
+- ✅ **67 endpoints via MCP** — plug into Cursor, Claude, Cline, Continue directly
+- ✅ **Pay per call from $0.001** — no subscription, no minimum, no KYC
+- ✅ **Free to start** — 50 calls/day per IP (no signup) + 100 credits on registration
+- ✅ **Works globally** — US, EU, SEA, anywhere with internet
 
-Whether you need Baidu OCR for document scanning, Baidu Translation for multilingual text, or Baidu ASR/TTS for voice processing — GoldBean unlocks it all without the registration barriers.
+Whether you need Chinese OCR for document scanning, translation for multilingual products, or TTS for voice apps — GoldBean is the only way to use Baidu AI without a Chinese account.
 
 ---
 

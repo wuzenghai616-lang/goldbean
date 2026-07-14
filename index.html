@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldBean — China AI Gateway | Access Baidu AI Globally | Pay-Per-Call from $0.001</title>
+<meta name="description" content="The only China AI Gateway for global developers. 67 Baidu AI endpoints via MCP — OCR, translation, TTS, LLM. No Chinese phone number, no real-name verification. 50 free calls/day.">
+<meta name="keywords" content="China AI Gateway, Baidu AI, OCR API, LLM API, TTS API, ASR API, MCP server, pay-per-call, x402, USDC, Chinese AI">
+<meta property="og:title" content="GoldBean — China AI Gateway | Access Baidu AI Globally">
+<meta property="og:description" content="67 Baidu AI endpoints via MCP. 50 free calls/day. Pay-per-call from $0.001. No Chinese account needed.">
+<meta property="og:url" content="https://goldbean-api.xyz">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://goldbean-api.xyz/og-image.png">
+<link rel="icon" href="/favicon.ico">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0e1a;color:#e4e7ec;line-height:1.6}
+a{color:#6366f1;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+/* Hero */
+.hero{padding:80px 20px 60px;text-align:center;background:linear-gradient(180deg,#0a0e1a 0%,#131829 100%);border-bottom:1px solid #1e2433}
+.hero h1{font-size:2.6rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;color:#fff}
+.hero h1 span{color:#6366f1}
+.hero .tagline{font-size:1.15rem;color:#9ca3af;max-width:680px;margin:0 auto 32px}
+.hero .stats{display:flex;gap:40px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.hero .stat{text-align:center}
+.hero .stat .num{font-size:1.8rem;font-weight:700;color:#6366f1}
+.hero .stat .label{font-size:.8rem;color:#6b7280;text-transform:uppercase;letter-spacing:.05em}
+/* CTA */
+.cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.btn{display:inline-block;padding:14px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.btn-primary{background:#6366f1;color:#fff}
+.btn-primary:hover{background:#5558e0;text-decoration:none;transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:#e4e7ec;border:1px solid #2d3548}
+.btn-secondary:hover{background:#1a1f2e;text-decoration:none}
+.free-trial-banner{background:linear-gradient(135deg,#1a1f2e 0%,#1e2433 100%);border:1px solid #2d3548;border-radius:12px;padding:20px 28px;max-width:600px;margin:24px auto 0;text-align:left;display:flex;align-items:center;gap:16px}
+.free-trial-banner .icon{font-size:2rem}
+.free-trial-banner .text{flex:1}
+.free-trial-banner .text strong{color:#10b981;font-size:1.05rem}
+.free-trial-banner .text p{font-size:.85rem;color:#9ca3af;margin-top:2px}
+/* Sections */
+.section{padding:60px 0;border-bottom:1px solid #1e2433}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:32px;text-align:center;color:#fff}
+/* Features grid */
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.feature{background:#131829;border:1px solid #1e2433;border-radius:10px;padding:24px}
+.feature h3{font-size:1.05rem;color:#fff;margin-bottom:8px}
+.feature p{font-size:.85rem;color:#9ca3af}
+.feature .count{display:inline-block;background:#1e2433;color:#6366f1;font-size:.75rem;padding:2px 8px;border-radius:4px;margin-top:8px}
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto}
+.plan{background:#131829;border:1px solid #1e2433;border-radius:10px;padding:24px;text-align:center}
+.plan .name{font-size:.9rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.plan .price{font-size:2rem;font-weight:800;color:#fff}
+.plan .price small{font-size:.85rem;color:#9ca3af}
+.plan .desc{font-size:.8rem;color:#6b7280;margin-top:8px}
+.plan.popular{border-color:#6366f1}
+.plan.popular .name{color:#6366f1}
+/* Code block */
+.code-block{background:#0d1117;border:1px solid #1e2433;border-radius:8px;padding:20px;margin:24px auto;max-width:700px;overflow-x:auto}
+.code-block pre{font-family:'SF Mono',Consolas,monospace;font-size:.82rem;color:#e4e7ec;line-height:1.8}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#6366f1}
+.code-block .str{color:#10b981}
+/* Footer */
+.footer{padding:40px 20px;text-align:center;color:#4b5563;font-size:.85rem}
+.footer a{color:#6b7280}
+@media(max-width:640px){
+.hero h1{font-size:1.8rem}
+.hero .tagline{font-size:.95rem}
+.cta-group{flex-direction:column;align-items:stretch}
+.btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>China AI Gateway — <span>Access Baidu AI from Anywhere</span></h1>
+    <p class="tagline">67 Baidu AI endpoints via MCP — OCR, translation, TTS, LLM, vision, video. Zero barriers: no Chinese phone number, no real-name verification, no Baidu Cloud account needed.</p>
+    
+    <div class="stats">
+      <div class="stat"><div class="num">67</div><div class="label">AI Endpoints</div></div>
+      <div class="stat"><div class="num">51</div><div class="label">MCP Tools</div></div>
+      <div class="stat"><div class="num">$0.001</div><div class="label">Per Call</div></div>
+      <div class="stat"><div class="num">50</div><div class="label">Free Calls/Day</div></div>
+    </div>
+
+    <div class="cta-group">
+      <a href="#quickstart" class="btn btn-primary">Start Free — No Credit Card</a>
+      <a href="https://github.com/wuzenghai616-lang/goldbean" class="btn btn-secondary" target="_blank">GitHub Docs</a>
+    </div>
+
+    <div class="free-trial-banner">
+      <div class="icon">&#127873;</div>
+      <div class="text">
+        <strong>50 free API calls every day — no signup needed</strong>
+        <p>Register to get 100 bonus credits. No credit card. No commitment. No Chinese account required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Start -->
+<section class="section" id="quickstart">
+  <div class="container">
+    <h2>Quick Start — 30 Seconds</h2>
+    <div class="code-block">
+<pre><span class="comment"># 1. Free call — no API key needed (50/day)</span>
+<span class="key">curl</span> "https://goldbean-api.xyz/paid/baidu-ocr?image=https://example.com/text.png"
+
+<span class="comment"># 2. Register for 100 bonus credits</span>
+<span class="key">curl</span> -X POST https://goldbean-api.xyz/paid/user/register \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{"email":"you@example.com"}'</span>
+
+<span class="comment"># 3. Use with MCP (Cursor, Claude, Cline, Continue)</span>
+npx goldbean-mcp
+
+<span class="comment"># 4. Or install as npm package</span>
+npm install goldbean-mcp</pre>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <div class="container">
+    <h2>67 Baidu AI Endpoints</h2>
+    <div class="features">
+      <div class="feature"><h3>OCR</h3><p>General, high-precision, handwriting, QR code, bank card, business license, table, document, Qianfan-OCR</p><span class="count">12 tools</span></div>
+      <div class="feature"><h3>Vision</h3><p>Plant, animal, dish, ingredient, currency, car model, logo, landmark, object detection</p><span class="count">10 tools</span></div>
+      <div class="feature"><h3>LLM</h3><p>ERNIE chat, DeepSeek reasoning, vision chat, embedding, reranker, DeepThink</p><span class="count">6 tools</span></div>
+      <div class="feature"><h3>Speech</h3><p>Text-to-speech (TTS) and speech-to-text (ASR)</p><span class="count">2 tools</span></div>
+      <div class="feature"><h3>NLP</h3><p>Sentiment, summary, embedding, correction, keyword, address extraction</p><span class="count">6 tools</span></div>
+      <div class="feature"><h3>Image Gen</h3><p>Text-to-image generation and image editing with CJK text rendering</p><span class="count">2 tools</span></div>
+      <div class="feature"><h3>Video Gen</h3><p>MuseSteamer video generation and query</p><span class="count">2 tools</span></div>
+      <div class="feature"><h3>More</h3><p>Translation, Content Moderation, Protein Folding (HelixFold), PaddleOCR-VL</p><span class="count">14 tools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section">
+  <div class="container">
+    <h2>Simple Pricing</h2>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="name">Free</div>
+        <div class="price">$0</div>
+        <div class="desc">50 calls/day<br>No signup needed</div>
+      </div>
+      <div class="plan">
+        <div class="name">Pay-Per-Call</div>
+        <div class="price">$0.001<small>/call</small></div>
+        <div class="desc">From $0.001/call<br>USDC, PayPal, Alipay</div>
+      </div>
+      <div class="plan popular">
+        <div class="name">Starter</div>
+        <div class="price">$5<small>/mo</small></div>
+        <div class="desc">Unlimited basic+standard<br>50 premium calls</div>
+      </div>
+      <div class="plan">
+        <div class="name">Monthly</div>
+        <div class="price">$9.9<small>/mo</small></div>
+        <div class="desc">Unlimited basic+standard<br>$20 premium quota</div>
+      </div>
+      <div class="plan">
+        <div class="name">Yearly</div>
+        <div class="price">$89<small>/yr</small></div>
+        <div class="desc">Best value<br>$200 premium quota</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:24px;color:#9ca3af;font-size:.85rem">
+      <a href="/buy-credits.html">Buy credits →</a> · Premium endpoints: LLM $0.002/1K tokens, ImageGen $0.03, VideoGen $0.08
+    </p>
+  </div>
+</section>
+
+<!-- Payment -->
+<section class="section">
+  <div class="container">
+    <h2>Payment Options</h2>
+    <div class="features">
+      <div class="feature"><h3>x402 USDC</h3><p>Pay per call with USDC on Base network. No signup, no API key — just pay and go.</p></div>
+      <div class="feature"><h3>PayPal</h3><p>Buy credits from $1. Secure, global. No account needed for free tier.</p></div>
+      <div class="feature"><h3>Alipay</h3><p>支付宝充值，从 ¥7 起。适合中国开发者。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Why GoldBean -->
+<section class="section">
+  <div class="container">
+    <h2>Why GoldBean?</h2>
+    <div class="features">
+      <div class="feature"><h3>🇨🇳 China AI Gateway</h3><p>The only standardized way to access Baidu AI without a Chinese account. No phone number, no ID, no enterprise verification.</p></div>
+      <div class="feature"><h3>🔌 MCP Protocol</h3><p>Works directly with Cursor, Claude Desktop, Cline, Continue. Plug and play — no code changes needed.</p></div>
+      <div class="feature"><h3>💰 Pay Per Call</h3><p>From $0.001 per call. No subscription, no minimum. Only pay for what you use.</p></div>
+      <div class="feature"><h3>🆓 Free to Start</h3><p>50 free calls per day per IP. No signup, no credit card. Register for 100 bonus credits.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>GoldBean API · <a href="https://goldbean-api.xyz/health">Status</a> · <a href="https://goldbean-api.xyz/api/routes">API Routes</a> · <a href="https://goldbean-api.xyz/openapi.json">OpenAPI</a> · <a href="https://github.com/wuzenghai616-lang/goldbean">GitHub</a> · <a href="https://goldbean-api.xyz/.well-known/mcp.json">MCP Manifest</a></p>
+    <p style="margin-top:8px">v9.8.0 · 67 AI Endpoints · 51 MCP Tools · MIT License</p>
+  </div>
+</footer>
+
+</body>
+</html>
