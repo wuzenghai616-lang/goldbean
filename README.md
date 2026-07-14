@@ -163,10 +163,8 @@ node nodejs-x402-example.js
 | Endpoint | Description |
 |----------|-------------|
 | `GET /health` | Service health check |
-| `GET /btc-price` | Bitcoin real-time price ($) |
-| `GET /weather-now?city=Lanzhou` | Current weather in any city |
-| `GET /gas` | Ethereum gas price (Gwei) |
 | `GET /.well-known/x402-bazaar` | x402 payment discovery |
+| `GET /.well-known/mcp.json` | MCP server metadata |
 | `GET /api/routes` | Full route registry |
 
 ### 🎯 Baidu AI Endpoints (Pay-per-Call) — 37 APIs
@@ -278,13 +276,13 @@ Powered by the [x402 protocol](https://x402.org) — decentralized micropayments
 ┌──────────────┐    HTTPS    ┌──────────────────────┐
 │  MCP Client   │ ──────────→ │  GoldBean API Server  │
 │  (Claude,     │ ←────────── │  v9.8.0 on VPS       │
-│   Cursor,     │    402/200  │  port 9879            │
+│   Cursor,     │    402/200  │  port 3099            │
 │   Cline)      │             │                      │
 └──────────────┘             ├── Baidu AI (OCR/TTS)  │
-                              ├── CoinGecko (BTC)     │
-┌──────────────┐             ├── Etherscan (Gas)     │
-│  Web Browser  │──────────→ │── HelixFold3          │
-│  (curl/REST)  │             │── PayPal/Alipay       │
+                              ├── x402 USDC           │
+┌──────────────┐             ├── HelixFold3          │
+│  Web Browser  │──────────→ │── PayPal/Alipay       │
+│  (curl/REST)  │             │── MuseSteamer Video   │
 └──────────────┘             └──────────────────────┘
 ```
 
