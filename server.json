@@ -2,7 +2,7 @@
   "version": "9.8.0",
   "npm": "1.0.0",
   "tools": 51,
-  "description": "GoldBean — 50 Baidu AI tools via MCP. OCR, Vision, LLM (ERNIE/DeepSeek), Speech, NLP, Image/Video Generation, Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day.",
+  "description": "China AI Gateway — 51 Baidu AI MCP tools: OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day. PayPal, Alipay, x402 USDC.",
   "pricing": "from $0.001/call",
   "subscription_plans": [
     "Starter $5",

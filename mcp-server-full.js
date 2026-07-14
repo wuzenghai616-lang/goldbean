@@ -1,101 +1,354 @@
 // ═══════════════════════════════════════════════════════
-// GoldBean MCP Server — Full Edition (50+ tools)
-// Exposes all Baidu AI endpoints via MCP protocol
+// GoldBean MCP Server — v9.8.0 (50 Baidu AI tools)
+// https://goldbean-api.xyz
 // ═══════════════════════════════════════════════════════
 const http = require('http');
 const crypto = require('crypto');
 
 const API_BASE = 'http://127.0.0.1:9879';
 const PUBLIC_URL = 'https://goldbean-api.xyz';
+const VERSION = '9.8.0';
 
 // ═══════════════════════════════════════════════════════
 // Tool Definitions
 // ═══════════════════════════════════════════════════════
 
 const TOOLS = [
-  // --- Free Tools ---
-  { name: 'btc_price', description: 'Get current Bitcoin price in USD', inputSchema: { type: 'object', properties: {} } },
-  { name: 'eth_gas', description: 'Get current Ethereum gas price in Gwei', inputSchema: { type: 'object', properties: {} } },
-  { name: 'weather', description: 'Get current weather for any city worldwide', inputSchema: { type: 'object', properties: { city: { type: 'string', description: 'City name (e.g. London, Beijing, Tokyo)' } }, required: ['city'] } },
-  { name: 'service_health', description: 'Check GoldBean API service health and version', inputSchema: { type: 'object', properties: {} } },
+  // ── Service ──
+  {
+    name: 'service_health',
+    description: 'Check GoldBean API service status, version, and uptime. Returns: { status, version, uptime, endpoints, free_calls_remaining }.',
+    inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'service' }
+  },
 
-  // --- OCR Tools ---
-  { name: 'baidu_ocr', description: 'General text OCR — extract text from images. Supports Chinese, English, and mixed text.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL (recommended)' }, image: { type: 'string', description: 'Base64-encoded image (use url instead if possible)' } } } },
-  { name: 'baidu_ocr_accurate', description: 'High-accuracy OCR for complex or low-quality documents', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_table', description: 'Extract table structure from images — returns structured table data', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_idcard', description: 'ID card recognition (Chinese 身份证). Extracts name, ID number, address, etc.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, side: { type: 'string', description: 'Card side: "front" or "back"' } } } },
-  { name: 'baidu_ocr_handwriting', description: 'Handwritten text recognition — extract handwritten Chinese or English text', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_qrcode', description: 'QR code and barcode recognition', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_bankcard', description: 'Bank card number recognition', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_business_license', description: 'Business license (营业执照) recognition', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_ocr_webimage', description: 'OCR optimized for web images and screenshots', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_deepseek_ocr', description: 'Advanced OCR with DeepSeek-OCR model — handles complex layouts, multi-column text, and mixed content', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom extraction instruction' } } } },
-  { name: 'baidu_paddleocr_vl', description: 'Document parsing with PaddleOCR-VL — layout analysis, reading order, and structure extraction', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom instruction' } } } },
-  { name: 'baidu_qianfan_ocr', description: 'General-purpose OCR with Qianfan-OCR model — supports 32k context, good for long documents', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom instruction' } } } },
+  // ── OCR (12 tools) ──
+  {
+    name: 'baidu_ocr',
+    description: 'General-purpose OCR — extract printed text from images. Supports Chinese, English, Japanese, and 20+ languages with >90% accuracy. Returns: { words_result: [{ words: "text" }], words_result_num, language }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL (recommended, <10MB)' }, image: { type: 'string', description: 'Base64-encoded image (no data: prefix)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_accurate',
+    description: 'High-accuracy OCR for low-quality, blurry, or complex documents. Returns structured text with confidence scores. Use when baidu_ocr results are insufficient.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_table',
+    description: 'Table extraction from images — returns structured rows/columns as JSON array. Handles merged cells and multi-page tables.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_idcard',
+    description: 'Chinese ID card (身份证) recognition. Extracts: name, gender, nationality, birth date, address, ID number. Supports front/back side detection.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, side: { type: 'string', enum: ['front', 'back'], description: 'Card side: "front" (photo) or "back" (issuer)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_handwriting',
+    description: 'Handwritten text recognition — extract handwritten Chinese or English text from images of notes, forms, or letters.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_qrcode',
+    description: 'QR code and barcode recognition — decode 1D/2D barcodes from images. Supports QR, Data Matrix, PDF417, Code128, and more.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_bankcard',
+    description: 'Bank card recognition — extract card number, bank name, and card type from photos of bank cards.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_business_license',
+    description: 'Chinese business license (营业执照) recognition. Extracts: company name, unified social credit code, legal representative, registered capital, establishment date, business scope.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ocr_webimage',
+    description: 'OCR optimized for web images and screenshots — handles compressed, low-resolution images from web pages. Returns text with positional data.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_deepseek_ocr',
+    description: 'Advanced OCR with DeepSeek-OCR model — handles complex layouts, multi-column text, mixed text-and-image content, and mathematical formulas. Supports custom extraction prompts.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom extraction instruction (e.g. "Extract only the table data")' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_paddleocr_vl',
+    description: 'Document parsing with PaddleOCR-VL — performs layout analysis, reading order detection, and structure extraction. Returns structured document with headings, paragraphs, tables, and figures identified.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom instruction' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_qianfan_ocr',
+    description: 'General-purpose OCR with Qianfan-OCR model — supports up to 32k context length, ideal for long documents and multi-page scans.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, prompt: { type: 'string', description: 'Custom instruction' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'ocr', pricing: '$0.001/call' }
+  },
 
-  // --- Speech Tools ---
-  { name: 'baidu_tts', description: 'Text-to-Speech — convert Chinese or English text to natural-sounding audio', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to convert to speech' }, per: { type: 'string', description: 'Voice: 0=female, 1=male, 3=emotional, 4=emotional female, 5=male(2)' } }, required: ['text'] } },
-  { name: 'baidu_asr', description: 'Speech-to-Text — convert audio to text (Chinese)', inputSchema: { type: 'object', properties: { audio: { type: 'string', description: 'Base64-encoded audio data' }, format: { type: 'string', description: 'Audio format: pcm, wav, amr' }, rate: { type: 'number', description: 'Sample rate (default: 16000)' } }, required: ['audio'] } },
+  // ── Speech (2 tools) ──
+  {
+    name: 'baidu_tts',
+    description: 'Text-to-Speech synthesis — convert text to natural-sounding audio. Supports Chinese (Mandarin/Cantonese) and English. Returns MP3 audio binary. Voice options: 0=female, 1=male, 3=emotional, 4=emotional female, 5=male(alt).',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to synthesize (max 1024 chars)' }, per: { type: 'string', enum: ['0', '1', '3', '4', '5'], description: 'Voice persona: 0=female, 1=male, 3=emotional, 4=emotional-female, 5=male-alt' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'speech', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_asr',
+    description: 'Automatic Speech Recognition — transcribe audio to text. Supports Chinese (Mandarin), English, and Cantonese. Returns: { result: ["transcribed text"] }.',
+    inputSchema: { type: 'object', properties: { audio: { type: 'string', description: 'Base64-encoded audio data (PCM/WAV/AMR, <60s)' }, format: { type: 'string', enum: ['pcm', 'wav', 'amr'], description: 'Audio format (default: pcm)' }, rate: { type: 'number', description: 'Sample rate in Hz (default: 16000)' } }, required: ['audio'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'speech', pricing: '$0.001/call' }
+  },
 
-  // --- LLM Tools ---
-  { name: 'baidu_llm_chat', description: 'Chat with ERNIE LLM (Baidu\'s GPT-class large language model). Good for Chinese language tasks.', inputSchema: { type: 'object', properties: { message: { type: 'string', description: 'Your message or prompt' }, model: { type: 'string', description: 'Model: ernie-5.1 (default), ernie-4.0-turbo' } }, required: ['message'] } },
-  { name: 'baidu_deepthink', description: 'Deep reasoning with DeepSeek-R1 — chain-of-thought reasoning for complex problems. Returns both reasoning and answer.', inputSchema: { type: 'object', properties: { message: { type: 'string', description: 'Your reasoning question' }, model: { type: 'string', description: 'Model (default: deepseek-r1-250528)' } }, required: ['message'] } },
-  { name: 'baidu_vision_chat', description: 'Vision LLM — describe and analyze images using ERNIE-4.5-VL or Qwen3-VL models', inputSchema: { type: 'object', properties: { image: { type: 'string', description: 'Image URL' }, message: { type: 'string', description: 'Question about the image' }, model: { type: 'string', description: 'Model (default: ernie-4.5-turbo-vl)' } }, required: ['image'] } },
+  // ── LLM (3 tools) ──
+  {
+    name: 'baidu_llm_chat',
+    description: 'Chat with ERNIE LLM — Baidu\'s flagship large language model (comparable to GPT-4). Excellent at Chinese language tasks, reasoning, code generation, and multi-turn conversation. OpenAI-compatible. Returns: { result: "response text" }.',
+    inputSchema: { type: 'object', properties: { message: { type: 'string', description: 'User message or prompt' }, model: { type: 'string', enum: ['ernie-5.1', 'ernie-4.0-turbo', 'ernie-4.5'], description: 'Model (default: ernie-5.1)' } }, required: ['message'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'llm', pricing: '$0.002/1K tokens' }
+  },
+  {
+    name: 'baidu_deepthink',
+    description: 'Deep reasoning with DeepSeek-R1 — chain-of-thought reasoning for math, logic, and complex analysis. Returns both reasoning trace and final answer. Returns: { reasoning: "step-by-step", result: "answer" }.',
+    inputSchema: { type: 'object', properties: { message: { type: 'string', description: 'Reasoning question or problem' }, model: { type: 'string', description: 'Model (default: deepseek-r1-250528)' } }, required: ['message'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'llm', pricing: '$0.003/call' }
+  },
+  {
+    name: 'baidu_vision_chat',
+    description: 'Vision-language model — describe and analyze images using ERNIE-4.5-VL or Qwen3-VL. Supports visual question answering, image description, and OCR-like tasks. Returns: { result: "description/answer" }.',
+    inputSchema: { type: 'object', properties: { image: { type: 'string', description: 'Image URL' }, message: { type: 'string', description: 'Question about the image (e.g. "What objects are in this image?")' }, model: { type: 'string', description: 'Model (default: ernie-4.5-turbo-vl)' } }, required: ['image'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'llm', pricing: '$0.002/1K tokens' }
+  },
 
-  // --- Translation ---
-  { name: 'baidu_translate', description: 'Multi-language translation powered by Baidu Translate. Supports 200+ languages.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to translate' }, from: { type: 'string', description: 'Source language (default: auto-detect)' }, to: { type: 'string', description: 'Target language (default: en). Use zh for Chinese, ja for Japanese, ko for Korean, etc.' } }, required: ['text'] } },
+  // ── Translation (1 tool) ──
+  {
+    name: 'baidu_translate',
+    description: 'Multi-language translation powered by Baidu Translate. Supports 200+ languages including Chinese, English, Japanese, Korean, French, German, Spanish, Arabic, etc. Returns: { trans_result: [{ src, dst }] }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to translate' }, from: { type: 'string', description: 'Source language code (default: auto-detect). e.g. en, zh, ja, ko, fr, de' }, to: { type: 'string', description: 'Target language code (default: en). e.g. en, zh, ja, ko, fr, de' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'translation', pricing: '$0.001/call' }
+  },
 
-  // --- Vision & Recognition ---
-  { name: 'baidu_image_recognition', description: 'General image recognition — identify objects, scenes, and concepts in images', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_object_detect', description: 'Object detection with bounding boxes — locate and identify multiple objects in an image', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_landmark', description: 'Landmark recognition — identify famous landmarks and buildings', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_plant', description: 'Plant species recognition — identify plants from photos', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', description: 'Set "true" to include Wikipedia info' } } } },
-  { name: 'baidu_animal', description: 'Animal species recognition — identify animals from photos', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', description: 'Set "true" to include Wikipedia info' } } } },
-  { name: 'baidu_dish', description: 'Dish/cuisine recognition — identify food dishes from photos', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', description: 'Set "true" to include info' } } } },
-  { name: 'baidu_logo', description: 'Brand logo recognition — identify brand logos in images', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_car', description: 'Car model recognition — identify car make and model from photos', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', description: 'Set "true" for info' } } } },
-  { name: 'baidu_ingredient', description: 'Fruit and vegetable recognition', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
-  { name: 'baidu_vehicle_detect', description: 'Vehicle detection — count and locate vehicles in images (good for parking lots)', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
+  // ── Vision & Recognition (10 tools) ──
+  {
+    name: 'baidu_image_recognition',
+    description: 'General image recognition — identify objects, scenes, concepts, and activities in images. Returns categorized labels with confidence scores.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_object_detect',
+    description: 'Object detection — locate and identify multiple objects in an image with bounding boxes. Returns: { results: [{ name, score, location: {left, top, width, height} }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_landmark',
+    description: 'Landmark recognition — identify famous landmarks, buildings, and monuments from photos. Returns: { result: { landmark, score } }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_plant',
+    description: 'Plant species recognition — identify plants, flowers, and trees from photos. Returns: { result: [{ name, score, baike }], optional Wikipedia info }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', enum: ['true', 'false'], description: 'Include Wikipedia info (default: false)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_animal',
+    description: 'Animal species recognition — identify animals, birds, and insects from photos. Returns: { result: [{ name, score, baike }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', enum: ['true', 'false'], description: 'Include Wikipedia info' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_dish',
+    description: 'Food/cuisine recognition — identify dishes and food items from photos. Returns: { result: [{ name, score, calories }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', enum: ['true', 'false'], description: 'Include nutrition info' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_logo',
+    description: 'Brand logo recognition — identify brand logos in images. Returns: { result: [{ name, score, location }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_car',
+    description: 'Car model recognition — identify car make, model, and year from photos. Returns: { result: [{ name, score, year }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, baike: { type: 'string', enum: ['true', 'false'], description: 'Include detailed specs' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_ingredient',
+    description: 'Fruit and vegetable recognition — identify fresh produce from photos. Returns: { result: [{ name, score }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_vehicle_detect',
+    description: 'Vehicle detection and counting — detect all vehicles in an image (cars, trucks, buses, motorcycles) with bounding boxes. Useful for parking lot management and traffic analysis.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'vision', pricing: '$0.001/call' }
+  },
 
-  // --- Face & Body ---
-  { name: 'baidu_face_detect', description: 'Face detection and analysis — returns age, gender, emotion, beauty score, glasses, etc.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, fields: { type: 'string', description: 'Fields to return (default: age,beauty,expression,gender,glasses,emotion,face_shape)' } } } },
-  { name: 'baidu_face_compare', description: '1:1 face comparison — verify if two faces belong to the same person. Returns similarity score.', inputSchema: { type: 'object', properties: { url1: { type: 'string', description: 'First image URL' }, url2: { type: 'string', description: 'Second image URL' }, image1: { type: 'string', description: 'First base64 image' }, image2: { type: 'string', description: 'Second base64 image' } } } },
-  { name: 'baidu_body_analysis', description: 'Body analysis — human body detection, posture recognition, people counting', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, type: { type: 'string', description: 'Analysis type (default: body_analysis)' } } } },
-  { name: 'baidu_gesture', description: 'Hand gesture recognition — identify gestures like fist, open palm, peace sign, etc.', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
+  // ── Face & Body (4 tools) ──
+  {
+    name: 'baidu_face_detect',
+    description: 'Face detection and attribute analysis — returns face location, age estimate, gender, emotion, beauty score, glasses, face shape, and expression for each detected face.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, fields: { type: 'string', description: 'Comma-separated attributes (default: age,beauty,expression,gender,glasses,emotion,face_shape)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'face', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_face_compare',
+    description: '1:1 face verification — compare two faces to determine if they belong to the same person. Returns similarity score (0-100) and match threshold. Returns: { score, threshold, is_same_person }.',
+    inputSchema: { type: 'object', properties: { url1: { type: 'string', description: 'First image URL' }, url2: { type: 'string', description: 'Second image URL' }, image1: { type: 'string', description: 'First base64 image' }, image2: { type: 'string', description: 'Second base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'face', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_body_analysis',
+    description: 'Human body detection and analysis — detect people, recognize posture/pose, and count individuals in images. Returns: { person_num, person_info: [{ location, attributes }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, type: { type: 'string', description: 'Analysis type (default: body_analysis)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'face', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_gesture',
+    description: 'Hand gesture recognition — identify gestures from photos: fist, open palm, peace sign, thumbs up, OK sign, etc. Returns: { result: [{ classname, probability, location }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'face', pricing: '$0.001/call' }
+  },
 
-  // --- Image Processing ---
-  { name: 'baidu_image_enhance', description: 'Image quality enhancement — denoise, deblur, and improve image quality', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, type: { type: 'string', description: 'Enhancement type: image_quality_enhance, colorize, dehaze, contrast_enhance' } } } },
+  // ── Image Processing (1 tool) ──
+  {
+    name: 'baidu_image_enhance',
+    description: 'AI-powered image quality enhancement — denoise, deblur, dehaze, colorize black-and-white photos, and enhance contrast. Returns enhanced image as base64.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' }, type: { type: 'string', enum: ['image_quality_enhance', 'colorize', 'dehaze', 'contrast_enhance'], description: 'Enhancement type (default: image_quality_enhance)' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'image', pricing: '$0.001/call' }
+  },
 
-  // --- Image Generation ---
-  { name: 'baidu_image_gen', description: 'AI image generation from text prompts using Qwen-Image model. Excellent at Chinese text rendering in images.', inputSchema: { type: 'object', properties: { prompt: { type: 'string', description: 'Image description' }, model: { type: 'string', description: 'Model (default: qwen-image)' }, n: { type: 'number', description: 'Number of images (default: 1)' } }, required: ['prompt'] } },
-  { name: 'baidu_image_edit', description: 'AI image editing — modify existing images with text instructions using Qwen-Image-Edit', inputSchema: { type: 'object', properties: { image: { type: 'string', description: 'Original image URL' }, prompt: { type: 'string', description: 'Edit instruction' }, model: { type: 'string', description: 'Model (default: qwen-image-edit)' } }, required: ['image', 'prompt'] } },
+  // ── Image Generation (2 tools) ──
+  {
+    name: 'baidu_image_gen',
+    description: 'AI image generation from text prompts using Qwen-Image model. Excellent at rendering Chinese text within images. Supports various art styles. Returns: { image_url, seed }.',
+    inputSchema: { type: 'object', properties: { prompt: { type: 'string', description: 'Image description (e.g. "A red panda wearing a chef hat, watercolor style")' }, model: { type: 'string', description: 'Model (default: qwen-image)' }, n: { type: 'number', description: 'Number of images to generate (default: 1, max: 4)' } }, required: ['prompt'], additionalProperties: false },
+    annotations: { readOnlyHint: false, category: 'image-gen', pricing: '$0.03/call' }
+  },
+  {
+    name: 'baidu_image_edit',
+    description: 'AI image editing — modify existing images with text instructions using Qwen-Image-Edit model. Can add/remove objects, change style, or transform content. Returns: { image_url }.',
+    inputSchema: { type: 'object', properties: { image: { type: 'string', description: 'Original image URL' }, prompt: { type: 'string', description: 'Edit instruction (e.g. "Replace the sky with a sunset")' }, model: { type: 'string', description: 'Model (default: qwen-image-edit)' } }, required: ['image', 'prompt'], additionalProperties: false },
+    annotations: { readOnlyHint: false, category: 'image-gen', pricing: '$0.03/call' }
+  },
 
-  // --- Video Generation ---
-  { name: 'baidu_video_gen', description: 'AI video generation from image + text prompt using MuseSteamer. Returns a task_id for async polling.', inputSchema: { type: 'object', properties: { prompt: { type: 'string', description: 'Video description (e.g. "slow zoom in")' }, image: { type: 'string', description: 'Reference image URL' }, model: { type: 'string', description: 'Model (default: musesteamer-air-i2v)' } }, required: ['prompt', 'image'] } },
-  { name: 'baidu_video_query', description: 'Query video generation task status. Use the task_id from baidu_video_gen.', inputSchema: { type: 'object', properties: { task_id: { type: 'string', description: 'Task ID from video generation' } }, required: ['task_id'] } },
+  // ── Video Generation (2 tools) ──
+  {
+    name: 'baidu_video_gen',
+    description: 'AI video generation from image + text prompt using MuseSteamer model. Submit a reference image and motion description to generate a short video clip. Async: returns task_id for polling. Returns: { task_id }.',
+    inputSchema: { type: 'object', properties: { prompt: { type: 'string', description: 'Motion description (e.g. "camera slowly zooms in, gentle wind blowing")' }, image: { type: 'string', description: 'Reference image URL' }, model: { type: 'string', description: 'Model (default: musesteamer-air-i2v)' } }, required: ['prompt', 'image'], additionalProperties: false },
+    annotations: { readOnlyHint: false, category: 'video-gen', pricing: '$0.08/call' }
+  },
+  {
+    name: 'baidu_video_query',
+    description: 'Query video generation task status. Use the task_id returned by baidu_video_gen. Returns: { task_status, video_url } when complete, or { task_status: "running" } while processing.',
+    inputSchema: { type: 'object', properties: { task_id: { type: 'string', description: 'Task ID from baidu_video_gen' } }, required: ['task_id'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'video-gen', pricing: 'free' }
+  },
 
-  // --- NLP ---
-  { name: 'baidu_nlp', description: 'NLP lexical analysis — Chinese word segmentation and POS tagging', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to analyze' }, type: { type: 'string', description: 'Analysis type: lexer (default), depparser, etc.' } }, required: ['text'] } },
-  { name: 'baidu_sentiment', description: 'Sentiment analysis — classify text as positive, negative, or neutral', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to analyze' } }, required: ['text'] } },
-  { name: 'baidu_summary', description: 'Automatic text summarization — condense long articles into short summaries', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Long text to summarize' } }, required: ['text'] } },
-  { name: 'baidu_text_corrector', description: 'Text error correction — detect and fix Chinese text errors', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text with potential errors' } }, required: ['text'] } },
-  { name: 'baidu_keyword_extraction', description: 'Keyword extraction — extract the most important keywords from an article', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Article text' }, num: { type: 'number', description: 'Number of keywords (default: 5)' } }, required: ['text'] } },
-  { name: 'baidu_word_embedding', description: 'Word vector embedding — convert text to vector representations for ML tasks', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Word or text to embed' } }, required: ['text'] } },
+  // ── NLP (6 tools) ──
+  {
+    name: 'baidu_nlp',
+    description: 'Chinese NLP lexical analysis — word segmentation (分词) and part-of-speech tagging. Returns: { items: [{ word, pos_tag, ne }], basic_words }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Chinese text to analyze' }, type: { type: 'string', enum: ['lexer', 'depparser'], description: 'Analysis type (default: lexer)' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_sentiment',
+    description: 'Sentiment analysis — classify text as positive (2), negative (0), or neutral (1). Returns: { items: [{ sentiment, confidence, prop }], text }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to analyze (Chinese or English)' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_summary',
+    description: 'Automatic text summarization — condense long articles into concise summaries. Returns: { summary: "condensed text" }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Long text to summarize (Chinese works best)' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_text_corrector',
+    description: 'Chinese text error correction — detect and fix typos, grammatical errors, and character mistakes in Chinese text. Returns: { corrected_text, errors: [{ original, corrected }] }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Chinese text with potential errors' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_keyword_extraction',
+    description: 'Keyword extraction — identify the most important keywords from an article. Returns: { keywords: [{ word, score }] }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Article text' }, num: { type: 'number', description: 'Number of keywords (default: 5, max: 20)' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_word_embedding',
+    description: 'Word embedding — convert words or short phrases to dense vector representations (768-dim) for similarity computation, clustering, and ML tasks.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Word or phrase to embed' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'nlp', pricing: '$0.001/call' }
+  },
 
-  // --- Embedding & Reranker ---
-  { name: 'baidu_embedding', description: 'Text embedding — convert text to dense vectors for semantic search, clustering, and RAG. Supports embedding-v1, BGE, Qwen3 models.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text(s) to embed. Use || to separate multiple texts.' }, model: { type: 'string', description: 'Model (default: embedding-v1)' } }, required: ['text'] } },
-  { name: 'baidu_reranker', description: 'Document reranking — rerank documents by relevance to a query. Useful for RAG pipelines.', inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'Search query' }, documents: { type: 'string', description: 'Documents separated by ||' }, model: { type: 'string', description: 'Model (default: bce-reranker-base)' } }, required: ['query', 'documents'] } },
+  // ── Embedding & Reranker (2 tools) ──
+  {
+    name: 'baidu_embedding',
+    description: 'Text embedding for semantic search, clustering, and RAG — convert text to dense vectors. Supports embedding-v1, BGE, and Qwen3 models. Use || to separate multiple texts for batch embedding.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text(s) to embed. Use || to separate multiple texts for batch processing.' }, model: { type: 'string', enum: ['embedding-v1', 'bge-large-en', 'bge-large-zh', 'qwen3-embedding'], description: 'Model (default: embedding-v1)' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'embedding', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_reranker',
+    description: 'Document reranking — rerank a list of documents by relevance to a query. Essential for RAG pipelines to improve retrieval accuracy. Returns: { results: [{ index, relevance_score }] }.',
+    inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'Search query' }, documents: { type: 'string', description: 'Documents separated by || (max 100)' }, model: { type: 'string', description: 'Model (default: bce-reranker-base)' } }, required: ['query', 'documents'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'embedding', pricing: '$0.001/call' }
+  },
 
-  // --- Content Moderation ---
-  { name: 'baidu_text_review', description: 'Text content moderation — detect spam, porn, violence, and sensitive content in text', inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to review' } }, required: ['text'] } },
-  { name: 'baidu_image_review', description: 'Image content moderation — detect inappropriate content in images', inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } } } },
+  // ── Content Moderation (2 tools) ──
+  {
+    name: 'baidu_text_review',
+    description: 'Text content moderation — detect spam, porn, violence, politically sensitive content, and abuse in text. Returns: { result: [{ type, probability, hit }] }.',
+    inputSchema: { type: 'object', properties: { text: { type: 'string', description: 'Text to review' } }, required: ['text'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'moderation', pricing: '$0.001/call' }
+  },
+  {
+    name: 'baidu_image_review',
+    description: 'Image content moderation — detect inappropriate or unsafe content in images (porn, violence, political sensitivity). Returns: { result: [{ type, probability }] }.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string', description: 'Image URL' }, image: { type: 'string', description: 'Base64 image' } }, additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'moderation', pricing: '$0.001/call' }
+  },
 
-  // --- Science ---
-  { name: 'baidu_helixfold', description: 'Protein structure prediction using HelixFold3 (AlphaFold3-class). Predict 3D structure from amino acid sequence.', inputSchema: { type: 'object', properties: { seq: { type: 'string', description: 'Protein amino acid sequence' }, name: { type: 'string', description: 'Target name' } }, required: ['seq'] } },
+  // ── Science (1 tool) ──
+  {
+    name: 'baidu_helixfold',
+    description: 'Protein 3D structure prediction using HelixFold3 (AlphaFold3-class model). Predict protein structure from amino acid sequence for drug discovery and bioinformatics research. Returns: { pdb_url, confidence }.',
+    inputSchema: { type: 'object', properties: { seq: { type: 'string', description: 'Protein amino acid sequence (FASTA format, single-letter codes)' }, name: { type: 'string', description: 'Target protein name (optional)' } }, required: ['seq'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'science', pricing: '$0.03/call' }
+  },
 
-  // --- Account ---
-  { name: 'register', description: 'Register for a free API key (20 free credits). Returns your GB_ API key.', inputSchema: { type: 'object', properties: { email: { type: 'string', description: 'Your email address' }, name: { type: 'string', description: 'Optional display name' } }, required: ['email'] } },
-  { name: 'check_credits', description: 'Check your remaining API credits and usage', inputSchema: { type: 'object', properties: { api_key: { type: 'string', description: 'Your GB_ API key' } }, required: ['api_key'] } },
+  // ── Account (2 tools) ──
+  {
+    name: 'register',
+    description: 'Register for a free GoldBean API key. Returns your GB_ API key with 100 free credits. No credit card needed. Returns: { api_key, credits, message }.',
+    inputSchema: { type: 'object', properties: { email: { type: 'string', description: 'Your email address' }, name: { type: 'string', description: 'Optional display name' } }, required: ['email'], additionalProperties: false },
+    annotations: { readOnlyHint: false, category: 'account', pricing: 'free' }
+  },
+  {
+    name: 'check_credits',
+    description: 'Check your remaining API credits, usage statistics, and subscription status. Returns: { credits_remaining, calls_today, plan, free_calls_remaining }.',
+    inputSchema: { type: 'object', properties: { api_key: { type: 'string', description: 'Your GB_ API key' } }, required: ['api_key'], additionalProperties: false },
+    annotations: { readOnlyHint: true, category: 'account', pricing: 'free' }
+  },
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -103,10 +356,6 @@ const TOOLS = [
 // ═══════════════════════════════════════════════════════
 
 const TOOL_ROUTES = {
-  // Free
-  btc_price: { method: 'GET', path: '/btc-price' },
-  eth_gas: { method: 'GET', path: '/gas' },
-  weather: { method: 'GET', path: '/weather-now', params: { city: 'city' } },
   service_health: { method: 'GET', path: '/health' },
 
   // OCR
@@ -338,7 +587,7 @@ const server = http.createServer((req, res) => {
           result = {
             protocolVersion: '2024-11-05',
             capabilities: { tools: { listChanged: false }, resources: { listChanged: false } },
-            serverInfo: { name: 'GoldBean MCP', version: '2.0.0' }
+            serverInfo: { name: 'GoldBean MCP', version: VERSION }
           };
         } else if (json.method === 'tools/list') {
           result = { tools: TOOLS };
@@ -353,12 +602,12 @@ const server = http.createServer((req, res) => {
         } else if (json.method === 'handoff') {
           result = {
             handoff: {
-              summary: 'GoldBean — 50+ Baidu AI tools via MCP. OCR, TTS, LLM, Vision, NLP, Image Generation, Video Generation, Translation.',
+              summary: 'GoldBean v' + VERSION + ' — 50 Baidu AI tools via MCP. OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding.',
               pitch_to_human: [
-                'GoldBean provides 50+ AI tools powered by Baidu AI — accessible via MCP',
-                'Free: 5 calls/day per IP, no registration needed',
-                'Register for 20 free credits: POST /paid/user/register',
-                'Pay per call from $0.01 — PayPal, Alipay, or USDC',
+                'GoldBean provides 50 AI tools powered by Baidu AI — accessible via MCP',
+                'Free: 50 calls/day per IP, no registration needed',
+                'Register for 100 free credits: POST /paid/user/register',
+                'Pay per call from $0.001 — PayPal, Alipay, or USDC',
                 'Install: npx goldbean-mcp or use URL: https://goldbean-api.xyz/sse',
               ],
               install_command: 'npx goldbean-mcp',
@@ -407,11 +656,12 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify({
       ok: true,
       server: 'GoldBean MCP',
-      version: '2.0.0',
+      version: VERSION,
       tools: TOOLS.length,
       sse_endpoint: '/sse',
       post_endpoint: '/mcp',
       website: PUBLIC_URL,
+      pricing: 'from $0.001/call, 50 free calls/day',
     }));
     return;
   }
@@ -421,7 +671,7 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.MCP_PORT || 3099;
 server.listen(PORT, '127.0.0.1', () => {
-  console.log(`[GoldBean MCP] ${TOOLS.length} tools loaded on port ${PORT}`);
+  console.log(`[GoldBean MCP v${VERSION}] ${TOOLS.length} tools loaded on port ${PORT}`);
   console.log(`[GoldBean MCP] SSE: http://127.0.0.1:${PORT}/sse`);
   console.log(`[GoldBean MCP] POST: http://127.0.0.1:${PORT}/mcp`);
 });

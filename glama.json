@@ -1,6 +1,7 @@
 {
+  "$schema": "https://glama.ai/schema/glama.json",
   "name": "GoldBean",
-  "description": "50 Baidu AI MCP tools — OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day.",
+  "description": "China AI Gateway — 51 Baidu AI MCP tools: OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day. PayPal, Alipay, x402 USDC.",
   "version": "9.8.0",
   "npm": "goldbean-mcp@1.0.0",
   "tools": 51,
