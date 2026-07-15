@@ -167,66 +167,122 @@ node nodejs-x402-example.js
 | `GET /.well-known/mcp.json` | MCP server metadata |
 | `GET /api/routes` | Full route registry |
 
-### 🎯 Baidu AI Endpoints (Pay-per-Call) — 37 APIs
+### 🎯 Baidu AI Tools (51 MCP Tools via Pay-per-Call)
 
-| Endpoint | Price | Description |
-|----------|:-----:|-------------|
-| `GET /paid/baidu-ocr` | $0.001 | General text OCR |
-| `GET /paid/baidu-ocr-accurate` | $0.001 | High-accuracy OCR |
-| `GET /paid/baidu-ocr-table` | $0.001 | Table structure OCR |
-| `GET /paid/baidu-idcard` | $0.001 | ID card recognition |
-| `GET /paid/baidu-tts?text=...` | $0.001 | Text-to-Speech (Chinese) |
-| `GET /paid/baidu-translate?text=...` | $0.001 | Multi-language translation |
-| `GET /paid/baidu-llm-chat?prompt=...` | $0.002/1K tokens | ERNIE chat (GPT-class LLM) |
-| `GET /paid/baidu-asr?audio=...` | $0.001 | Speech-to-Text |
-| `GET /paid/baidu-image-recognition?image=...` | $0.001 | Object/scene recognition |
-| `GET /paid/baidu-image-enhance?image=...` | $0.001 | Image enhancement |
-| `GET /paid/baidu-object-detect?image=...` | $0.001 | Object detection with bounding boxes |
-| `GET /paid/baidu-landmark?image=...` | $0.001 | Landmark recognition |
-| `GET /paid/baidu-face-detect?image=...` | $0.001 | Face detection & analysis |
-| `GET /paid/baidu-face-compare?image1=...&image2=...` | $0.001 | 1:1 face comparison |
-| `GET /paid/baidu-body-analysis?image=...` | $0.001 | Body/gesture analysis |
-| `GET /paid/baidu-gesture?image=...` | $0.001 | Hand gesture recognition |
-| `GET /paid/baidu-nlp?text=...` | $0.001 | NLP (lexer, sentiment, etc.) |
-| `GET /paid/baidu-sentiment?text=...` | $0.001 | Sentiment analysis |
-| `GET /paid/baidu-summary?text=...` | $0.001 | Text summarization |
-| `GET /paid/baidu-word-embedding?text=...` | $0.001 | Word vector embedding |
-| `GET /paid/baidu-text-correction?text=...` | $0.001 | Text error correction |
-| `GET /paid/baidu-comment-tag?text=...` | $0.001 | Comment opinion tag extraction |
-| `GET /paid/baidu-emotion?text=...` | $0.001 | Emotion detection in text |
-| `GET /paid/baidu-keyword?text=...` | $0.001 | Article keyword extraction |
-| `GET /paid/baidu-address?text=...` | $0.001 | Address parsing & structuring |
-| `GET /paid/baidu-text-similarity?text1=...&text2=...` | $0.001 | Short text similarity score |
-| `GET /paid/baidu-text-review?text=...` | $0.001 | Text content moderation |
-| `GET /paid/baidu-image-review?image=...` | $0.001 | Image content moderation |
-| `GET /paid/baidu-plant?image=...` | $0.001 | Plant species recognition |
-| `GET /paid/baidu-animal?image=...` | $0.001 | Animal species recognition |
-| `GET /paid/baidu-dish?image=...` | $0.001 | Dish/cuisine recognition |
-| `GET /paid/baidu-ingredient?image=...` | $0.001 | Fruit/vegetable recognition |
-| `GET /paid/baidu-currency?image=...` | $0.001 | Banknote/currency recognition |
-| `GET /paid/baidu-car-type?image=...` | $0.001 | Car make/model recognition |
-| `GET /paid/baidu-redwine?image=...` | $0.001 | Red wine label recognition |
-| `GET /paid/baidu-logo?image=...` | $0.001 | Brand logo recognition |
-| `GET /paid/baidu-ocr-handwrite?image=...` | $0.001 | Handwritten text OCR |
-| `GET /paid/baidu-ocr-vin?image=...` | $0.001 | VIN code OCR |
-| `GET /paid/baidu-image-colorize?image=...` | $0.001 | B&W photo colorization |
-| `GET /paid/baidu-style-trans?image=...` | $0.001 | Artistic style transfer |
-| `GET /paid/baidu-selfie-anime?image=...` | $0.001 | Portrait to anime conversion |
-| `GET /paid/baidu-dehaze?image=...` | $0.001 | Image dehazing |
-| `GET /paid/baidu-body-count?image=...` | $0.001 | People counting |
-| `GET /paid/baidu-body-keypoints?image=...` | $0.001 | Body skeleton keypoints |
-| `GET /paid/baidu-face-liveness?image=...` | $0.001 | Face liveness (anti-spoofing) |
-| `GET /paid/baidu-helixfold?seq=...` | $0.03 | Protein structure prediction |
-| `GET /paid/baidu-vision-chat?image=...&message=...` | $0.001 | Vision understanding (ERNIE-4.5-VL / Qwen3-VL) |
-| `GET /paid/baidu-deepthink?message=...` | $0.003 | Deep reasoning (DeepSeek-R1, chain-of-thought) |
-| `GET /paid/baidu-embedding?text=...` | $0.001 | Text embedding (embedding-v1, BGE, Qwen3) |
-| `GET /paid/baidu-reranker?query=...&documents=...` | $0.001 | Document reranking (BCE / Qwen3 reranker) |
-| `GET /paid/baidu-image-gen?prompt=...` | $0.03 | Text-to-image (Qwen-Image, CJK text rendering) |
-| `GET /paid/baidu-image-edit?image=...&prompt=...` | $0.03 | Image editing (Qwen-Image-Edit, multi-image fusion) |
-| `GET /paid/baidu-deepseek-ocr?image=...` | $0.001 | Advanced OCR (DeepSeek-OCR, complex layouts) |
-| `GET /paid/baidu-paddleocr-vl?image=...` | $0.001 | Document parsing (PaddleOCR-VL, layout analysis) |
-| `GET /paid/baidu-qianfan-ocr?image=...` | $0.001 | General-purpose OCR (Qianfan-OCR, 32k context) |
-| `GET /paid/baidu-video-gen?prompt=...&image=...` | $0.08 | Video generation (MuseSteamer, text/image-to-video) |
+#### OCR (12 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_ocr` | $0.001 | General printed text OCR — 20+ languages, default choice for most OCR tasks |
+| `baidu_ocr_accurate` | $0.001 | High-precision OCR for blurry/low-quality images where baidu_ocr is insufficient |
+| `baidu_ocr_table` | $0.001 | Structured table extraction — preserves row/column/cell structure |
+| `baidu_ocr_idcard` | $0.001 | Chinese ID card field extraction (front + back) |
+| `baidu_ocr_handwriting` | $0.001 | Handwritten Chinese/English text recognition |
+| `baidu_ocr_qrcode` | $0.001 | QR code and barcode detection/decoding |
+| `baidu_ocr_bankcard` | $0.001 | Bank card number, type, and bank name extraction |
+| `baidu_ocr_business_license` | $0.001 | Chinese business license field extraction |
+| `baidu_ocr_webimage` | $0.001 | OCR for web images with complex backgrounds/watermarks |
+| `baidu_deepseek_ocr` | $0.001 | VLM-powered OCR for complex layouts requiring contextual understanding |
+| `baidu_paddleocr_vl` | $0.001 | PaddleOCR-VL for documents with tables, formulas, stamps |
+| `baidu_qianfan_ocr` | $0.001 | Custom template-based OCR via Qianfan platform |
+
+#### Speech (2 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_tts` | $0.001 | Text-to-speech — Chinese/English, 6 voice personas, MP3/WAV output |
+| `baidu_asr` | $0.001 | Speech-to-text — Chinese/English, word-level timestamps, WAV/MP3/PCM/AMR |
+
+#### LLM (3 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_llm_chat` | $0.002/1K | ERNIE LLM chat — conversational AI, Q&A, code generation (ernie-4.0-8k, ernie-3.5-8k, ernie-speed-128k) |
+| `baidu_deepthink` | $0.002/1K | ERNIE deep reasoning — multi-step proofs, logical analysis with thinking budget |
+| `baidu_vision_chat` | $0.002/1K | Vision-language chat — ask questions about images, scene description (ERNIE-VL) |
+
+#### Translation (1 tool)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_translate` | $0.001 | 28+ language translation with auto-detect |
+
+#### Vision (10 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_image_recognition` | $0.001 | General image recognition — objects, scenes, concepts with Baike entries |
+| `baidu_object_detect` | $0.001 | Multi-object detection with bounding boxes and per-category count |
+| `baidu_landmark` | $0.001 | Landmark/building identification with GPS coordinates |
+| `baidu_plant` | $0.001 | Plant species identification (20,000+ species) |
+| `baidu_animal` | $0.001 | Animal species identification (10,000+ species) |
+| `baidu_dish` | $0.001 | Dish/food recognition with calorie estimation |
+| `baidu_logo` | $0.001 | Brand logo detection and identification |
+| `baidu_car` | $0.001 | Vehicle make/model/year identification (3,000+ models) |
+| `baidu_ingredient` | $0.001 | Food ingredient/raw material identification |
+| `baidu_vehicle_detect` | $0.001 | Vehicle detection and counting — traffic/parking (car/truck/bus/motorcycle) |
+
+#### Face & Body (4 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_face_detect` | $0.001 | Face detection with 10+ attributes (age, gender, emotion, mask, glasses) |
+| `baidu_face_compare` | $0.001 | 1:1 face comparison — identity verification with similarity score 0-100 |
+| `baidu_body_analysis` | $0.001 | Body attribute analysis — gender, clothing color, orientation |
+| `baidu_gesture` | $0.001 | Hand gesture recognition — 20+ gesture types with keypoints |
+
+#### Image Processing & Generation (3 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_image_enhance` | $0.001 | Image quality enhancement — denoise, dehaze, contrast, clarity |
+| `baidu_image_gen` | $0.03 | Text-to-image generation — 4 styles (realistic/anime/sketch/oil_painting/3d) |
+| `baidu_image_edit` | $0.03 | Image editing via text instructions — add/remove/modify with optional mask |
+
+#### Video Generation (2 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_video_gen` | $0.08 | Text-to-video generation (async, use baidu_video_query to check status) |
+| `baidu_video_query` | $0.001 | Query async video generation task status and get download URL |
+
+#### NLP (6 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_nlp` | $0.001 | Chinese NLP — word segmentation, POS tagging, dependency parsing |
+| `baidu_sentiment` | $0.001 | Sentiment analysis — positive/negative/neutral with confidence scores |
+| `baidu_summary` | $0.001 | Text summarization — abstractive summary with configurable length |
+| `baidu_text_corrector` | $0.001 | Chinese text error correction — spelling, grammar, punctuation |
+| `baidu_keyword_extraction` | $0.001 | Keyword/phrase extraction with relevance ranking |
+| `baidu_word_embedding` | $0.001 | Word-level vector embedding (64/128/256/512 dimensions) |
+
+#### Embedding & Reranking (2 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_embedding` | $0.002/1K | Text embedding for semantic search/RAG (embedding-v1, BGE models, up to 16 texts/batch) |
+| `baidu_reranker` | $0.002/1K | Document reranking by query relevance — refine RAG retrieval (up to 100 docs) |
+
+#### Moderation (2 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_text_review` | $0.001 | Text content moderation — spam, abuse, profanity, policy violations (6 categories) |
+| `baidu_image_review` | $0.001 | Image content moderation — inappropriate/violent/policy-violating material |
+
+#### Science (1 tool)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `baidu_helixfold` | $0.001 | Protein 3D structure prediction from amino acid sequence (AlphaFold-inspired) |
+
+#### Account (2 tools)
+
+| Tool | Price | Description |
+|------|:-----:|-------------|
+| `register` | Free | Register GoldBean account — get API key + 100 free credits |
+| `check_credits` | Free | Check remaining credits, usage stats, and subscription status |
 | `GET /paid/baidu-video-query?task_id=...` | $0.001 | Query video generation task status |
 
 ### 💳 Subscription Plans
