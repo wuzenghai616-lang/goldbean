@@ -1,15 +1,23 @@
 {
-  "version": "9.8.0",
-  "npm": "1.0.0",
-  "tools": 51,
-  "description": "China AI Gateway — 51 Baidu AI MCP tools: OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day. PayPal, Alipay, x402 USDC.",
-  "pricing": "from $0.001/call",
-  "subscription_plans": [
-    "Starter $5",
-    "Monthly $9.9",
-    "Quarterly $25",
-    "Yearly $89"
-  ],
-  "free_tier": "50 calls/day per IP",
-  "registration_credits": 100
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.wuzenghai616-lang/goldbean",
+  "description": "51 Baidu AI MCP tools: OCR, Vision, LLM, Speech, NLP. Pay-per-call from $0.001.",
+  "title": "GoldBean MCP Server",
+  "repository": {
+    "url": "https://github.com/wuzenghai616-lang/goldbean",
+    "source": "github"
+  },
+  "version": "1.2.0",
+  "websiteUrl": "https://goldbean-api.xyz",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "goldbean-mcp",
+"version": "1.2.0",
+      "runtimeHint": "npx -y goldbean-mcp",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
 }
