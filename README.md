@@ -5,9 +5,12 @@
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![x402 Native](https://img.shields.io/badge/x402-Native%20on%20Base-blue)](https://x402.org)
 [![npm](https://img.shields.io/npm/v/goldbean-mcp?color=orange)](https://www.npmjs.com/package/goldbean-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/goldbean-mcp)](https://www.npmjs.com/package/goldbean-mcp)
 [![Glama Score](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean/badges/score.svg)](https://glama.ai/mcp/servers/wuzenghai616-lang/goldbean)
+[![GitHub stars](https://img.shields.io/github/stars/wuzenghai616-lang/goldbean)](https://github.com/wuzenghai616-lang/goldbean/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Free Tier](https://img.shields.io/badge/free%20tier-50%20calls%2Fday-brightgreen)](https://goldbean-api.xyz)
+[![RapidAPI](https://img.shields.io/badge/RapidAPI-Live-green)](https://rapidapi.com/wuzenghai616lang/api/goldbean-chinese-ai)
 
 **GoldBean** is the only Chinese AI multimodal API cluster in the x402 ecosystem. 53 production-ready endpoints powered by Baidu AI — OCR (19 types), image recognition (10 types), ERNIE LLM, TTS, ASR, NLP, translation, face detection, image/video generation, and search. All accessible via MCP protocol with pay-per-call pricing.
 
