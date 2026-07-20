@@ -1,23 +1,23 @@
 {
   "$schema": "https://glama.ai/schema/glama.json",
   "name": "GoldBean",
-  "description": "China AI Gateway — 51 Baidu AI MCP tools: OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day. PayPal, Alipay, x402 USDC.",
+  "description": "China AI Gateway — 53 Baidu AI MCP tools: OCR (19), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.01, 50 free calls/day. PayPal, Alipay, x402 USDC.",
   "version": "9.8.0",
-  "npm": "goldbean-mcp@1.0.0",
-  "tools": 51,
+  "npm": "goldbean-mcp@1.2.0",
+  "tools": 53,
   "pricing": {
-    "basic": "$0.001/call",
-    "llm": "$0.002/1K tokens",
-    "deepthink": "$0.003/call",
+    "basic": "$0.01/call",
+    "llm": "$0.03/1K tokens",
+    "deepthink": "$0.03/call",
     "image_gen": "$0.03/call",
     "video_gen": "$0.08/call",
     "free_tier": "50 calls/day per IP, no registration needed"
   },
   "subscription": {
-    "starter": "$5/500 calls",
-    "monthly": "$9.9/5000 calls",
-    "quarterly": "$25/20000 calls",
-    "yearly": "$89/100000 calls"
+    "starter": "$5/100 calls",
+    "monthly": "$29.9/unlimited",
+    "quarterly": "$69/unlimited",
+    "yearly": "$269/unlimited"
   },
   "categories": [
     "ai-and-machine-learning",

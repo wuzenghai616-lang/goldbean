@@ -1,6 +1,6 @@
 # 🫘 GoldBean — 53 Chinese AI Tools via x402 Micropayments
 
-> **53 Baidu AI endpoints (19 OCR types, ERNIE LLM, TTS, ASR, vision, NLP, translation, search) — pay per call from $0.003 in USDC on Base. No API keys, no signup, no subscription.**
+> **53 Baidu AI endpoints (19 OCR types, ERNIE LLM, TTS, ASR, vision, NLP, translation, search) — pay per call from $0.01 in USDC on Base. No API keys, no signup, no subscription.**
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Fgoldbean-api.xyz%2Fhealth&label=API%20Status)](https://goldbean-api.xyz/health)
 [![x402 Native](https://img.shields.io/badge/x402-Native%20on%20Base-blue)](https://x402.org)
@@ -20,7 +20,7 @@
 | Feature | Details |
 |---------|---------|
 | **53 AI Endpoints** | 19 OCR types, 10 image recognition, ERNIE LLM, TTS, ASR, NLP (6 types), translation (28+ languages), face/gesture/body detection, image/video generation, web search |
-| **x402 Native** | Pay $0.003–$0.08 per call with USDC on Base mainnet — 2-second settlement, no KYC |
+| **x402 Native** | Pay $0.01–$0.08 per call with USDC on Base mainnet — 2-second settlement, no KYC |
 | **No API Keys** | x402 payment replaces API keys. Free tier needs nothing — just call the endpoint |
 | **Free Tier** | 50 free API calls/day per IP + 100 credits on registration — no wallet needed |
 | **MCP Compatible** | Works with Cursor, Claude Desktop, Cline, Codex, Continue |
@@ -193,15 +193,15 @@ curl -X POST "https://goldbean-api.xyz/paid/user/register" \
 
 ## 💰 Pricing
 
-| Plan | Price | Calls | Per Call |
-|------|-------|-------|----------|
-| Free Tier | $0 | 50/day per IP | $0 |
-| Starter | $5 one-time | 500 calls | $0.01 |
-| Developer Monthly | $9.9/month | 5,000 calls | $0.002 |
-| Developer Quarterly | $25/quarter | 20,000 calls | $0.0013 |
-| Developer Yearly | $89/year | 100,000 calls | $0.0009 |
+| Plan | Price | Calls | Type |
+|------|-------|-------|------|
+| Free Tier | $0 | 50/day per IP | No wallet needed |
+| Starter | $5 one-time | 100 calls | Pay-per-call credit |
+| Monthly | $29.9/month | Unlimited | Subscription |
+| Quarterly | $69/quarter | Unlimited | Subscription |
+| Yearly | $269/year | Unlimited | Subscription |
 
-> Or pay per call without subscription — starting at **$0.003/call** in USDC on Base.
+> Or pay per call without subscription — from **$0.01/call** (OCR/vision/speech) to **$0.08/call** (video generation) in USDC on Base.
 
 **Payment methods:** x402 USDC (Base mainnet) | PayPal | Alipay
 
