@@ -274,6 +274,16 @@ npx goldbean-mcp
 
 ---
 
+## 🌐 Community / Related x402 Projects
+
+| Project | Description | Network |
+|---------|-------------|---------|
+| [JMT x402 Agent Tools](https://jmt-x402-proxy.jmthomasofficial.workers.dev) | 25 paid x402 endpoints: web search, AI analysis, crypto/stock data, SEC filings, company intel, news, sentiment, macro dashboard ($0.001-$0.15/call) | Base mainnet |
+
+> Built an x402-powered service? [Add it here](https://github.com/wuzenghai616-lang/goldbean/issues/new?labels=community&title=Add+my+x402+project) or submit a PR!
+
+---
+
 ## 📖 Documentation
 
 - **API Reference**: https://goldbean-api.xyz/openapi.json
