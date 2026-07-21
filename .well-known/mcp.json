@@ -15,12 +15,12 @@
     {
       "type": "mcp",
       "url": "https://goldbean-api.xyz/mcp",
-      "description": "MCP over HTTP (JSON-RPC 2.0) - primary"
+      "description": "Streamable HTTP transport (Smithery-compatible) — POST JSON-RPC 2.0; Accept: text/event-stream for SSE streaming"
     },
     {
       "type": "mcp",
       "url": "https://goldbean-api.xyz/sse",
-      "description": "MCP over HTTP+SSE - alternative"
+      "description": "SSE transport — GET for event stream, POST to /messages?sessionId=xxx for client messages"
     }
   ],
   "payment": {

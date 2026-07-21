@@ -1,6 +1,7 @@
 'use strict';
 
 const http = require('http');
+const crypto = require('crypto');
 const fs = require('fs');
 const url = require('url');
 
@@ -1044,6 +1045,401 @@ async function handleToolsCall(params, ctx) {
   };
 }
 
+// ========== SSE & Streamable HTTP Transport Layer ==========
+
+// SSE session store: sessionId -> { res, createdAt }
+var sseSessions = new Map();
+
+// Generate a unique session ID
+function generateSessionId() {
+  return crypto.randomBytes(16).toString('hex');
+}
+
+// Write an SSE event to a response stream
+function writeSSEEvent(res, eventType, data) {
+  res.write('event: ' + eventType + '\ndata: ' + JSON.stringify(data) + '\n\n');
+}
+
+// Clean up stale SSE sessions (older than 30 minutes)
+function cleanStaleSSESessions() {
+  var now = Date.now();
+  var staleThreshold = 30 * 60 * 1000; // 30 minutes
+  sseSessions.forEach(function (session, id) {
+    if (now - session.createdAt > staleThreshold) {
+      try { session.res.end(); } catch (e) { /* ignore */ }
+      sseSessions.delete(id);
+      console.log('[SSE] Cleaned stale session: ' + id);
+    }
+  });
+}
+
+// Run cleanup every 5 minutes
+setInterval(cleanStaleSSESessions, 5 * 60 * 1000);
+
+// Handle GET /sse — SSE transport: opens a long-lived event stream
+function handleSSEGet(req, res) {
+  var sessionId = generateSessionId();
+
+  // Set SSE headers
+  setCorsHeaders(res);
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'X-Accel-Buffering': 'no' // Prevent nginx buffering
+  });
+
+  // Store session
+  sseSessions.set(sessionId, { res: res, createdAt: Date.now() });
+
+  // Send initial endpoint event — tells the client where to POST messages
+  var messageEndpoint = PUBLIC_URL + '/messages?sessionId=' + sessionId;
+  writeSSEEvent(res, 'endpoint', messageEndpoint);
+
+  console.log('[SSE] New session: ' + sessionId + ' (total: ' + sseSessions.size + ')');
+
+  // Heartbeat to keep connection alive (every 15 seconds)
+  var heartbeatInterval = setInterval(function () {
+    try {
+      res.write(': heartbeat\n\n'); // SSE comment as keep-alive
+    } catch (e) {
+      clearInterval(heartbeatInterval);
+      sseSessions.delete(sessionId);
+    }
+  }, 15000);
+
+  // Clean up on close
+  req.on('close', function () {
+    clearInterval(heartbeatInterval);
+    sseSessions.delete(sessionId);
+    console.log('[SSE] Session closed: ' + sessionId + ' (remaining: ' + sseSessions.size + ')');
+  });
+
+  req.on('error', function (err) {
+    clearInterval(heartbeatInterval);
+    sseSessions.delete(sessionId);
+    console.error('[SSE] Session error: ' + sessionId + ' - ' + err.message);
+  });
+}
+
+// Handle POST /messages — SSE transport: client sends JSON-RPC messages here
+async function handleSSEPost(req, res) {
+  var query = parseQuery(req);
+  var sessionId = query.sessionId || '';
+  var clientIp = getClientIp(req);
+  var apiKey = extractApiKey(req, query);
+
+  if (!sessionId || !sseSessions.has(sessionId)) {
+    setCorsHeaders(res);
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Invalid or missing sessionId' }));
+    return;
+  }
+
+  // Read body
+  var body = '';
+  req.on('data', function (chunk) { body += chunk; });
+
+  req.on('end', async function () {
+    try {
+      var parsed = JSON.parse(body);
+      var rpcId = parsed.id !== undefined ? parsed.id : null;
+      var rpcMethod = parsed.method;
+      var params = parsed.params || {};
+
+      // Auth check
+      var isPublicMethod = (rpcMethod === 'tools/list' || rpcMethod === 'initialize' ||
+        (rpcMethod === 'tools/call' && params.name === 'register'));
+      var authz = isPublicMethod ? { ok: true, user: null, public: true } : checkAuth(apiKey, '', clientIp);
+
+      if (!authz.ok) {
+        // Send error back via SSE event + acknowledge POST
+        setCorsHeaders(res);
+        res.writeHead(202, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'accepted' }));
+
+        var session = sseSessions.get(sessionId);
+        if (session) {
+          writeSSEEvent(session.res, 'message', {
+            jsonrpc: '2.0',
+            id: rpcId,
+            error: { code: 401, message: authz.reason }
+          });
+        }
+        return;
+      }
+
+      var reqCtx = {
+        apiKey: apiKey,
+        profile: '',
+        clientIp: clientIp,
+        user: authz.user || null
+      };
+
+      var result;
+      switch (rpcMethod) {
+        case 'initialize':
+          result = handleInitialize(params);
+          break;
+        case 'tools/list':
+          result = handleToolsList();
+          break;
+        case 'tools/call':
+          if (!params.name) {
+            // Send error via SSE
+            setCorsHeaders(res);
+            res.writeHead(202, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ status: 'accepted' }));
+            var s = sseSessions.get(sessionId);
+            if (s) {
+              writeSSEEvent(s.res, 'message', {
+                jsonrpc: '2.0', id: rpcId,
+                error: { code: -32602, message: 'Invalid params: tool name is required' }
+              });
+            }
+            return;
+          }
+          try {
+            result = await handleToolsCall(params, reqCtx);
+          } catch (callErr) {
+            result = {
+              content: [{ type: 'text', text: 'Error: ' + (callErr.message || 'Tool execution failed') }],
+              isError: true
+            };
+          }
+          break;
+        case 'resources/list':
+          result = handleResourcesList();
+          break;
+        case 'prompts/list':
+          result = handlePromptsList();
+          break;
+        default:
+          // Send method not found via SSE
+          setCorsHeaders(res);
+          res.writeHead(202, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ status: 'accepted' }));
+          var ses = sseSessions.get(sessionId);
+          if (ses) {
+            writeSSEEvent(ses.res, 'message', {
+              jsonrpc: '2.0', id: rpcId,
+              error: { code: -32601, message: 'Method not found: ' + rpcMethod }
+            });
+          }
+          return;
+      }
+
+      // Acknowledge POST
+      setCorsHeaders(res);
+      res.writeHead(202, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'accepted' }));
+
+      // Push result via SSE event
+      var session = sseSessions.get(sessionId);
+      if (session) {
+        writeSSEEvent(session.res, 'message', {
+          jsonrpc: '2.0',
+          id: rpcId,
+          result: result
+        });
+      }
+
+    } catch (parseErr) {
+      setCorsHeaders(res);
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Parse error: ' + parseErr.message }));
+    }
+  });
+
+  req.on('error', function (err) {
+    setCorsHeaders(res);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Internal error: ' + err.message }));
+  });
+}
+
+// Handle POST /mcp — Streamable HTTP transport (Smithery-required format)
+// This is the primary endpoint for Streamable HTTP: single request/response,
+// but can also stream if client sends Accept: text/event-stream
+async function handleMCPPost(req, res) {
+  var clientIp = getClientIp(req);
+  var query = parseQuery(req);
+  var apiKey = extractApiKey(req, query);
+  var profile = query.profile || '';
+
+  // Check if client wants SSE streaming response
+  var acceptHeader = (req.headers['accept'] || '').toLowerCase();
+  var wantsSSE = acceptHeader.includes('text/event-stream');
+
+  // Read body
+  var body = '';
+  req.on('data', function (chunk) {
+    body += chunk;
+    if (body.length > 10 * 1024 * 1024) {
+      setCorsHeaders(res);
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Request body too large (max 10MB)' }));
+      req.destroy();
+    }
+  });
+
+  req.on('end', async function () {
+    try {
+      var parsed = JSON.parse(body);
+      var rpcId = parsed.id !== undefined ? parsed.id : null;
+      var rpcMethod = parsed.method;
+      var params = parsed.params || {};
+
+      if (!parsed.jsonrpc || parsed.jsonrpc !== '2.0') {
+        if (wantsSSE) {
+          setCorsHeaders(res);
+          res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+          writeSSEEvent(res, 'message', {
+            jsonrpc: '2.0', id: rpcId,
+            error: { code: -32600, message: 'Invalid Request: jsonrpc must be "2.0"' }
+          });
+          res.end();
+        } else {
+          sendJsonRpcError(res, rpcId, -32600, 'Invalid Request: jsonrpc must be "2.0"');
+        }
+        return;
+      }
+
+      if (!rpcMethod) {
+        if (wantsSSE) {
+          setCorsHeaders(res);
+          res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+          writeSSEEvent(res, 'message', {
+            jsonrpc: '2.0', id: rpcId,
+            error: { code: -32600, message: 'Invalid Request: method is required' }
+          });
+          res.end();
+        } else {
+          sendJsonRpcError(res, rpcId, -32600, 'Invalid Request: method is required');
+        }
+        return;
+      }
+
+      // Auth check
+      var isPublicMethod = (rpcMethod === 'tools/list' || rpcMethod === 'initialize' ||
+        (rpcMethod === 'tools/call' && params.name === 'register'));
+      var authz = isPublicMethod ? { ok: true, user: null, public: true } : checkAuth(apiKey, profile, clientIp);
+
+      if (!authz.ok) {
+        auditLog({
+          ts: new Date().toISOString(), event: 'auth_denied',
+          ip: clientIp, apiKey: apiKey, profile: profile, reason: authz.reason
+        });
+        if (wantsSSE) {
+          setCorsHeaders(res);
+          res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+          writeSSEEvent(res, 'message', {
+            jsonrpc: '2.0', id: rpcId,
+            error: { code: 401, message: authz.reason }
+          });
+          res.end();
+        } else {
+          setCorsHeaders(res);
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Unauthorized', message: authz.reason }));
+        }
+        return;
+      }
+
+      var reqCtx = {
+        apiKey: apiKey,
+        profile: profile,
+        clientIp: clientIp,
+        user: authz.user || null
+      };
+
+      var result;
+      switch (rpcMethod) {
+        case 'initialize':
+          result = handleInitialize(params);
+          break;
+        case 'tools/list':
+          result = handleToolsList();
+          break;
+        case 'tools/call':
+          if (!params.name) {
+            if (wantsSSE) {
+              setCorsHeaders(res);
+              res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+              writeSSEEvent(res, 'message', {
+                jsonrpc: '2.0', id: rpcId,
+                error: { code: -32602, message: 'Invalid params: tool name is required' }
+              });
+              res.end();
+            } else {
+              sendJsonRpcError(res, rpcId, -32602, 'Invalid params: tool name is required');
+            }
+            return;
+          }
+          try {
+            result = await handleToolsCall(params, reqCtx);
+          } catch (callErr) {
+            result = {
+              content: [{ type: 'text', text: 'Error: ' + (callErr.message || 'Tool execution failed') }],
+              isError: true
+            };
+          }
+          break;
+        case 'resources/list':
+          result = handleResourcesList();
+          break;
+        case 'prompts/list':
+          result = handlePromptsList();
+          break;
+        default:
+          if (wantsSSE) {
+            setCorsHeaders(res);
+            res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+            writeSSEEvent(res, 'message', {
+              jsonrpc: '2.0', id: rpcId,
+              error: { code: -32601, message: 'Method not found: ' + rpcMethod }
+            });
+            res.end();
+          } else {
+            sendJsonRpcError(res, rpcId, -32601, 'Method not found: ' + rpcMethod);
+          }
+          return;
+      }
+
+      // Return result — SSE streaming or plain JSON-RPC
+      if (wantsSSE) {
+        setCorsHeaders(res);
+        res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+        writeSSEEvent(res, 'message', {
+          jsonrpc: '2.0',
+          id: rpcId,
+          result: result
+        });
+        res.end();
+      } else {
+        sendJsonRpcResult(res, rpcId, result);
+      }
+
+    } catch (parseErr) {
+      if (wantsSSE) {
+        setCorsHeaders(res);
+        res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' });
+        writeSSEEvent(res, 'message', {
+          jsonrpc: '2.0', id: null,
+          error: { code: -32700, message: 'Parse error: ' + parseErr.message }
+        });
+        res.end();
+      } else {
+        sendJsonRpcError(res, null, -32700, 'Parse error: ' + parseErr.message);
+      }
+    }
+  });
+
+  req.on('error', function (err) {
+    sendJsonRpcError(res, null, -32603, 'Internal error: ' + err.message);
+  });
+}
+
 // ========== HTTP Server ==========
 
 var server = http.createServer(async function (req, res) {
@@ -1055,7 +1451,52 @@ var server = http.createServer(async function (req, res) {
     return;
   }
 
-  // GET: Health info
+  // Parse request path
+  var parsedUrl = url.parse(req.url || '', true);
+  var pathname = parsedUrl.pathname || '/';
+
+  // ---- SSE Transport: GET /sse ----
+  if (pathname === '/sse' && req.method === 'GET') {
+    handleSSEGet(req, res);
+    return;
+  }
+
+  // ---- SSE Transport: POST /messages ----
+  if (pathname === '/messages' && req.method === 'POST') {
+    handleSSEPost(req, res);
+    return;
+  }
+
+  // ---- Streamable HTTP Transport: POST /mcp ----
+  if (pathname === '/mcp' && req.method === 'POST') {
+    handleMCPPost(req, res);
+    return;
+  }
+
+  // ---- Streamable HTTP Transport: GET /mcp (server info) ----
+  if (pathname === '/mcp' && req.method === 'GET') {
+    var healthInfo = {
+      service: AGENT_HANDOFF.name,
+      version: VERSION,
+      status: 'running',
+      public_url: PUBLIC_URL,
+      tool_count: TOOLS.length,
+      categories: AGENT_HANDOFF.categories,
+      pricing_model: AGENT_HANDOFF.pricing_model,
+      free_tier: AGENT_HANDOFF.free_tier,
+      transport: {
+        streamable_http: { url: PUBLIC_URL + '/mcp', description: 'POST JSON-RPC 2.0; Accept: text/event-stream for SSE streaming' },
+        sse: { url: PUBLIC_URL + '/sse', description: 'GET for event stream; POST to /messages?sessionId=xxx' }
+      },
+      documentation: AGENT_HANDOFF.documentation
+    };
+    setCorsHeaders(res);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(healthInfo, null, 2));
+    return;
+  }
+
+  // ---- Root path: original JSON-RPC handler ----
   if (req.method === 'GET') {
     var healthInfo = {
       service: AGENT_HANDOFF.name,
