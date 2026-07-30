@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoldBean — Baidu AI APIs for Global Developers | Pay-per-Call</title>
+  <meta name="description" content="Access 56 Baidu AI APIs without a Chinese phone number or Baidu Cloud account. OCR (general, high-accuracy, table, handwriting), TTS, ASR, ERNIE LLM, translation, face comparison & liveness, gesture, object detection, landmark, plant/animal/dish/currency recognition, image colorize & style transfer, content moderation, NLP, HelixFold. Pay per call via PayPal, Alipay, or USDC.">
+  <meta property="og:title" content="GoldBean — Baidu AI APIs for Global Developers">
+  <meta property="og:description" content="56 Baidu AI endpoints. No Chinese phone number needed. Pay per call via PayPal / Alipay / USDC.">
+  <meta property="og:url" content="https://goldbean-api.xyz">
+  <link rel="canonical" href="https://goldbean-api.xyz">
+  <meta name="keywords" content="AI API, OCR API, TTS API, pay per use, x402, API marketplace, API marketplace, Web Search, Crypto API, Weather API, Baidu AI">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a16;color:#d0d0e8;line-height:1.6}
+    .container{max-width:960px;margin:0 auto;padding:40px 20px}
+
+    /* Hero */
+    .hero{text-align:center;padding:60px 20px 40px}
+    .hero h1{font-size:2.6em;color:#fff;margin-bottom:12px;font-weight:700}
+    .hero .sub{color:#8888cc;font-size:1.2em;margin-bottom:24px}
+    .hero .count{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:30px}
+    .hero .count span{background:#16162e;padding:10px 20px;border-radius:10px;border:1px solid #2a2a44}
+    .hero .count strong{display:block;font-size:1.6em;color:#a0a0ff}
+
+    /* Badge */
+    .badges{text-align:center;margin-bottom:30px}
+    .badge{display:inline-block;background:#1a1a33;padding:5px 14px;border-radius:20px;font-size:0.85em;margin:4px;color:#9999cc;border:1px solid #2a2a44}
+
+    /* Card */
+    .card{background:#12122a;border:1px solid #2a2a44;border-radius:14px;padding:28px;margin:20px 0}
+    .card h2{color:#b0b0ff;font-size:1.5em;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+    .card h2 .icon{font-size:1.3em}
+    .card p{margin-bottom:10px;color:#c0c0e0}
+
+    /* Buttons */
+    .btn{display:inline-block;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.2s;cursor:pointer;border:none;font-size:0.95em}
+    .btn-primary{background:#4040cc;color:#fff}
+    .btn-primary:hover{background:#5050ee}
+    .btn-ghost{background:transparent;border:1px solid #4040aa;color:#9090ff}
+    .btn-ghost:hover{background:#1a1a44}
+
+    /* Demo */
+    .demo-panel{background:#0e0e22;border-radius:10px;padding:20px;margin:10px 0}
+    .demo-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+    .demo-row label{color:#aaaadd;font-size:0.9em;min-width:80px}
+    .demo-row select,.demo-row input{padding:8px 12px;border-radius:6px;border:1px solid #333;background:#1a1a33;color:#ddd;font-size:0.95em;flex:1;min-width:150px}
+    .demo-row button{padding:10px 20px}
+    .demo-result{background:#08081a;padding:16px;border-radius:8px;font-family:'SF Mono','Fira Code',monospace;font-size:0.85em;white-space:pre-wrap;word-break:break-all;min-height:60px;border:1px solid #222;color:#b0b0d0}
+    .demo-result.loading{opacity:0.5}
+    .demo-result.error{color:#ff7777}
+
+    /* Code */
+    pre{background:#08081a;padding:18px;border-radius:10px;overflow-x:auto;font-size:0.85em;border:1px solid #1e1e35;line-height:1.5;position:relative}
+    code{font-family:'SF Mono','Fira Code',monospace}
+    .code-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .code-header .lang{color:#6666aa;font-size:0.8em;text-transform:uppercase;letter-spacing:1px}
+    .copy-btn{background:#222;border:1px solid #333;color:#aaa;padding:4px 12px;border-radius:4px;font-size:0.8em;cursor:pointer}
+    .copy-btn:hover{background:#333}
+
+    /* Pricing table */
+    table{width:100%;border-collapse:collapse;margin:10px 0}
+    th,td{text-align:left;padding:10px 14px;border-bottom:1px solid #1e1e35}
+    th{color:#8888bb;font-weight:600;font-size:0.85em;text-transform:uppercase}
+    td{color:#cccce0}
+    .price{color:#80d080;font-weight:600;text-align:right}
+    .free{color:#80d0d0;font-weight:600;text-align:right}
+
+    /* Tabs */
+    .tabs{display:flex;gap:4px;margin-bottom:16px}
+    .tab{padding:8px 18px;border-radius:6px 6px 0 0;cursor:pointer;background:#16162e;border:1px solid #2a2a44;border-bottom:none;color:#8888bb;font-size:0.9em;transition:all 0.2s}
+    .tab.active{background:#1a1a40;color:#d0d0ff;border-color:#4040aa}
+    .tab:hover{background:#1e1e3e}
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+
+    /* Steps */
+    .steps{list-style:none;counter-reset:step}
+    .steps li{counter-increment:step;padding:16px 16px 16px 48px;position:relative;margin-bottom:10px;background:#0e0e22;border-radius:8px;border:1px solid #1e1e35}
+    .steps li::before{content:counter(step);position:absolute;left:14px;top:14px;width:24px;height:24px;background:#4040cc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8em;font-weight:700;color:#fff}
+
+    /* x402 explain */
+    .flow-box{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:20px 0}
+    .flow-step{background:#0e0e22;border:1px solid #2a2a44;border-radius:10px;padding:16px 20px;text-align:center;min-width:130px;flex:1}
+    .flow-step .arrow{color:#4040aa;font-size:1.5em;display:block;margin-top:8px}
+    .flow-step strong{display:block;color:#a0a0ff;margin-bottom:4px}
+    .flow-step small{color:#8888bb;font-size:0.85em}
+
+    footer{text-align:center;padding:30px 0;color:#6666aa;font-size:0.9em;border-top:1px solid #1a1a30;margin-top:40px}
+    a{color:#8080ee;text-decoration:none}
+    a:hover{color:#a0a0ff}
+    .tag{margin:0}
+  </style>
+<meta property="og:image" content="https://goldbean-api.xyz/og-image.png">  <meta property="og:image:width" content="1200">  <meta property="og:image:height" content="630">  <meta property="og:image:alt" content="GoldBean — Pay-per-Use API Marketplace with 86 endpoints">  <meta property="og:type" content="website">  <meta property="og:site_name" content="GoldBean">  <meta name="twitter:card" content="summary_large_image">  <meta name="twitter:title" content="GoldBean — Baidu AI APIs for Global Developers">  <meta name="twitter:description" content="56 Baidu AI endpoints. No Chinese phone number needed. Pay per call.">  <meta name="twitter:image" content="https://goldbean-api.xyz/og-image.png">  <meta name="twitter:url" content="https://goldbean-api.xyz">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "GoldBean",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "url": "https://goldbean-api.xyz",
+  "description": "Access 56 Baidu AI APIs globally without a Chinese phone number. OCR, TTS, ASR, ERNIE LLM, translation, face detection, comparison & liveness, gesture, object detection, landmark, plant/animal/dish/currency recognition, image colorize, style transfer, selfie anime, dehaze, content moderation, NLP, HelixFold. Pay per call via PayPal, Alipay, or USDC.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0.01",
+    "priceCurrency": "USD"
+  },
+  "softwareVersion": "9.2.0"
+}</script>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>🫘 GoldBean</h1>
+  <p class="sub">Baidu AI APIs for Global Developers — No Chinese Phone Number Required</p>
+  <div class="count">
+    <span><strong>46</strong> Baidu AI APIs</span>
+    <span><strong>25</strong> Free Endpoints</span>
+    <span><strong>$0.01</strong> Starting at</span>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
+    <a href="#demo" class="btn btn-primary" style="font-size:1.1em;padding:14px 32px">⚡ Try Free Demo — No Sign-up</a>
+    <a href="/buy-credits.html" class="btn btn-ghost" style="font-size:1.1em;padding:14px 32px">Buy Credits</a>
+  </div>
+  <div style="background:#1a2a1a;border:1px solid #2a4a2a;border-radius:10px;padding:14px 20px;max-width:600px;margin:0 auto;text-align:center">
+    <span style="color:#80d080;font-size:1.1em">🎁 50 free API calls/day per IP — no signup needed! Register for 20 extra credits.</span>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+    <a href="#demo" class="btn btn-primary" style="font-size:1.15em;padding:14px 32px;background:#2a6a2a">⚡ Try Free Now — No Sign-up</a>
+    <a href="#quickstart" class="btn btn-ghost" style="font-size:1.15em;padding:14px 32px">📋 Quick Start</a>
+  </div>
+</div>
+
+<div class="badges">
+  <span class="badge">🤖 ERNIE LLM · OCR · TTS · ASR</span>
+  <span class="badge">🌱 Plant/Animal/Dish/Currency Recognition</span>
+  <span class="badge">🎨 Image Colorize · Style Transfer · Anime</span>
+  <span class="badge">🧠 NLP · Face Liveness · HelixFold</span>
+  <span class="badge">💳 PayPal · Alipay · USDC on Base</span>
+  <span class="badge">📦 MCP: <code>npx goldbean-mcp</code></span>
+</div>
+
+<!-- ===== LIVE DEMO ===== -->
+<div id="demo" class="card">
+  <h2><span class="icon">⚡</span> Live Demo — Try it Now</h2>
+  <p>Click a button below to call a real GoldBean API endpoint. No sign-up required!</p>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="demo-weather">🌤 Weather</div>
+    <div class="tab" data-tab="demo-btc">₿ BTC Price</div>
+    <div class="tab" data-tab="demo-gas">⛽ Gas Fee</div>
+  </div>
+
+  <div class="tab-content active" id="demo-weather">
+    <div class="demo-panel">
+      <div class="demo-row">
+        <label>City:</label>
+        <input type="text" id="weather-city" value="London" placeholder="e.g. Beijing, Tokyo, New York">
+        <button class="btn btn-primary" onclick="callDemo('weather')">Get Weather</button>
+      </div>
+      <div class="demo-result" id="result-weather">Click "Get Weather" to see live data</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="demo-btc">
+    <div class="demo-panel">
+      <div class="demo-row">
+        <button class="btn btn-primary" onclick="callDemo('btc')">Get BTC/USDT Price</button>
+      </div>
+      <div class="demo-result" id="result-btc">Click to see live price</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="demo-gas">
+    <div class="demo-panel">
+      <div class="demo-row">
+        <button class="btn btn-primary" onclick="callDemo('gas')">Get ETH Gas</button>
+      </div>
+      <div class="demo-result" id="result-gas">Click to see live gas fee</div>
+    </div>
+  </div>
+
+  <div class="demo-panel" style="margin-top:16px;border:2px solid #4040aa;background:#0a1a0a">
+    <div style="text-align:center;margin-bottom:12px">
+      <span style="color:#80d080;font-size:1.1em;font-weight:600">✅ Get 20 Extra Free Credits — No Credit Card, No Wallet</span>
+    </div>
+    <div class="demo-row">
+      <button class="btn btn-primary" style="width:100%" onclick="registerFree()">Get Free API Key Now</button>
+    </div>
+    <div class="demo-result" id="result-register" style="margin-top:8px">Click the button above to get 20 free credits instantly</div>
+  </div>
+
+  <div class="demo-panel" style="margin-top:16px;border:1px solid #4040aa">
+    <div class="demo-row">
+      <label style="color:#b0b0ff">💳 Try a Paid Endpoint</label>
+      <select id="paid-demo-select">
+        <option value="weather">Weather Now ($0.01)</option>
+        <option value="btc">BTC Price ($0.02)</option>
+        <option value="gas">ETH Gas ($0.01)</option>
+        <option value="crypto">Crypto Price ($0.01)</option>
+      </select>
+      <button class="btn btn-primary" onclick="callDemo('paid')">Pay &amp; Call ($0.01)</button>
+    </div>
+    <div class="demo-result" id="result-paid">50 free calls/day per IP (no signup). Register for 20 extra credits. <a href="/buy-credits.html"><strong>Buy credits from $1 →</strong></a> — PayPal, Alipay, or USDC on Base.</div>
+  </div>
+</div>
+
+
+<!-- ===== THE PROBLEM ===== -->
+<div class="card" style="border-color:#4040aa">
+  <h2><span class="icon">🌍</span> The Problem We Solve</h2>
+  <p style="font-size:1.05em;color:#c0c0e0">Baidu has world-class AI APIs — especially for <strong>Chinese language processing</strong> (OCR, NLP, ASR, TTS). But using them directly requires:</p>
+  <ul style="margin:12px 0 12px 20px;color:#a0a0c0">
+    <li>🇨🇳 A <strong>Chinese phone number</strong> for account registration</li>
+    <li>🪪 <strong>Chinese ID card</strong> for real-name verification</li>
+    <li>🏢 A <strong>Baidu Cloud account</strong> with payment setup</li>
+    <li>💰 Minimum monthly spend requirements</li>
+  </ul>
+  <p style="margin-top:12px;font-size:1.05em;color:#80d080"><strong>GoldBean removes that barrier.</strong> Same Baidu AI APIs, accessible globally with just PayPal, Alipay, or USDC. No Chinese ID, no Baidu account, no subscription.</p>
+</div>
+
+<!-- ===== BAIDU AI ENDPOINTS ===== -->
+<div class="card">
+  <h2><span class="icon">🤖</span> Baidu AI Endpoints — The Core</h2>
+  <p>These are the APIs you can't easily get outside China. Each one is powered by Baidu's production-grade AI models.</p>
+
+  <div class="feature-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0">
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>👁 Baidu OCR</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">General-purpose Chinese/English text extraction from images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ocr</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🔍 OCR High-Accuracy</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Enhanced OCR for complex layouts, low quality</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ocr-accurate</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📊 Table OCR</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Extract structured data from tables in images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ocr-table</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>✍ Handwriting OCR</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Recognize handwritten Chinese and English text</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ocr-handwrite</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🪪 ID Card Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Extract name, ID number, address from Chinese ID cards</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-idcard</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🚗 VIN Code OCR</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Extract Vehicle Identification Numbers from photos</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ocr-vin</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🔊 Text-to-Speech (TTS)</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Natural Chinese & multilingual voice synthesis</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-tts</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🎤 Speech Recognition (ASR)</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Audio-to-text with Baidu's industry-leading Chinese ASR</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-asr</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🧠 ERNIE LLM Chat</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Baidu's ERNIE 4.0 — strong at Chinese NLP, Q&A, summarization</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-llm-chat</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🌐 Baidu Translation</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">High-quality Chinese-centric translation (200+ languages)</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-translate</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🖼 Image Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Label and classify objects in images using Baidu vision AI</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-image-recognition</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>✨ Image Enhancement</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Upscale and enhance image quality with Baidu's deep learning</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-image-enhance</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>😀 Face Detection</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect faces, attributes, and landmarks</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-face-detect</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🔄 Face Comparison</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">1:1 face comparison for identity verification</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-face-compare</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>👁 Face Liveness Detection</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Anti-spoofing — detect if a face is real or a photo</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-face-liveness</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🧍 Body Analysis</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Human body detection, pose estimation, gesture recognition</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-body-analysis</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>✋ Gesture Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Recognize hand gestures from images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-gesture</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>👥 People Counting</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Count the number of people in a crowd or scene</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-body-count</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🤸 Body Keypoints</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect body skeleton keypoints for pose analysis</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-body-keypoints</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📦 Object Detection</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect and locate objects with bounding boxes</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-object-detect</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🏛 Landmark Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify famous landmarks and monuments</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-landmark</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🌱 Plant Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify plant species from photos</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-plant</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🐾 Animal Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify animal species from images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-animal</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🍜 Dish Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify dishes and cuisines from food photos</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-dish</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🥬 Ingredient Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify fruits, vegetables, and ingredients</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-ingredient</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>💵 Currency Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify banknote denominations and currencies</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-currency</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🚙 Car Type Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify vehicle make and model from photos</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-car-type</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🍷 Red Wine Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Identify wine labels and get wine details</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-redwine</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🏷 Brand Logo Recognition</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect and identify brand logos in images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-logo</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📝 Baidu NLP</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Sentiment analysis, keyword extraction, text classification</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-nlp</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>😊 Sentiment Analysis</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Classify text sentiment as positive/negative/neutral</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-sentiment</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📄 Text Summarization</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Auto-generate summaries from long articles</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-summary</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🔗 Word Embedding</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Generate word vector embeddings for NLP tasks</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-word-embedding</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>✏ Text Correction</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Auto-correct typos and errors in Chinese text</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-text-correction</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>💭 Comment Tag Extraction</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Extract opinion tags and sentiment from reviews</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-comment-tag</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>😊 Emotion Detection</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect emotional tone in text (happy, sad, angry, etc.)</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-emotion</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🏷 Keyword Extraction</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Auto-tag articles with relevant keywords</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-keyword</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📍 Address Parsing</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Parse Chinese addresses into structured components</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-address</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📐 Text Similarity</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Compute semantic similarity between two texts</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-text-similarity</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>📝 Text Content Moderation</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect profanity, spam, and inappropriate content in text</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-text-review</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🖼 Image Content Moderation</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Detect inappropriate content in images</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-image-review</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🎨 Image Colorization</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Turn black-and-white photos into color with AI</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-image-colorize</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🎭 Style Transfer</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Apply artistic styles to photos (Van Gogh, Monet, etc.)</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-style-trans</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>😙 Selfie Anime</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Transform portrait photos into anime-style avatars</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-selfie-anime</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🌫 Image Dehazing</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Remove haze and fog from photos for clearer results</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-dehaze</code>
+    </div>
+    <div class="feature-item" style="background:#0e0e22;padding:14px;border-radius:8px;border:1px solid #1e1e35">
+      <strong>🧬 HelixFold</strong>
+      <small style="display:block;color:#8888bb;margin:4px 0">Protein structure prediction with Baidu's PaddleHelix</small>
+      <code style="font-size:0.8em;color:#8080ee">GET /paid/baidu-helixfold</code>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUICK START ===== -->
+<div id="quickstart" class="card">
+  <h2><span class="icon">🚀</span> Quick Start — 30 Seconds</h2>
+
+  <div class="code-header">
+    <span class="lang">Free — No Auth Required</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+  </div>
+  <pre id="code-free"><code># Baidu OCR — extract text from Chinese image
+curl "https://goldbean-api.xyz/paid/baidu-ocr?url=https://example.com/chinese-text.png" \
+  -H "x-user-id: YOUR_API_KEY"
+
+# Get weather (free)
+curl "https://goldbean-api.xyz/weather-now?city=London"
+
+# BTC price (free)
+curl "https://goldbean-api.xyz/btc-price"
+
+# ETH gas (free)
+curl "https://goldbean-api.xyz/gas"</code></pre>
+
+  <div class="code-header" style="margin-top:20px">
+    <span class="lang">Paid — x402 Payment (one call = $0.01)</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+  </div>
+  <pre id="code-paid"><code># Step 1: Get x402 pricing quote
+curl -H "Accept: application/x402+json" \
+  "https://goldbean-api.xyz/paid/weather-now?city=Tokyo"
+
+# Step 2: Sign the 402 challenge with your wallet
+# (see x402 tutorial below)
+
+# Step 3: Call with signed payment
+curl -H "Authorization: x402 <signed-token>" \
+  "https://goldbean-api.xyz/paid/weather-now?city=Tokyo"</code></pre>
+
+  <div class="code-header" style="margin-top:20px">
+    <span class="lang">MCP — AI Agent Integration</span>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+  </div>
+  <pre id="code-mcp"><code># Add to your Claude Desktop / Cursor / Windsurf config:
+{
+  "mcpServers": {
+    "goldbean": {
+      "command": "npx",
+      "args": ["-y", "goldbean-mcp"]
+    }
+  }
+}
+
+# Or install globally:
+npm install -g goldbean-mcp</code></pre>
+</div>
+
+<!-- ===== PRICING ===== -->
+<div class="card">
+  <h2><span class="icon">💰</span> Pricing — Starting at $0.01</h2>
+  <p>No subscription. No monthly fees. Pay only for what you use.</p>
+  <table>
+    <tr><th>Category</th><th>Example APIs</th><th>Price</th></tr>
+    <tr><td>🧠 AI / LLM</td><td>ERNIE Chat, NLP, Sentiment, Summary, Translation</td><td class="price">$0.002/1K – $0.01/call</td></tr>
+    <tr><td>👁 Vision / OCR</td><td>OCR (General, High-Acc, Table, Handwriting, VIN), Face, Body</td><td class="price">$0.02/call</td></tr>
+    <tr><td>🎨 Image Processing</td><td>Colorize, Style Transfer, Selfie Anime, Dehaze</td><td class="price">$0.02/call</td></tr>
+    <tr><td>🌱 Recognition</td><td>Plant, Animal, Dish, Currency, Car, RedWine, Logo, Landmark</td><td class="price">$0.02/call</td></tr>
+    <tr><td>🎵 Voice</td><td>TTS (Text-to-Speech), ASR (Speech-to-Text)</td><td class="price">$0.02/call</td></tr>
+    <tr><td>🆓 Free</td><td>Health, Plans, x402 Bazaar, OpenAPI</td><td class="free">Free</td></tr>
+  </table>
+  <p style="margin-top:12px"><a href="/buy-credits.html" class="btn btn-primary" style="font-size:1.1em;padding:14px 28px">💳 Buy Credits — From $1 (PayPal / Alipay / USDC)</a></p>
+</div>
+
+<!-- ===== x402 HOW IT WORKS ===== -->
+<div id="x402" class="card">
+  <h2><span class="icon">🔐</span> How x402 Works</h2>
+  <p>x402 is a pay-per-request protocol for HTTP APIs. Instead of API keys or subscriptions, you pay per call using USDC on Base.</p>
+
+  <div class="flow-box">
+    <div class="flow-step">
+      <strong>1. Request</strong>
+      <small>Send request with Accept: application/x402+json</small>
+      <span class="arrow">→</span>
+    </div>
+    <div class="flow-step">
+      <strong>2. 402 Challenge</strong>
+      <small>Server returns price + payment instructions</small>
+      <span class="arrow">→</span>
+    </div>
+    <div class="flow-step">
+      <strong>3. Sign + Pay</strong>
+      <small>Sign USDC payment with your wallet</small>
+      <span class="arrow">→</span>
+    </div>
+    <div class="flow-step">
+      <strong>4. Response</strong>
+      <small>Get your API response!</small>
+    </div>
+  </div>
+
+  <p style="margin-top:16px"><strong>Quick x402 Signing Tutorial:</strong></p>
+  <ol class="steps">
+    <li>
+      <strong>Install a wallet</strong>
+      <br><span style="color:#8888bb">Use <a href="https://metamask.io">MetaMask</a> or any EVM wallet on Base network. Get USDC on Base.</span>
+    </li>
+    <li>
+      <strong>Make an x402 request</strong>
+      <pre style="margin-top:8px"><code>curl -v -H "Accept: application/x402+json" \
+  "https://goldbean-api.xyz/paid/weather-now?city=Tokyo"</code></pre>
+    </li>
+    <li>
+      <strong>Sign the challenge</strong>
+      <br><span style="color:#8888bb">The server returns a <code>402 Payment Required</code> with a <code>X-402-Payment</code> header containing the payment URL. Use your wallet to sign the transaction.</span>
+      <pre style="margin-top:8px"><code># Example response header:
+# X-402-Payment: https://goldbean-api.xyz/x402/pay/0x1234...
+# 
+# Send USDC to the contract address returned
+# Include the signed transaction hash as Bearer token</code></pre>
+    </li>
+    <li>
+      <strong>Get your data</strong>
+      <pre style="margin-top:8px"><code>curl -H "Authorization: Bearer &lt;signed-tx-hash&gt;" \
+  "https://goldbean-api.xyz/paid/weather-now?city=Tokyo"</code></pre>
+    </li>
+  </ol>
+</div>
+
+<!-- ===== RESOURCES ===== -->
+<div class="card">
+  <h2><span class="icon">📚</span> Resources</h2>
+  <table>
+    <tr><td>📦 MCP Server</td><td><code>npx goldbean-mcp</code></td></tr>
+    <tr><td>📖 OpenAPI Spec</td><td><a href="/openapi.json">/openapi.json</a></td></tr>
+    <tr><td>🛒 Pricing Plans</td><td><a href="/paid/plans">/paid/plans</a></td></tr>
+    <tr><td>🔗 x402 Bazaar</td><td><a href="/.well-known/x402-bazaar">/.well-known/x402-bazaar</a></td></tr>
+    <tr><td>💻 GitHub</td><td><a href="https://github.com/wuzenghai616-lang/goldbean">github.com/wuzenghai616-lang/goldbean</a></td></tr>
+    <tr><td>📝 Dev.to</td><td><a href="https://dev.to/goldbean">dev.to/goldbean</a></td></tr>
+    <tr><td>🏪 MCP Registry</td><td><code>xyz.goldbean-api/goldbean-mcp</code></td></tr>
+  </table>
+</div>
+
+<footer>
+  <p>GoldBean API Service &middot; goldbean-api.xyz</p>
+  <p>Pay-per-Use APIs for AI Agents and Developers</p>
+  <p>Wishing You Good Fortune & Prosperity 🫘</p>
+</footer>
+
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Demo: Free endpoints
+async function callDemo(type) {
+  const resultEl = document.getElementById('result-' + type);
+  resultEl.textContent = 'Loading...';
+  resultEl.className = 'demo-result loading';
+
+  try {
+    let url;
+    if (type === 'weather') {
+      const city = document.getElementById('weather-city').value || 'London';
+      url = 'https://goldbean-api.xyz/weather-now?city=' + encodeURIComponent(city);
+    } else if (type === 'btc') {
+      url = 'https://goldbean-api.xyz/btc-price';
+    } else if (type === 'gas') {
+      url = 'https://goldbean-api.xyz/gas';
+    } else if (type === 'paid') {
+      // paid demo shows simulated x402 flow
+      const sel = document.getElementById('paid-demo-select');
+      const val = sel.options[sel.selectedIndex].value;
+      url = 'https://goldbean-api.xyz/paid/' + val + '?city=Tokyo';
+    }
+
+    const resp = await fetch(url);
+    const text = await resp.text();
+    resultEl.textContent = text;
+    resultEl.className = 'demo-result';
+
+    if (resp.status === 402 || resp.status === 403) {
+      resultEl.className = 'demo-result';
+      // It's a 402 - that's expected for paid demo
+      resultEl.textContent = '✅ Server responded with 402 (Payment Required) — this is expected! This shows x402 is working.\n\nHeaders:\n' +
+        Array.from(resp.headers.entries()).map(([k,v]) => k + ': ' + v).join('\n') +
+        '\n\nBody:\n' + text;
+    }
+  } catch (err) {
+    resultEl.className = 'demo-result error';
+    resultEl.textContent = 'Error: ' + err.message;
+  }
+}
+
+// Register for free credits
+async function registerFree() {
+  const el = document.getElementById('result-register');
+  el.textContent = 'Registering...';
+  el.className = 'demo-result loading';
+  try {
+    const resp = await fetch('https://goldbean-api.xyz/paid/user/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: 'free-trial@goldbean-api.xyz'})
+    });
+    const data = await resp.json();
+    if (data.success) {
+      el.className = 'demo-result';
+      el.innerHTML = '<span style="color:#80d080">✅ Success!</span>\n\nYour API Key: <code style="color:#a0a0ff;font-size:1.1em">' + data.apiKey + '</code>\n\nFree credits: ' + data.freeCredits + '\n\nUse this key as <code>x-user-id</code> header in your API calls.';
+    } else {
+      el.className = 'demo-result error';
+      el.textContent = 'Error: ' + JSON.stringify(data);
+    }
+  } catch(err) {
+    el.className = 'demo-result error';
+    el.textContent = 'Error: ' + err.message;
+  }
+}
+
+// Copy code
+function copyCode(btn) {
+  const pre = btn.parentElement.nextElementSibling;
+  if (!pre) return;
+  const text = pre.textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

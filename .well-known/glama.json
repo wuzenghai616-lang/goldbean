@@ -1,0 +1,87 @@
+{
+  "": "https://schema.glama.ai/mcp/connector-1.json",
+  "name": "GoldBean",
+  "description": "x402 Micropaid MCP Server - 16 paid AI tools: Baidu OCR, TTS, ASR, NLP, LLM Chat, HelixFold3, Face/Body/Image AI. Pay per call via x402 (USDC on Base), PayPal, or Alipay.",
+  "serverUrl": "https://goldbean-api.xyz/sse",
+  "homepage": "https://goldbean-api.xyz",
+  "github": "https://github.com/wuzenghai616-lang/goldbean",
+  "tags": [
+    "x402",
+    "micropayments",
+    "baidu-ai",
+    "ocr",
+    "tts",
+    "asr",
+    "nlp",
+    "protein-folding",
+    "ai",
+    "blockchain",
+    "api-marketplace"
+  ],
+  "tools": [
+    {
+      "name": "baidu_ocr",
+      "description": "Chinese OCR - recognize text from images via Baidu AI"
+    },
+    {
+      "name": "baidu_ocr_accurate",
+      "description": "High-accuracy Chinese OCR via Baidu AI"
+    },
+    {
+      "name": "baidu_idcard",
+      "description": "ID card recognition (Chinese national ID)"
+    },
+    {
+      "name": "baidu_tts",
+      "description": "Text-to-speech in Chinese via Baidu AI"
+    },
+    {
+      "name": "baidu_translate",
+      "description": "Translate text between languages via Baidu AI"
+    },
+    {
+      "name": "baidu_llm_chat",
+      "description": "AI chat completion via Baidu ERNIE LLM"
+    },
+    {
+      "name": "baidu_asr",
+      "description": "Automatic speech recognition (Chinese) via Baidu AI"
+    },
+    {
+      "name": "baidu_image_recognition",
+      "description": "General image recognition and classification"
+    },
+    {
+      "name": "baidu_image_enhance",
+      "description": "Image quality enhancement and super-resolution"
+    },
+    {
+      "name": "baidu_face_detect",
+      "description": "Face detection and attribute analysis"
+    },
+    {
+      "name": "baidu_body_analysis",
+      "description": "Human body detection and keypoint analysis"
+    },
+    {
+      "name": "baidu_nlp",
+      "description": "Chinese NLP: word segmentation, sentiment, entity recognition"
+    },
+    {
+      "name": "baidu_helixfold",
+      "description": "Protein structure prediction via PaddleHelix HelixFold3"
+    },
+    {
+      "name": "paypal_create_order",
+      "description": "Create a PayPal payment order"
+    },
+    {
+      "name": "paypal_capture",
+      "description": "Capture a completed PayPal payment"
+    },
+    {
+      "name": "user_register",
+      "description": "Register a new user account"
+    }
+  ]
+}

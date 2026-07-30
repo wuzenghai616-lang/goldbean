@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "server": {
+    "name": "GoldBean MCP",
+    "version": "8.0.0",
+    "transport": "sse",
+    "endpoint": "/sse",
+    "baseUrl": "https://goldbean-api.xyz"
+  },
+  "capabilities": {
+    "tools": {}
+  }
+}

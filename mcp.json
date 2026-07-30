@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "name": "GoldBean",
+  "description": "China AI Gateway — 51 Baidu AI MCP tools: OCR (12), Vision (10), LLM (3), Speech (2), NLP (6), Image Gen (2), Video Gen (2), Translation, Embedding, Moderation, Protein Folding. Pay-per-call from $0.001, 50 free calls/day. PayPal, Alipay, x402 USDC.",
+  "homepage": "https://goldbean-api.xyz",
+  "repository": "https://github.com/wuzenghai616-lang/goldbean",
+  "license": "MIT",
+  "version": "9.8.0",
+  "author": {
+    "name": "GoldBean",
+    "url": "https://goldbean-api.xyz",
+    "email": "wuzenghai616@gmail.com"
+  },
+  "endpoints": [
+    {
+      "type": "mcp",
+      "url": "https://goldbean-api.xyz/sse",
+      "description": "Direct MCP over HTTP+SSE (primary)"
+    },
+    {
+      "type": "mcp",
+      "url": "https://mcp.smithery.run/wuzenghai616",
+      "description": "Smithery MCP Gateway (alternative)"
+    }
+  ],
+  "payment": {
+    "type": "x402",
+    "network": "eip155:8453",
+    "chain": "base-mainnet",
+    "currency": "USDC",
+    "contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "wallet": "0x7484b0bca25d2ee56e9b0535572d4cf44a047d98",
+    "pricing": "pay-per-call",
+    "min_amount_usd": 0.001,
+    "max_amount_usd": 0.08,
+    "free_tier": "50 calls/day per IP"
+  },
+  "capabilities": {
+    "tools": [
+      "baidu_ocr",
+      "baidu_ocr_accurate",
+      "baidu_ocr_table",
+      "baidu_ocr_idcard",
+      "baidu_ocr_handwriting",
+      "baidu_ocr_qrcode",
+      "baidu_ocr_bankcard",
+      "baidu_ocr_business_license",
+      "baidu_ocr_webimage",
+      "baidu_deepseek_ocr",
+      "baidu_paddleocr_vl",
+      "baidu_qianfan_ocr",
+      "baidu_tts",
+      "baidu_asr",
+      "baidu_llm_chat",
+      "baidu_deepthink",
+      "baidu_vision_chat",
+      "baidu_translate",
+      "baidu_image_recognition",
+      "baidu_object_detect",
+      "baidu_landmark",
+      "baidu_plant",
+      "baidu_animal",
+      "baidu_dish",
+      "baidu_logo",
+      "baidu_car",
+      "baidu_ingredient",
+      "baidu_vehicle_detect",
+      "baidu_face_detect",
+      "baidu_face_compare",
+      "baidu_body_analysis",
+      "baidu_gesture",
+      "baidu_image_enhance",
+      "baidu_image_gen",
+      "baidu_image_edit",
+      "baidu_video_gen",
+      "baidu_video_query",
+      "baidu_nlp",
+      "baidu_sentiment",
+      "baidu_summary",
+      "baidu_text_corrector",
+      "baidu_keyword_extraction",
+      "baidu_word_embedding",
+      "baidu_embedding",
+      "baidu_reranker",
+      "baidu_text_review",
+      "baidu_image_review",
+      "baidu_helixfold",
+      "register",
+      "check_credits"
+    ],
+    "resources": [
+      "openapi.json",
+      "pricing-plans"
+    ]
+  },
+  "discovery": {
+    "openapi": "https://goldbean-api.xyz/openapi.json",
+    "x402": "https://goldbean-api.xyz/.well-known/x402.json",
+    "bazaar": "https://goldbean-api.xyz/.well-known/x402-bazaar"
+  }
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><link rel="icon" href="/favicon.ico" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldBean (GB) Bazaar</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 0 20px}
+.logo{font-size:48px;margin-bottom:8px}
+h1{font-size:32px;font-weight:700;color:#facc15}
+.subtitle{color:#94a3b8;font-size:14px;margin-top:4px}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;margin:2px}
+.badge-green{background:#166534;color:#bbf7d0}
+.badge-blue{background:#1e3a5f;color:#93c5fd}
+.badge-purple{background:#4c1d95;color:#c4b5fd}
+.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0 24px}
+.stat-card{background:#1e293b;border-radius:12px;padding:12px 20px;text-align:center;min-width:100px;border:1px solid #334155}
+.stat-number{font-size:24px;font-weight:700;color:#facc15}
+.stat-label{font-size:11px;color:#94a3b8;margin-top:2px}
+.category{margin-bottom:20px;background:#1e293b;border-radius:12px;overflow:hidden;border:1px solid #334155}
+.category-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#334155}
+.category-header:hover{background:#3b4a5f}
+.category-name{font-size:15px;font-weight:600;color:#e2e8f0}
+.category-count{font-size:12px;color:#94a3b8;background:#1e293b;padding:2px 8px;border-radius:999px}
+.category-body{padding:8px}
+.endpoint-row{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;font-size:13px;border-radius:6px}
+.endpoint-row:nth-child(odd){background:#1a2332}
+.endpoint-row:hover{background:#2d3a4d}
+.endpoint-path{font-family:'Courier New',monospace;color:#93c5fd}
+.endpoint-price{color:#facc15;font-weight:600;font-size:12px}
+.endpoint-desc{color:#94a3b8;font-size:12px;flex:1;margin:0 10px}
+.price-range{font-size:11px;color:#94a3b8}
+.network-info{text-align:center;font-size:12px;color:#64748b;padding:20px 0;border-top:1px solid #334155;margin-top:20px}
+.network-info a{color:#93c5fd}
+@media(max-width:600px){.endpoint-row{flex-wrap:wrap;gap:2px}.endpoint-desc{margin:0 0 0 10px;width:100%}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="logo">🫘</div>
+<h1>GoldBean · x402 Bazaar</h1>
+<p class="subtitle">Micropaid API Marketplace on Base | v7.6.0</p>
+</header>
+
+<div class="stats">
+<div class="stat-card"><div class="stat-number">120</div><div class="stat-label">Paid Endpoints</div></div>
+<div class="stat-card"><div class="stat-number">9</div><div class="stat-label">Free Endpoints</div></div>
+<div class="stat-card"><div class="stat-number">$0.01–$0.08</div><div class="stat-label">Price Range</div></div>
+<div class="stat-card"><div class="stat-number">11</div><div class="stat-label">Categories</div></div>
+</div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">1. AI LLM & Multimodal</span><span class="category-count">12 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/llm-chat</span><span class="endpoint-desc">大模型对话生成</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/llm-embed</span><span class="endpoint-desc">文本向量嵌入检索</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/llm-summary</span><span class="endpoint-desc">长文摘要报告生成</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/llm-translate</span><span class="endpoint-desc">多语种互译</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/llm-code</span><span class="endpoint-desc">代码生成/解释/调试</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/image-gen</span><span class="endpoint-desc">AI图片生成</span><span class="endpoint-price">$0.05</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/image-analyze</span><span class="endpoint-desc">图片OCR/内容识别</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/image-upscale</span><span class="endpoint-desc">图片高清放大修复</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/voice-2-text</span><span class="endpoint-desc">语音转文字</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/text-2-voice</span><span class="endpoint-desc">文字转语音</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/video-gen</span><span class="endpoint-desc">AI短视频生成</span><span class="endpoint-price">$0.08</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/video-analyze</span><span class="endpoint-desc">视频内容分析字幕</span><span class="endpoint-price">$0.06</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">2. Web Search & Data</span><span class="category-count">6 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/web-search</span><span class="endpoint-desc">全网综合搜索</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/web-crawl</span><span class="endpoint-desc">网页深度爬取</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/news-crypto</span><span class="endpoint-desc">加密货币新闻</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/news-global</span><span class="endpoint-desc">全球新闻聚合</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/arxiv-search</span><span class="endpoint-desc">学术论文检索</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/wikipedia</span><span class="endpoint-desc">维基百科查询</span><span class="endpoint-price">$0.01</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">3. Finance & Market</span><span class="category-count">7 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/stock-price</span><span class="endpoint-desc">全球股票实时价格</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/forex-rate</span><span class="endpoint-desc">外汇汇率</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/crypto-price</span><span class="endpoint-desc">加密货币行情</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/crypto-history</span><span class="endpoint-desc">加密货币K线</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/commodity-price</span><span class="endpoint-desc">大宗商品价格</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/index-price</span><span class="endpoint-desc">全球股指</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/fund-nav</span><span class="endpoint-desc">基金净值</span><span class="endpoint-price">$0.02</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">4. Social & Sentiment</span><span class="category-count">8 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-twitter</span><span class="endpoint-desc">X/Twitter舆情</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-discord</span><span class="endpoint-desc">Discord消息</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-telegram</span><span class="endpoint-desc">Telegram群组</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-weibo</span><span class="endpoint-desc">微博热搜舆情</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-wechat</span><span class="endpoint-desc">公众号内容</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-instagram</span><span class="endpoint-desc">Instagram帖子</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/social-tiktok</span><span class="endpoint-desc">TikTok视频热度</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/sentiment</span><span class="endpoint-desc">文本情感分析</span><span class="endpoint-price">$0.02</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">5. Ecommerce & Life</span><span class="category-count">7 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/ecomm-product</span><span class="endpoint-desc">商品信息价格</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/ecomm-review</span><span class="endpoint-desc">商品评论分析</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/ecomm-search</span><span class="endpoint-desc">电商商品搜索</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/express-trace</span><span class="endpoint-desc">快递物流轨迹</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/air-ticket</span><span class="endpoint-desc">机票查询比价</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/hotel-search</span><span class="endpoint-desc">酒店查询价格</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/food-delivery</span><span class="endpoint-desc">外卖商家菜单</span><span class="endpoint-price">$0.02</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">6. Map & Weather</span><span class="category-count">7 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/map-geocode</span><span class="endpoint-desc">地址经纬度互转</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/map-reverse</span><span class="endpoint-desc">经纬度转地址</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/map-route</span><span class="endpoint-desc">路径规划距离</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/map-poi</span><span class="endpoint-desc">周边POI查询</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/weather-now</span><span class="endpoint-desc">实时天气预警</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/weather-forecast</span><span class="endpoint-desc">7天天气预报</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/weather-history</span><span class="endpoint-desc">历史天气查询</span><span class="endpoint-price">$0.02</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">7. Office & Document</span><span class="category-count">7 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-pdf-parse</span><span class="endpoint-desc">PDF解析转文本</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-pdf-merge</span><span class="endpoint-desc">PDF合并拆分</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-excel</span><span class="endpoint-desc">Excel数据计算</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-word</span><span class="endpoint-desc">Word文档解析</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-ocr</span><span class="endpoint-desc">图片文字识别</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/office-barcode</span><span class="endpoint-desc">条码二维码识别</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/email-verify</span><span class="endpoint-desc">邮箱验证</span><span class="endpoint-price">$0.01</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">8. Security & Compliance</span><span class="category-count">7 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/kyc-check</span><span class="endpoint-desc">身份人脸核验</span><span class="endpoint-price">$0.05</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/aml-screen</span><span class="endpoint-desc">反洗钱筛查</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/address-risk</span><span class="endpoint-desc">链上地址风险</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/token-risk</span><span class="endpoint-desc">代币合约安全</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/phish-check</span><span class="endpoint-desc">钓鱼链接检测</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/virus-scan</span><span class="endpoint-desc">文件病毒扫描</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/captcha-solve</span><span class="endpoint-desc">验证码识别</span><span class="endpoint-price">$0.04</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">9. Web3 & Onchain</span><span class="category-count">10 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/block-latest</span><span class="endpoint-desc">最新区块高度</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/block-detail</span><span class="endpoint-desc">区块详情查询</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/tx-detail</span><span class="endpoint-desc">交易明细查询</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/address-balance</span><span class="endpoint-desc">多链余额查询</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/address-txs</span><span class="endpoint-desc">地址历史交易</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/nonce</span><span class="endpoint-desc">钱包交易nonce</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/defi-swap-quote</span><span class="endpoint-desc">Dex最优报价</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/nft-floor</span><span class="endpoint-desc">NFT地板价查询</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/ens-resolve</span><span class="endpoint-desc">ENS域名解析</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/did-resolve</span><span class="endpoint-desc">DID身份解析</span><span class="endpoint-price">$0.02</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">10. Gaming, Metaverse & Entertainment</span><span class="category-count">5 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/game-nft-item</span><span class="endpoint-desc">链游NFT道具</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/game-wallet</span><span class="endpoint-desc">游戏钱包资产</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/metaverse-land</span><span class="endpoint-desc">元宇宙土地数据</span><span class="endpoint-price">$0.04</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/music-search</span><span class="endpoint-desc">音乐搜索歌词</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/music-recognize</span><span class="endpoint-desc">听歌识曲</span><span class="endpoint-price">$0.03</span></div>
+</div></div>
+
+<div class="category">
+<div class="category-header"><span class="category-name">11. System & Tools</span><span class="category-count">6 endpoints</span></div>
+<div class="category-body">
+<div class="endpoint-row"><span class="endpoint-path">/paid/github-search</span><span class="endpoint-desc">GitHub代码搜索</span><span class="endpoint-price">$0.02</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/github-repo</span><span class="endpoint-desc">仓库详情查询</span><span class="endpoint-price">$0.03</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/ip-locate</span><span class="endpoint-desc">IP地址定位</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/domain-whois</span><span class="endpoint-desc">域名WHOIS查询</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/url-shorten</span><span class="endpoint-desc">短链接生成</span><span class="endpoint-price">$0.01</span></div>
+<div class="endpoint-row"><span class="endpoint-path">/paid/qrcode-gen</span><span class="endpoint-desc">二维码生成</span><span class="endpoint-price">$0.01</span></div>
+</div></div>
+
+<div class="network-info">
+<p>Network: Base <code>eip155:8453</code> | Wallet: <code>0x7484b0bca25d2ee56e9b0535572d4cf44a047d98</code></p>
+<p>API Gateway: <a href="https://goldbean-api.xyz">https://goldbean-api.xyz</a> | Health: <a href="/health">/health</a></p>
+<p>Powered by GoldBean (GB) v7.6.0 · x402 Protocol</p>
+</div>
+</div>
+<script>
+document.querySelectorAll('.category-header').forEach(function(h){h.addEventListener('click',function(){var b=this.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none'})});
+// Start collapsed for cleaner view
+document.querySelectorAll('.category-body').forEach(function(b,i){if(i>0)b.style.display='none'});
+</script>
+</body>
+</html>

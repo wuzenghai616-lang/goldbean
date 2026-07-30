@@ -1,0 +1,2098 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GoldBean API Paid Tools",
+    "version": "7.9.5",
+    "description": "x402 Pay-per-call API marketplace. Baidu OCR, NLP, TTS, LLM, Image Gen, Search and more.",
+    "contact": {
+      "url": "https://goldbean-api.xyz"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://goldbean-api.xyz"
+    }
+  ],
+  "paths": {
+    "/paid/user/register": {
+      "post": {
+        "summary": "Register",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-ocr": {
+      "get": {
+        "summary": "Baidu Ocr",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-ocr-accurate": {
+      "get": {
+        "summary": "Baidu Ocr Accurate",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-idcard": {
+      "get": {
+        "summary": "Baidu Idcard",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-tts": {
+      "get": {
+        "summary": "Baidu Tts",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-translate": {
+      "get": {
+        "summary": "Baidu Translate",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-llm-chat": {
+      "get": {
+        "summary": "Baidu Llm Chat",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-asr": {
+      "get": {
+        "summary": "Baidu Asr",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-image-recognition": {
+      "get": {
+        "summary": "Baidu Image Recognition",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-image-enhance": {
+      "get": {
+        "summary": "Baidu Image Enhance",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-face-detect": {
+      "get": {
+        "summary": "Baidu Face Detect",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-body-analysis": {
+      "get": {
+        "summary": "Baidu Body Analysis",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-nlp": {
+      "get": {
+        "summary": "Baidu Nlp",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/baidu-helixfold": {
+      "get": {
+        "summary": "Baidu Helixfold",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/paypal/create-order": {
+      "post": {
+        "summary": "Create Order",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/paypal/capture": {
+      "post": {
+        "summary": "Capture",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/llm-chat": {
+      "get": {
+        "summary": "Llm Chat",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/llm-embed": {
+      "get": {
+        "summary": "Llm Embed",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/llm-stream": {
+      "get": {
+        "summary": "Llm Stream",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/llm-complete": {
+      "get": {
+        "summary": "Llm Complete",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/image-gen": {
+      "get": {
+        "summary": "Image Gen",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/image-edit": {
+      "get": {
+        "summary": "Image Edit",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/image-variation": {
+      "get": {
+        "summary": "Image Variation",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/video-gen": {
+      "get": {
+        "summary": "Video Gen",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/video-edit": {
+      "get": {
+        "summary": "Video Edit",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/audio-transcribe": {
+      "get": {
+        "summary": "Audio Transcribe",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/audio-translate": {
+      "get": {
+        "summary": "Audio Translate",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/audio-tts": {
+      "get": {
+        "summary": "Audio Tts",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ocr-general": {
+      "get": {
+        "summary": "Ocr General",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ocr-accurate": {
+      "get": {
+        "summary": "Ocr Accurate",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ocr-table": {
+      "get": {
+        "summary": "Ocr Table",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ocr-form": {
+      "get": {
+        "summary": "Ocr Form",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/translate-text": {
+      "get": {
+        "summary": "Translate Text",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/translate-detect": {
+      "get": {
+        "summary": "Translate Detect",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/nsfw-check": {
+      "get": {
+        "summary": "Nsfw Check",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/content-moderation": {
+      "get": {
+        "summary": "Content Moderation",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/face-detect": {
+      "get": {
+        "summary": "Face Detect",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/face-compare": {
+      "get": {
+        "summary": "Face Compare",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/face-search": {
+      "get": {
+        "summary": "Face Search",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/object-detect": {
+      "get": {
+        "summary": "Object Detect",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/object-segment": {
+      "get": {
+        "summary": "Object Segment",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/speech-recog": {
+      "get": {
+        "summary": "Speech Recog",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/speech-synth": {
+      "get": {
+        "summary": "Speech Synth",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/doc-analysis": {
+      "get": {
+        "summary": "Doc Analysis",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/doc-summary": {
+      "get": {
+        "summary": "Doc Summary",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/doc-qa": {
+      "get": {
+        "summary": "Doc Qa",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/code-gen": {
+      "get": {
+        "summary": "Code Gen",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/code-review": {
+      "get": {
+        "summary": "Code Review",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/code-explain": {
+      "get": {
+        "summary": "Code Explain",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/search-web": {
+      "get": {
+        "summary": "Search Web",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/search-news": {
+      "get": {
+        "summary": "Search News",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/search-image": {
+      "get": {
+        "summary": "Search Image",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/email-send": {
+      "get": {
+        "summary": "Email Send",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/email-read": {
+      "get": {
+        "summary": "Email Read",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/email-list": {
+      "get": {
+        "summary": "Email List",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/sms-send": {
+      "get": {
+        "summary": "Sms Send",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/sms-status": {
+      "get": {
+        "summary": "Sms Status",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/storage-upload": {
+      "get": {
+        "summary": "Storage Upload",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/storage-get": {
+      "get": {
+        "summary": "Storage Get",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/storage-list": {
+      "get": {
+        "summary": "Storage List",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/db-query": {
+      "get": {
+        "summary": "Db Query",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/db-insert": {
+      "get": {
+        "summary": "Db Insert",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/db-update": {
+      "get": {
+        "summary": "Db Update",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/db-delete": {
+      "get": {
+        "summary": "Db Delete",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/auth-login": {
+      "get": {
+        "summary": "Auth Login",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/auth-verify": {
+      "get": {
+        "summary": "Auth Verify",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/auth-refresh": {
+      "get": {
+        "summary": "Auth Refresh",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/notify-push": {
+      "get": {
+        "summary": "Notify Push",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/notify-email": {
+      "get": {
+        "summary": "Notify Email",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/notify-sms": {
+      "get": {
+        "summary": "Notify Sms",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/analytics-page": {
+      "get": {
+        "summary": "Analytics Page",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/analytics-event": {
+      "get": {
+        "summary": "Analytics Event",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/analytics-user": {
+      "get": {
+        "summary": "Analytics User",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/social-post": {
+      "get": {
+        "summary": "Social Post",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/social-like": {
+      "get": {
+        "summary": "Social Like",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/social-share": {
+      "get": {
+        "summary": "Social Share",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/social-comment": {
+      "get": {
+        "summary": "Social Comment",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/map-geocode": {
+      "get": {
+        "summary": "Map Geocode",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/map-reverse": {
+      "get": {
+        "summary": "Map Reverse",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/map-distance": {
+      "get": {
+        "summary": "Map Distance",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/map-search": {
+      "get": {
+        "summary": "Map Search",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/weather-current": {
+      "get": {
+        "summary": "Weather Current",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/weather-forecast": {
+      "get": {
+        "summary": "Weather Forecast",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/weather-history": {
+      "get": {
+        "summary": "Weather History",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/finance-stock": {
+      "get": {
+        "summary": "Finance Stock",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/finance-crypto": {
+      "get": {
+        "summary": "Finance Crypto",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/finance-forex": {
+      "get": {
+        "summary": "Finance Forex",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/news-top": {
+      "get": {
+        "summary": "News Top",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/news-category": {
+      "get": {
+        "summary": "News Category",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/news-search": {
+      "get": {
+        "summary": "News Search",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ip-geo": {
+      "get": {
+        "summary": "Ip Geo",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ip-dns": {
+      "get": {
+        "summary": "Ip Dns",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/ip-whois": {
+      "get": {
+        "summary": "Ip Whois",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/file-convert": {
+      "get": {
+        "summary": "File Convert",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/file-compress": {
+      "get": {
+        "summary": "File Compress",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/file-split": {
+      "get": {
+        "summary": "File Split",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/file-merge": {
+      "get": {
+        "summary": "File Merge",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/calendar-read": {
+      "get": {
+        "summary": "Calendar Read",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/calendar-create": {
+      "get": {
+        "summary": "Calendar Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/calendar-update": {
+      "get": {
+        "summary": "Calendar Update",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/contact-list": {
+      "get": {
+        "summary": "Contact List",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/contact-get": {
+      "get": {
+        "summary": "Contact Get",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/contact-create": {
+      "get": {
+        "summary": "Contact Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/task-create": {
+      "get": {
+        "summary": "Task Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/task-read": {
+      "get": {
+        "summary": "Task Read",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/task-update": {
+      "get": {
+        "summary": "Task Update",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/task-delete": {
+      "get": {
+        "summary": "Task Delete",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/note-create": {
+      "get": {
+        "summary": "Note Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/note-read": {
+      "get": {
+        "summary": "Note Read",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/note-update": {
+      "get": {
+        "summary": "Note Update",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/note-delete": {
+      "get": {
+        "summary": "Note Delete",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/form-create": {
+      "get": {
+        "summary": "Form Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/form-submit": {
+      "get": {
+        "summary": "Form Submit",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/form-results": {
+      "get": {
+        "summary": "Form Results",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/survey-create": {
+      "get": {
+        "summary": "Survey Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/survey-vote": {
+      "get": {
+        "summary": "Survey Vote",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/survey-results": {
+      "get": {
+        "summary": "Survey Results",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/poll-create": {
+      "get": {
+        "summary": "Poll Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/poll-vote": {
+      "get": {
+        "summary": "Poll Vote",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/poll-results": {
+      "get": {
+        "summary": "Poll Results",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/quiz-create": {
+      "get": {
+        "summary": "Quiz Create",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/quiz-attempt": {
+      "get": {
+        "summary": "Quiz Attempt",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/quiz-score": {
+      "get": {
+        "summary": "Quiz Score",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/office-docx": {
+      "get": {
+        "summary": "Office Docx",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/office-xlsx": {
+      "get": {
+        "summary": "Office Xlsx",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/office-pptx": {
+      "get": {
+        "summary": "Office Pptx",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/office-pdf": {
+      "get": {
+        "summary": "Office Pdf",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/office-ocr": {
+      "get": {
+        "summary": "Office Ocr",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/health-check": {
+      "get": {
+        "summary": "Health Check",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    },
+    "/paid/status-ping": {
+      "get": {
+        "summary": "Status Ping",
+        "tags": [
+          "paid"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "402": {
+            "description": "x402 Payment Required"
+          }
+        }
+      }
+    }
+  }
+}

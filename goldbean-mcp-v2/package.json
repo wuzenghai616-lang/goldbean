@@ -1,0 +1,58 @@
+{
+  "name": "goldbean-mcp",
+  "mcpName": "io.github.wuzenghai616-lang/goldbean",
+  "version": "2.0.0",
+  "description": "GoldBean MCP Server v2 — Stateless, Edge-Ready. 48 Baidu AI tools (OCR/NLP/Vision/Speech/Translation/Face/Body/Creation/Search/LLM) via HTTP MCP. Zero handshake, zero session, zero SDK dependency. Compatible with MCP 2026-07-28. Deploy to Cloudflare Workers, Bun, Deno, or npx. Pay-per-call from $0.001 via x402 USDC, PayPal, Alipay. 50 free calls/day.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "goldbean-mcp": "src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "server.json",
+    "wrangler.toml"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "http": "node src/index.js --http",
+    "test": "echo 'Run: node src/index.js --http --port=9878'"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-v2",
+    "stateless",
+    "x402",
+    "goldbean",
+    "baidu-ai",
+    "ocr",
+    "tts",
+    "asr",
+    "llm",
+    "edge",
+    "serverless",
+    "cloudflare-workers",
+    "micropayment",
+    "usdc",
+    "modelcontextprotocol",
+    "ai-agent",
+    "api-gateway",
+    "chinese-ai",
+    "translation",
+    "nlp",
+    "vision",
+    "speech-recognition"
+  ],
+  "author": "GoldBean",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuzenghai616-lang/goldbean.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

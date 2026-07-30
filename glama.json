@@ -1,0 +1,81 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "goldbean",
+  "version": "0.1.1",
+  "description": "GoldBean — Pay-per-Use AI API Marketplace. 27 endpoints: 13 Baidu AI APIs (OCR, TTS, ASR, Translation, LLM, Image, Face, Body, NLP, HelixFold3) + PayPal/Alipay/x402 + Bitcoin/Gas/Weather. Free tier. Pay-per-call via x402 micropayments with USDC on Base.",
+  "maintainers": ["wuzenghai616-lang"],
+  "homepage": "https://goldbean-api.xyz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuzenghai616-lang/goldbean.git"
+  },
+  "type": "mcp_server",
+  "status": "stable",
+  "framework": "Express 5",
+  "transport": ["sse", "stdio"],
+  "servers": [
+    {
+      "type": "sse",
+      "url": "https://goldbean-api.xyz/sse"
+    }
+  ],
+  "tools": 27,
+  "total_endpoints": 27,
+  "capabilities": {
+    "tools": {
+      "discovery": true,
+      "paid_endpoints": true
+    }
+  },
+  "packages": [
+    {
+      "registry": "npm",
+      "name": "goldbean-mcp",
+      "version": "0.1.1"
+    }
+  ],
+  "keywords": [
+    "x402",
+    "micropayments",
+    "api-marketplace",
+    "crypto",
+    "blockchain",
+    "defi",
+    "ai",
+    "web3",
+    "pay-per-call",
+    "base",
+    "usdc",
+    "mcp-server",
+    "agent",
+    "ethereum",
+    "weather",
+    "search",
+    "image-generation",
+    "Fintech",
+    "Agent Commerce"
+  ],
+  "features": {
+    "micropayments": {
+      "enabled": true,
+      "protocol": "x402",
+      "network": "Base (eip155:8453)",
+      "currency": "USDC",
+      "price_per_call": "$0.01-$0.02"
+    },
+    "free_endpoints": {
+      "enabled": true,
+      "count": 5,
+      "endpoints": ["/health", "/eth-price", "/btc-price", "/weather", "/mcp"]
+    },
+    "docker": {
+      "optimized": true,
+      "image_size": "<200MB",
+      "compatible": ["Claude Desktop", "Cursor", "Windsurf"]
+    }
+  },
+  "compatibility": {
+    "clients": ["Claude Desktop", "Cursor", "Windsurf", "Continue"],
+    "platforms": ["macOS", "Linux", "Windows"]
+  }
+}

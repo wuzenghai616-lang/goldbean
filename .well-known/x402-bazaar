@@ -1,0 +1,37 @@
+{
+  "name": "GoldBean API",
+  "description": "GoldBean API Marketplace — 67 routes (57 paid + 10 free). Baidu AI (OCR/TTS/ASR/Translate/LLM Chat/NLP/Image). OpenAI-compatible endpoints. Web Search, Weather, Crypto. Pay per call via x402 (USDC), PayPal, or Alipay.",
+  "version": "9.6.0",
+  "currencies": [
+    {
+      "id": "USDC",
+      "network": "base",
+      "decimals": 6,
+      "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bdA02913"
+    }
+  ],
+  "pricing": {
+    "plans": {
+      "monthly": {
+        "price": 29.9,
+        "currency": "USDC"
+      },
+      "quarterly": {
+        "price": 69,
+        "currency": "USDC"
+      },
+      "yearly": {
+        "price": 269,
+        "currency": "USDC"
+      }
+    }
+  },
+  "payment_methods": [
+    "x402",
+    "paypal",
+    "alipay"
+  ],
+  "wallet": "0x7484b0bca25d2ee56e9b0535572d4cf44a047d98",
+  "network": "eip155:8453",
+  "endpoint": "https://goldbean-api.xyz"
+}

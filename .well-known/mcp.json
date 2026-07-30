@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "name": "GoldBean API",
+  "description": "Pay-per-call AI API marketplace bridging Baidu AI to the global agent economy. 67 endpoints (57 paid + 10 free): 74 Baidu AI — OCR (19 types), TTS, ASR, translation, LLM chat (ERNIE/DeepSeek/Qwen), image recognition (plant/animal/dish/car/logo/ingredient), video generation (MuseSteamer), NLP (14 types), face, body, content moderation, HelixFold. OpenAI-compatible APIs, web search, weather. x402 USDC, PayPal, Alipay.",
+  "homepage": "https://goldbean-api.xyz",
+  "repository": "https://github.com/wuzenghai616-lang/goldbean",
+  "license": "MIT",
+  "version": "9.6.0",
+  "author": {
+    "name": "GoldBean",
+    "url": "https://goldbean-api.xyz",
+    "email": "wuzenghai616@gmail.com"
+  },
+  "endpoints": [
+    {
+      "type": "mcp",
+      "url": "https://goldbean-api.xyz/sse",
+      "description": "Direct MCP over HTTP+SSE (primary)"
+    },
+    {
+      "type": "mcp",
+      "url": "https://mcp.smithery.run/wuzenghai616",
+      "description": "Smithery MCP Gateway (alternative)"
+    }
+  ],
+  "payment": {
+    "type": "x402",
+    "network": "eip155:8453",
+    "chain": "base-mainnet",
+    "currency": "USDC",
+    "contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "wallet": "0x7484b0bca25d2ee56e9b0535572d4cf44a047d98",
+    "pricing": "pay-per-call",
+    "min_amount_usd": 0.01,
+    "max_amount_usd": 0.05,
+    "free_tier": "50 calls/day"
+  },
+  "capabilities": {
+    "tools": [
+      "baidu-ocr",
+      "baidu-ocr-accurate",
+      "baidu-ocr-webimage",
+      "baidu-ocr-handwriting",
+      "baidu-ocr-qrcode",
+      "baidu-ocr-bankcard",
+      "baidu-ocr-business-license",
+      "baidu-ocr-numbers",
+      "baidu-ocr-seal",
+      "baidu-ocr-doc-office",
+      "baidu-ocr-table",
+      "baidu-idcard",
+      "baidu-deepseek-ocr",
+      "baidu-paddleocr-vl",
+      "baidu-qianfan-ocr",
+      "baidu-tts",
+      "baidu-asr",
+      "baidu-translate",
+      "baidu-llm-chat",
+      "baidu-deepthink",
+      "baidu-vision-chat",
+      "baidu-nlp",
+      "baidu-text-review",
+      "baidu-sentiment",
+      "baidu-summary",
+      "baidu-word-embedding",
+      "baidu-embedding",
+      "baidu-reranker",
+      "baidu-text-corrector",
+      "baidu-keyword-extraction",
+      "baidu-image-recognition",
+      "baidu-plant",
+      "baidu-animal",
+      "baidu-dish",
+      "baidu-logo",
+      "baidu-car",
+      "baidu-ingredient",
+      "baidu-vehicle-detect",
+      "baidu-object-detect",
+      "baidu-landmark",
+      "baidu-image-enhance",
+      "baidu-image-gen",
+      "baidu-image-edit",
+      "baidu-image-review",
+      "baidu-face-detect",
+      "baidu-face-compare",
+      "baidu-body-analysis",
+      "baidu-gesture",
+      "baidu-video-gen",
+      "baidu-video-query",
+      "baidu-helixfold",
+      "chat-completions",
+      "image-generations",
+      "embeddings",
+      "audio-transcriptions",
+      "audio-speech",
+      "gas-price",
+      "btc-price",
+      "weather"
+    ],
+    "resources": [
+      "openapi.json",
+      "llms.txt",
+      "pricing-plans"
+    ]
+  },
+  "discovery": {
+    "openapi": "https://goldbean-api.xyz/openapi.json",
+    "llms_txt": "https://goldbean-api.xyz/llms.txt",
+    "x402": "https://goldbean-api.xyz/.well-known/x402.json",
+    "bazaar": "https://goldbean-api.xyz/.well-known/x402-bazaar"
+  }
+}

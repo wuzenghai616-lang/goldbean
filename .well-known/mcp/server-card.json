@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "label": "GoldBean MCP Server",
+  "description": "Pay-per-call MCP server: 16 paid AI tools (Baidu OCR, TTS, ASR, NLP, LLM Chat, HelixFold3, Face/Body/Image AI) via x402 micropayments on Base USDC, PayPal, or Alipay",
+  "type": "remote",
+  "transport": "sse",
+  "url": "https://goldbean-api.xyz/sse",
+  "tools": [
+    {
+      "name": "user_register",
+      "description": "POST /paid/user/register",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "baidu_ocr",
+      "description": "GET /paid/baidu-ocr",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "Image URL or base64"
+          },
+          "language_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_ocr_accurate",
+      "description": "GET /paid/baidu-ocr-accurate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "Image URL or base64"
+          },
+          "language_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_idcard",
+      "description": "GET /paid/baidu-idcard",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_tts",
+      "description": "GET /paid/baidu-tts",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Text to speak"
+          },
+          "voice": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_translate",
+      "description": "GET /paid/baidu-translate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_llm_chat",
+      "description": "GET /paid/baidu-llm-chat",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_asr",
+      "description": "GET /paid/baidu-asr",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "string",
+            "description": "Audio URL"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_image_recognition",
+      "description": "GET /paid/baidu-image-recognition",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_image_enhance",
+      "description": "GET /paid/baidu-image-enhance",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_face_detect",
+      "description": "GET /paid/baidu-face-detect",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_body_analysis",
+      "description": "GET /paid/baidu-body-analysis",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_nlp",
+      "description": "GET /paid/baidu-nlp",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "baidu_helixfold",
+      "description": "GET /paid/baidu-helixfold",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "seq": {
+            "type": "string",
+            "description": "Protein sequence"
+          }
+        }
+      }
+    },
+    {
+      "name": "paypal_create_order",
+      "description": "POST /paid/paypal/create-order",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "name": "paypal_capture",
+      "description": "POST /paid/paypal/capture",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  ]
+}

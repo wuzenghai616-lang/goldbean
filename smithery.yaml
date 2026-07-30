@@ -1,0 +1,33 @@
+# Smithery.ai configuration for GoldBean MCP Server
+# https://smithery.ai/docs/build/project-config
+runtime: "container"
+
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
+
+startCommand:
+  type: "stdio"
+  configSchema:
+    # No user-configurable options needed - the server runs on its own
+    type: "object"
+    properties: {}
+    required: []
+  exampleConfig: {}
+  commandFunction:
+    |-
+      function(config) {
+        return {
+          command: 'goldbean-mcp',
+          args: []
+        };
+      }
+
+# Protocol and deployment metadata
+description: |
+  GoldBean — Pay-per-Use AI API Marketplace. 27 endpoints: 13 Baidu AI APIs
+  (OCR, TTS, ASR, Translation, LLM, Image, Face, Body, NLP, HelixFold3) +
+  PayPal/Alipay/x402 + Bitcoin/Gas/Weather. Free tier.
+
+# Server card for discovery (reduces scanning dependency)
+serverCardUrl: "https://raw.githubusercontent.com/wuzenghai616-lang/goldbean/master/.well-known/mcp/server-card.json"

@@ -1,0 +1,6 @@
+{
+  "protocol": "x402",
+  "network": "base-mainnet",
+  "currency": "USDC",
+  "description": "Pay per call with USDC on Base mainnet. 2-second settlement."
+}

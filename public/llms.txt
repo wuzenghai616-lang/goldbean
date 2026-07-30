@@ -1,0 +1,100 @@
+# GoldBean API
+
+> Pay-per-call AI API marketplace bridging Baidu AI to the global agent economy. 47 endpoints covering OCR, translation, TTS, LLM chat, image recognition, and more. Payments via x402 (USDC on Base), PayPal, or Alipay. No API keys, no signup — just pay and call.
+
+## Base URL
+https://goldbean-api.xyz
+
+## MCP Endpoint
+https://goldbean-api.xyz/sse
+
+## Authentication
+- x402 protocol: HTTP 402 response → pay USDC on Base → get data
+- Free tier: 50 calls/day (no payment needed)
+- Traditional: register at POST /paid/user/register, use x-user-id header
+
+## Quick Start
+
+### Using MCP (Claude Desktop / Cursor)
+```json
+{
+  "mcpServers": {
+    "goldbean": {
+      "url": "https://goldbean-api.xyz/sse"
+    }
+  }
+}
+```
+
+### Using x402 (pay-per-call)
+```bash
+curl https://goldbean-api.xyz/paid/baidu-ocr?image_url=https://example.com/test.jpg \
+  -H "x-payment: <x402_payment_payload>"
+```
+
+### npm package
+```bash
+npx goldbean-mcp
+```
+
+## Endpoints
+
+### Baidu AI (Paid, $0.01-$0.03/call)
+- POST /paid/baidu-ocr — General text OCR (extract text from images)
+- POST /paid/baidu-ocr-accurate — High-accuracy OCR for complex documents
+- POST /paid/baidu-idcard — ID card recognition (name, ID number, address)
+- POST /paid/baidu-tts — Text-to-speech with multiple voice options
+- POST /paid/baidu-translate — Multi-language translation (supports 28+ languages)
+- POST /paid/baidu-llm-chat — ERNIE LLM conversational AI
+- POST /paid/baidu-asr — Automatic speech recognition (audio to text)
+- POST /paid/baidu-image-recognition — Object and scene recognition
+- POST /paid/baidu-image-enhance — Image quality enhancement
+- POST /paid/baidu-face-detect — Face detection and attribute analysis
+- POST /paid/baidu-body-analysis — Human body keypoint detection
+- POST /paid/baidu-nlp — Natural language processing (sentiment, keywords)
+- POST /paid/baidu-helixfold — Protein structure prediction
+
+### OpenAI-Compatible (Paid)
+- POST /v1/chat/completions — ChatGPT-style completions
+- GET /v1/models — List available models
+- POST /v1/images/generations — AI image generation
+- POST /v1/embeddings — Text embeddings
+- POST /v1/audio/transcriptions — Audio transcription (Whisper-compatible)
+- POST /v1/audio/speech — Text-to-speech (TTS API)
+
+### Free Endpoints
+- GET /gas — Real-time Base chain gas price
+- GET /btc-price — Current Bitcoin price
+- GET /weather-now — Weather by city
+- GET /health — Service health check
+
+### System
+- GET /api/routes — List all routes (dev only)
+- GET /api/pricing/plans — Pricing plans
+- GET /api/pricing/endpoint — Per-endpoint pricing
+- GET /info — Service info
+
+## Pricing
+- Pay-as-you-go: $0.01-$0.03 per call (USDC on Base mainnet)
+- Free tier: 50 calls/day, no credit card
+- Bulk: 100 calls for $0.99, 500 calls for $4.99
+- Also accepts PayPal and Alipay
+
+## Payment Methods
+- x402 (USDC on Base) — instant settlement, 2-second confirmation
+- PayPal — for traditional users
+- Alipay — for Chinese users
+
+## Discovery
+- /.well-known/x402.json — x402 payment discovery
+- /.well-known/mcp.json — MCP server manifest
+- /.well-known/x402-bazaar — x402 Bazaar v2 service discovery
+- /openapi.json — OpenAPI 3.0 spec
+- /llms.txt — This file
+
+## Links
+- Homepage: https://goldbean-api.xyz
+- GitHub: https://github.com/wuzenghai616-lang/goldbean
+- npm: https://www.npmjs.com/package/goldbean-mcp
+- MCP Registry: https://registry.modelcontextprotocol.io
+- License: MIT

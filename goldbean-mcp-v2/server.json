@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2026-07-28/server.schema.json",
+  "name": "io.github.wuzenghai616-lang/goldbean",
+  "description": "48 Baidu AI MCP tools — OCR (12 types), NLP (8), Vision (4), Speech (4), Translation (3), Face (3), Body (2), Creation (4), Search (2), LLM (ERNIE/DeepSeek). Stateless, edge-ready, zero SDK dependency. Compatible with MCP 2026-07-28. Pay-per-call from $0.001 via x402 USDC, PayPal, Alipay. 50 free calls/day.",
+  "title": "GoldBean MCP Server v2",
+  "repository": {
+    "url": "https://github.com/wuzenghai616-lang/goldbean",
+    "source": "github"
+  },
+  "version": "2.0.0",
+  "protocolVersion": "2026-07-28",
+  "stateless": true,
+  "websiteUrl": "https://goldbean-api.xyz",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "goldbean-mcp",
+      "version": "2.0.0",
+      "runtimeHint": "npx -y goldbean-mcp",
+      "transport": {
+        "type": "http",
+        "url": "https://goldbean-api.xyz/mcp"
+      }
+    }
+  ]
+}

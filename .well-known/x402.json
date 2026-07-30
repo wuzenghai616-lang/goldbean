@@ -1,0 +1,57 @@
+{
+  "x402-version": "1.0.0",
+  "service": {
+    "name": "GoldBean API",
+    "description": "Pay-per-call AI API marketplace. 47 endpoints: Baidu AI (OCR, translation, TTS, ASR, LLM chat), OpenAI-compatible APIs, web search, crypto, weather. Pay with USDC on Base.",
+    "version": "8.0.0",
+    "homepage": "https://goldbean-api.xyz",
+    "documentation": "https://goldbean-api.xyz/openapi.json",
+    "llms_txt": "https://goldbean-api.xyz/llms.txt",
+    "mcp_endpoint": "https://goldbean-api.xyz/sse",
+    "repository": "https://github.com/wuzenghai616-lang/goldbean",
+    "license": "MIT"
+  },
+  "payable": {
+    "default-scheme": "exact",
+    "default-network": "eip155:8453",
+    "default-asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "pay-to": "0x7484b0bca25d2ee56e9b0535572d4cf44a047d98",
+    "pricing": {
+      "model": "pay-per-call",
+      "min_amount_usd": 0.01,
+      "max_amount_usd": 0.05,
+      "free_tier": {
+        "calls_per_day": 50,
+        "description": "50 free API calls per day, no payment needed"
+      }
+    },
+    "accepted_currencies": [
+      {
+        "id": "USDC",
+        "network": "base",
+        "contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "decimals": 6
+      }
+    ],
+    "alternative_methods": ["paypal", "alipay"]
+  },
+  "endpoints": {
+    "base_url": "https://goldbean-api.xyz",
+    "openapi": "https://goldbean-api.xyz/openapi.json",
+    "llms_txt": "https://goldbean-api.xyz/llms.txt",
+    "mcp_manifest": "https://goldbean-api.xyz/.well-known/mcp.json",
+    "bazaar": "https://goldbean-api.xyz/.well-known/x402-bazaar",
+    "routes_api": "https://goldbean-api.xyz/api/routes"
+  },
+  "categories": [
+    "ai-ml",
+    "ocr",
+    "translation",
+    "tts",
+    "asr",
+    "image-recognition",
+    "llm",
+    "developer-tools",
+    "data"
+  ]
+}

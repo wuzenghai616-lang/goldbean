@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoldBean Playground — Compare 7 Chinese LLMs Side by Side</title>
+  <meta name="description" content="Test DeepSeek, Kimi, Doubao, Qwen, Hunyuan, and ERNIE with one prompt. Compare output quality, speed, and cost. Free 2000 calls/day.">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a16;color:#d0d0e8;line-height:1.6}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    
+    /* Header */
+    .header{text-align:center;padding:30px 20px 20px}
+    .header h1{font-size:2.2em;color:#fff;margin-bottom:8px}
+    .header .sub{color:#8888cc;font-size:1.1em;margin-bottom:12px}
+    .header .free-badge{display:inline-block;background:#1a3a1a;border:1px solid #2a5a2a;color:#6ada6a;padding:5px 16px;border-radius:20px;font-size:0.9em}
+    .header .links{margin-top:14px}
+    .header .links a{color:#7070ee;text-decoration:none;margin:0 12px;font-size:0.9em}
+    .header .links a:hover{text-decoration:underline}
+
+    /* Prompt Area */
+    .prompt-area{background:#12122a;border:1px solid #2a2a44;border-radius:14px;padding:24px;margin:20px 0}
+    .prompt-area label{display:block;color:#b0b0ff;font-size:1.1em;margin-bottom:12px;font-weight:600}
+    .prompt-area textarea{width:100%;min-height:100px;background:#0e0e22;border:1px solid #333;border-radius:8px;color:#e0e0ff;padding:14px;font-size:0.95em;font-family:inherit;resize:vertical}
+    .prompt-area textarea:focus{outline:none;border-color:#5050ee}
+    .prompt-controls{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:center}
+    .prompt-controls .btn-run{background:#4040cc;color:#fff;padding:12px 28px;border-radius:8px;border:none;font-size:1em;font-weight:600;cursor:pointer;transition:background 0.2s}
+    .prompt-controls .btn-run:hover{background:#5050ee}
+    .prompt-controls .btn-run:disabled{background:#333;color:#666;cursor:not-allowed}
+    .prompt-controls .btn-clear{background:transparent;border:1px solid #444;color:#999;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:0.9em}
+    .prompt-controls .btn-clear:hover{background:#1a1a33}
+    .prompt-controls .hint{color:#666;font-size:0.85em;margin-left:auto}
+
+    /* Model Selector */
+    .model-selector{margin:16px 0}
+    .model-selector .label{color:#aaaadd;font-size:0.9em;margin-bottom:8px}
+    .model-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .model-chip{display:inline-flex;align-items:center;gap:6px;background:#1a1a33;border:1px solid #2a2a44;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.88em;transition:all 0.2s;user-select:none}
+    .model-chip:hover{border-color:#4040aa}
+    .model-chip.active{background:#1a2a4a;border-color:#4060cc;color:#a0c0ff}
+    .model-chip .dot{width:8px;height:8px;border-radius:50%}
+    .model-chip .cost{font-size:0.8em;color:#666;margin-left:4px}
+    .model-chip.active .cost{color:#88aadd}
+
+    /* Results Grid */
+    .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:20px}
+    .result-card{background:#12122a;border:1px solid #2a2a44;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+    .result-card.hidden{display:none}
+    .result-header{padding:12px 16px;border-bottom:1px solid #1e1e38;display:flex;justify-content:space-between;align-items:center}
+    .result-header .name{font-weight:600;font-size:0.95em}
+    .result-header .name .provider{font-size:0.8em;color:#777;font-weight:400;margin-left:6px}
+    .result-header .status{font-size:0.8em;padding:2px 8px;border-radius:4px}
+    .status-idle{color:#666;background:#1a1a2a}
+    .status-loading{color:#cc0;background:#2a2a1a}
+    .status-done{color:#6ada6a;background:#1a2a1a}
+    .status-error{color:#da6a6a;background:#2a1a1a}
+    .result-body{padding:14px 16px;flex:1;overflow-y:auto;max-height:400px;font-size:0.9em;line-height:1.7;white-space:pre-wrap;word-break:break-word;color:#c8c8e8}
+    .result-body.loading{color:#555}
+    .result-body.loading::after{content:'';display:inline-block;width:14px;height:14px;border:2px solid #444;border-top-color:#66aaff;border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-left:8px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .result-footer{padding:8px 16px;border-top:1px solid #1e1e38;display:flex;gap:16px;font-size:0.78em;color:#666}
+    .result-footer span{white-space:nowrap}
+    .result-footer .cost{color:#8888cc}
+
+    /* Example Prompts */
+    .examples{margin:12px 0}
+    .examples .label{color:#888;font-size:0.85em;margin-bottom:8px}
+    .example-btn{background:#16162e;border:1px solid #2a2a44;color:#9090bb;padding:6px 12px;border-radius:6px;font-size:0.82em;cursor:pointer;margin:3px;transition:all 0.2s}
+    .example-btn:hover{border-color:#4040aa;color:#b0b0dd}
+
+    /* Footer */
+    .footer{text-align:center;padding:30px 20px;color:#555;font-size:0.85em}
+    .footer a{color:#7070ee;text-decoration:none}
+    
+    /* Responsive */
+    @media(max-width:768px){
+      .results-grid{grid-template-columns:1fr}
+      .header h1{font-size:1.6em}
+      .prompt-area textarea{min-height:80px}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>GoldBean Playground</h1>
+    <div class="sub">One prompt, 7 Chinese LLMs, side-by-side comparison</div>
+    <div class="free-badge">FREE 2000 calls/day / IP - no signup needed</div>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/api/pricing/plans">Pricing</a>
+      <a href="/buy-credits.html">Buy Credits</a>
+      <a href="https://github.com/wuzenghai616-lang/goldbean">GitHub</a>
+    </div>
+  </div>
+
+  <div class="prompt-area">
+    <label>Enter your prompt</label>
+    <textarea id="promptInput" placeholder="e.g. Write a Python function to merge two sorted linked lists. Explain the algorithm.">Write a Python function to merge two sorted linked lists. Explain the algorithm briefly.</textarea>
+    
+    <div class="examples">
+      <span class="label">Quick examples:</span>
+      <button class="example-btn" onclick="setPrompt('Write a Python function to merge two sorted linked lists. Explain the algorithm.')">Code: Merge Linked Lists</button>
+      <button class="example-btn" onclick="setPrompt('Translate to English: The quick brown fox jumps over the lazy dog. Then explain the grammar.')">Translation + Grammar</button>
+      <button class="example-btn" onclick="setPrompt('Write a 3-sentence product description for a smart water bottle that tracks hydration.')">Marketing Copy</button>
+      <button class="example-btn" onclick="setPrompt('Explain quantum entanglement to a 10-year-old in 100 words.')">Explain Complex Topic</button>
+      <button class="example-btn" onclick="setPrompt('Write a SQL query to find the top 3 customers by total purchase amount in the last 30 days.')">SQL Query</button>
+    </div>
+
+    <div class="model-selector">
+      <div class="label">Select models to compare (click to toggle):</div>
+      <div class="model-chips" id="modelChips"></div>
+    </div>
+
+    <div class="prompt-controls">
+      <button class="btn-run" id="runBtn" onclick="runComparison()">Run Comparison</button>
+      <button class="btn-clear" onclick="clearResults()">Clear</button>
+      <span class="hint">Tip: No API key needed - uses IP free quota</span>
+    </div>
+  </div>
+
+  <div class="results-grid" id="resultsGrid"></div>
+
+  <div class="footer">
+    <p>GoldBean API Marketplace - 7 Chinese LLM providers, one unified API</p>
+    <p><a href="/paid/user/register">Register</a> for 30-day unlimited free trial | <a href="/buy-credits.html">Buy credits</a> | <a href="https://goldbean-api.xyz/docs">Docs</a></p>
+  </div>
+</div>
+
+<script>
+// Model definitions
+const MODELS = [
+  { id: 'deepseek-pro',    name: 'DeepSeek Pro',    provider: 'DeepSeek',  endpoint: '/ai/ds/chat',       method: 'POST', cost: '$0.80/1M', color: '#4a9eff', defaultOn: true },
+  { id: 'deepseek-flash',  name: 'DeepSeek Flash',  provider: 'DeepSeek',  endpoint: '/ai/ds/flash',      method: 'POST', cost: '$0.05/1M', color: '#4a9eff', defaultOn: true },
+  { id: 'kimi',            name: 'Kimi K2.6',       provider: 'Moonshot',  endpoint: '/ai/kimi/chat',     method: 'POST', cost: '$1.50/1M', color: '#aa66ff', defaultOn: true },
+  { id: 'doubao-pro',      name: 'Doubao Pro',      provider: 'ByteDance', endpoint: '/ai/doubao/chat',   method: 'POST', cost: '$1.20/1M', color: '#ff6644', defaultOn: true },
+  { id: 'doubao-mini',     name: 'Doubao Mini',     provider: 'ByteDance', endpoint: '/ai/doubao/mini',   method: 'POST', cost: '$0.225/1M',color: '#ff6644', defaultOn: false },
+  { id: 'qwen-max',        name: 'Qwen Max',        provider: 'Alibaba',   endpoint: '/ai/qwen/chat',     method: 'POST', cost: '$1.50/1M', color: '#66aa44', defaultOn: true },
+  { id: 'hunyuan',         name: 'Hunyuan Pro',     provider: 'Tencent',   endpoint: '/ai/hy3/chat',      method: 'POST', cost: '$1.80/1M', color: '#44ccaa', defaultOn: true },
+  { id: 'ernie',           name: 'ERNIE 4.0',       provider: 'Baidu',     endpoint: '/paid/baidu-llm-chat', method: 'GET',  cost: '$2.00/1M', color: '#dd4444', defaultOn: false },
+];
+
+const selectedModels = new Set(MODELS.filter(m => m.defaultOn).map(m => m.id));
+
+// Render model chips
+function renderChips() {
+  const container = document.getElementById('modelChips');
+  container.innerHTML = '';
+  MODELS.forEach(m => {
+    const chip = document.createElement('div');
+    chip.className = 'model-chip' + (selectedModels.has(m.id) ? ' active' : '');
+    chip.innerHTML = `<span class="dot" style="background:${m.color}"></span>${m.name}<span class="provider">${m.provider}</span><span class="cost">${m.cost}</span>`;
+    chip.onclick = () => {
+      if (selectedModels.has(m.id)) selectedModels.delete(m.id);
+      else selectedModels.add(m.id);
+      chip.classList.toggle('active');
+    };
+    container.appendChild(chip);
+  });
+}
+
+// Render result cards
+function renderCards() {
+  const grid = document.getElementById('resultsGrid');
+  grid.innerHTML = '';
+  MODELS.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'result-card' + (selectedModels.has(m.id) ? '' : ' hidden');
+    card.id = 'card-' + m.id;
+    card.innerHTML = `
+      <div class="result-header">
+        <div class="name">${m.name}<span class="provider">${m.provider}</span></div>
+        <div class="status status-idle" id="status-${m.id}">Idle</div>
+      </div>
+      <div class="result-body" id="body-${m.id}">Waiting for prompt...</div>
+      <div class="result-footer" id="footer-${m.id}">
+        <span>Tokens: -</span>
+        <span>Time: -</span>
+        <span class="cost">Cost: -</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Set prompt from example
+function setPrompt(text) {
+  document.getElementById('promptInput').value = text;
+}
+
+// Clear results
+function clearResults() {
+  MODELS.forEach(m => {
+    const body = document.getElementById('body-' + m.id);
+    const status = document.getElementById('status-' + m.id);
+    const footer = document.getElementById('footer-' + m.id);
+    if (body) { body.className = 'result-body'; body.textContent = 'Waiting for prompt...'; }
+    if (status) { status.className = 'status status-idle'; status.textContent = 'Idle'; }
+    if (footer) footer.innerHTML = '<span>Tokens: -</span><span>Time: -</span><span class="cost">Cost: -</span>';
+  });
+}
+
+// Call a single model
+async function callModel(model, prompt) {
+  const body = document.getElementById('body-' + model.id);
+  const status = document.getElementById('status-' + model.id);
+  const footer = document.getElementById('footer-' + model.id);
+
+  if (!selectedModels.has(model.id)) return;
+
+  status.className = 'status status-loading';
+  status.textContent = 'Loading...';
+  body.className = 'result-body loading';
+  body.textContent = '';
+
+  const startTime = Date.now();
+
+  try {
+    let response, data;
+    const baseURL = window.location.origin;
+
+    if (model.method === 'GET') {
+      response = await fetch(`${baseURL}${model.endpoint}?message=${encodeURIComponent(prompt)}`);
+    } else {
+      response = await fetch(`${baseURL}${model.endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [{ role: 'user', content: prompt }] })
+      });
+    }
+
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+    data = await response.json();
+
+    // Extract content from various response formats
+    let content = '';
+    let tokens = 0;
+    let cost = '-';
+
+    if (data.content) {
+      content = data.content;
+      tokens = data.usage?.total_tokens || 0;
+    } else if (data.response) {
+      content = data.response;
+      tokens = data.usage?.total_tokens || 0;
+    } else if (data.choices && data.choices[0]) {
+      content = data.choices[0].message?.content || data.choices[0].text || '';
+      tokens = data.usage?.total_tokens || 0;
+    } else if (data.error) {
+      throw new Error(data.error.message || data.error.detail || JSON.stringify(data.error));
+    } else {
+      content = JSON.stringify(data, null, 2).substring(0, 500) + '...';
+    }
+
+    // Calculate estimated cost
+    if (tokens > 0) {
+      const costPerM = parseFloat(model.cost.replace(/[^0-9.]/g, ''));
+      if (costPerM) cost = '$' + ((tokens / 1000000) * costPerM).toFixed(6);
+    }
+
+    status.className = 'status status-done';
+    status.textContent = 'Done';
+    body.className = 'result-body';
+    body.textContent = content;
+    footer.innerHTML = `<span>Tokens: ${tokens}</span><span>Time: ${elapsed}s</span><span class="cost">Est. cost: ${cost}</span>`;
+
+  } catch (err) {
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+    status.className = 'status status-error';
+    status.textContent = 'Error';
+    body.className = 'result-body';
+    body.textContent = 'Error: ' + err.message;
+    footer.innerHTML = `<span>Tokens: -</span><span>Time: ${elapsed}s</span><span class="cost">Cost: -</span>`;
+  }
+}
+
+// Run comparison across all selected models
+async function runComparison() {
+  const prompt = document.getElementById('promptInput').value.trim();
+  if (!prompt) { alert('Please enter a prompt first.'); return; }
+
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+  btn.textContent = 'Running...';
+
+  // Show selected cards, hide others
+  MODELS.forEach(m => {
+    const card = document.getElementById('card-' + m.id);
+    if (card) card.classList.toggle('hidden', !selectedModels.has(m.id));
+  });
+
+  // Fire all requests in parallel
+  const promises = MODELS.filter(m => selectedModels.has(m.id)).map(m => callModel(m, prompt));
+  await Promise.allSettled(promises);
+
+  btn.disabled = false;
+  btn.textContent = 'Run Comparison';
+}
+
+// Init
+renderChips();
+renderCards();
+</script>
+</body>
+</html>

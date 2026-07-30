@@ -1,0 +1,20 @@
+name = "goldbean-mcp"
+main = "src/index.js"
+compatibility_date = "2026-07-28"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers Free tier: 100,000 requests/day
+# Workers Paid: $0.30/million requests
+
+[vars]
+GOLDBEAN_API_URL = "https://goldbean-api.xyz"
+GOLDBEAN_FREE_LIMIT = "50"
+
+# Optional: Set your own GoldBean API URL for private deployments
+# [vars]
+# GOLDBEAN_API_URL = "https://your-goldbean-instance.com"
+
+# Optional: Custom domain
+# [[routes]]
+# pattern = "mcp.yourdomain.com/*"
+# custom_domain = true

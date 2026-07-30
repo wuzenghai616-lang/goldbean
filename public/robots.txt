@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /health
+Allow: /.well-known/mcp.json
+Allow: /.well-known/x402.json
+Allow: /openapi.json
+Allow: /llms.txt
+Allow: /buy-credits.html
+Allow: /ocr-demo.html
+Allow: /bazaar.html
+
+Sitemap: https://goldbean-api.xyz/sitemap.xml

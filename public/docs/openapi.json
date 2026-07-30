@@ -1,0 +1,3528 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "GoldBean API",
+    "version": "7.7.0",
+    "description": "GoldBean (GB) - x402 Micropaid API Marketplace\n120 paid endpoints across 11 categories.\nPayment via x402 protocol: first request returns HTTP 402, client pays USDC/Base, retries.",
+    "contact": {
+      "email": "wuzenghai616@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://goldbean-api.xyz",
+      "description": "Production (Base Mainnet)"
+    }
+  ],
+  "paths": {
+    "/paid/llm-chat": {
+      "get": {
+        "summary": "AI LLM Chat",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/llm-embed": {
+      "get": {
+        "summary": "Text Embedding",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/llm-summary": {
+      "get": {
+        "summary": "Summary",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/llm-translate": {
+      "get": {
+        "summary": "Translation",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/llm-code": {
+      "get": {
+        "summary": "Code Gen",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/image-gen": {
+      "get": {
+        "summary": "Image Gen",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/image-analyze": {
+      "get": {
+        "summary": "Image Analysis",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/image-upscale": {
+      "get": {
+        "summary": "Image Upscale",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/voice-2-text": {
+      "get": {
+        "summary": "Speech-to-Text",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/text-2-voice": {
+      "get": {
+        "summary": "Text-to-Speech",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/video-gen": {
+      "get": {
+        "summary": "Video Gen",
+        "description": "Price: $0.08 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.08"
+      }
+    },
+    "/paid/video-analyze": {
+      "get": {
+        "summary": "Video Analysis",
+        "description": "Price: $0.06 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.06"
+      }
+    },
+    "/paid/web-search": {
+      "get": {
+        "summary": "Web Search",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/web-crawl": {
+      "get": {
+        "summary": "Web Crawl",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/news-crypto": {
+      "get": {
+        "summary": "Crypto News",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/news-global": {
+      "get": {
+        "summary": "Global News",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/arxiv-search": {
+      "get": {
+        "summary": "ArXiv Search",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/wikipedia": {
+      "get": {
+        "summary": "Wikipedia",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/stock-price": {
+      "get": {
+        "summary": "Stock Price",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/forex-rate": {
+      "get": {
+        "summary": "Forex",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/crypto-price": {
+      "get": {
+        "summary": "Crypto Price",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/crypto-history": {
+      "get": {
+        "summary": "Crypto Kline",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/commodity-price": {
+      "get": {
+        "summary": "Commodity",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/index-price": {
+      "get": {
+        "summary": "Index",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/fund-nav": {
+      "get": {
+        "summary": "Fund NAV",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/social-twitter": {
+      "get": {
+        "summary": "Twitter",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-discord": {
+      "get": {
+        "summary": "Discord",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-telegram": {
+      "get": {
+        "summary": "Telegram",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-weibo": {
+      "get": {
+        "summary": "Weibo",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-wechat": {
+      "get": {
+        "summary": "WeChat",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-instagram": {
+      "get": {
+        "summary": "Instagram",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/social-tiktok": {
+      "get": {
+        "summary": "TikTok",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/sentiment": {
+      "get": {
+        "summary": "Sentiment",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/ecomm-product": {
+      "get": {
+        "summary": "Product",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/ecomm-review": {
+      "get": {
+        "summary": "Review",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/ecomm-search": {
+      "get": {
+        "summary": "Search",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/express-trace": {
+      "get": {
+        "summary": "Express",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/air-ticket": {
+      "get": {
+        "summary": "Air Ticket",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/hotel-search": {
+      "get": {
+        "summary": "Hotel",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/food-delivery": {
+      "get": {
+        "summary": "Food",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/map-geocode": {
+      "get": {
+        "summary": "Geocode",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/map-reverse": {
+      "get": {
+        "summary": "Reverse",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/map-route": {
+      "get": {
+        "summary": "Route",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/map-poi": {
+      "get": {
+        "summary": "POI",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/weather-now": {
+      "get": {
+        "summary": "Weather Now",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/weather-forecast": {
+      "get": {
+        "summary": "Forecast",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/weather-history": {
+      "get": {
+        "summary": "Weather History",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/office-pdf-parse": {
+      "get": {
+        "summary": "PDF Parse",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/office-pdf-merge": {
+      "get": {
+        "summary": "PDF Merge",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/office-excel": {
+      "get": {
+        "summary": "Excel",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/office-word": {
+      "get": {
+        "summary": "Word",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/office-ocr": {
+      "get": {
+        "summary": "OCR",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/office-barcode": {
+      "get": {
+        "summary": "Barcode",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/email-verify": {
+      "get": {
+        "summary": "Email Verify",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/kyc-check": {
+      "get": {
+        "summary": "KYC",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/aml-screen": {
+      "get": {
+        "summary": "AML",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/address-risk": {
+      "get": {
+        "summary": "Address Risk",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/token-risk": {
+      "get": {
+        "summary": "Token Risk",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/phish-check": {
+      "get": {
+        "summary": "Phishing",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/virus-scan": {
+      "get": {
+        "summary": "Virus Scan",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/captcha-solve": {
+      "get": {
+        "summary": "Captcha",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/block-latest": {
+      "get": {
+        "summary": "Block Latest",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/block-detail": {
+      "get": {
+        "summary": "Block Detail",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/tx-detail": {
+      "get": {
+        "summary": "TX Detail",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/address-balance": {
+      "get": {
+        "summary": "Balance",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/address-txs": {
+      "get": {
+        "summary": "TX History",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/nonce": {
+      "get": {
+        "summary": "Nonce",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/defi-swap-quote": {
+      "get": {
+        "summary": "Swap Quote",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/nft-floor": {
+      "get": {
+        "summary": "NFT Floor",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/ens-resolve": {
+      "get": {
+        "summary": "ENS",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/did-resolve": {
+      "get": {
+        "summary": "DID",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/game-nft-item": {
+      "get": {
+        "summary": "Game NFT",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/game-wallet": {
+      "get": {
+        "summary": "Game Wallet",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/metaverse-land": {
+      "get": {
+        "summary": "Metaverse",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/music-search": {
+      "get": {
+        "summary": "Music Search",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/music-recognize": {
+      "get": {
+        "summary": "Music Recognize",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/github-search": {
+      "get": {
+        "summary": "GitHub Search",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/github-repo": {
+      "get": {
+        "summary": "GitHub Repo",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/ip-locate": {
+      "get": {
+        "summary": "IP Locate",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/domain-whois": {
+      "get": {
+        "summary": "WHOIS",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/url-shorten": {
+      "get": {
+        "summary": "URL Shorten",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/qrcode-gen": {
+      "get": {
+        "summary": "QR Gen",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/gas-forecast": {
+      "get": {
+        "summary": "Gas Forecast",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/market-intel": {
+      "get": {
+        "summary": "Market Intel",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/defi-insights": {
+      "get": {
+        "summary": "DeFi Insights",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/network-health": {
+      "get": {
+        "summary": "Network Health",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/tracker-report": {
+      "get": {
+        "summary": "Tracker",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/btc-price": {
+      "get": {
+        "summary": "BTC Price",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/eth-gas-now": {
+      "get": {
+        "summary": "Gas Now",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/token-price": {
+      "get": {
+        "summary": "Token Price",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/token-price-history": {
+      "get": {
+        "summary": "Token History",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/eth-fee-history": {
+      "get": {
+        "summary": "Fee History",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/stablecoin-rates": {
+      "get": {
+        "summary": "Stablecoin Rates",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/defi-pool-stats": {
+      "get": {
+        "summary": "Pool Stats",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/defi-lending-rates": {
+      "get": {
+        "summary": "Lending",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/defi-staking-apr": {
+      "get": {
+        "summary": "Staking APR",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/defi-positions": {
+      "get": {
+        "summary": "DeFi Positions",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/nft-owner": {
+      "get": {
+        "summary": "NFT Owner",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/nft-metadata": {
+      "get": {
+        "summary": "NFT Metadata",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/nft-trades": {
+      "get": {
+        "summary": "NFT Trades",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/contract-verified": {
+      "get": {
+        "summary": "Contract Verify",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/token-insight": {
+      "get": {
+        "summary": "Token Insight",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/lens-profile": {
+      "get": {
+        "summary": "Lens",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/farcaster-cast": {
+      "get": {
+        "summary": "Farcaster",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/rwa-realestate": {
+      "get": {
+        "summary": "RWA Real Estate",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/rwa-commodity": {
+      "get": {
+        "summary": "RWA Commodity",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/rwa-bond": {
+      "get": {
+        "summary": "RWA Bond",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/rwa-credit": {
+      "get": {
+        "summary": "RWA Credit",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/sms-send": {
+      "get": {
+        "summary": "SMS",
+        "description": "Price: $0.02 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.02"
+      }
+    },
+    "/paid/pay-fiat": {
+      "get": {
+        "summary": "Fiat Pay",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/pay-crypto": {
+      "get": {
+        "summary": "Crypto Pay",
+        "description": "Price: $0.01 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.01"
+      }
+    },
+    "/paid/ssi-verify": {
+      "get": {
+        "summary": "SSI",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    },
+    "/paid/zk-proof": {
+      "get": {
+        "summary": "ZK Proof",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/cross-chain-compare": {
+      "get": {
+        "summary": "Cross Chain",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/whale-alert": {
+      "get": {
+        "summary": "Whale Alert",
+        "description": "Price: $0.05 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.05"
+      }
+    },
+    "/paid/mempool-sniper": {
+      "get": {
+        "summary": "Mempool",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/onchain-signals": {
+      "get": {
+        "summary": "Signals",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/ai-agent-stats": {
+      "get": {
+        "summary": "Agent Stats",
+        "description": "Price: $0.06 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.06"
+      }
+    },
+    "/paid/simulation-tx": {
+      "get": {
+        "summary": "Sim TX",
+        "description": "Price: $0.04 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.04"
+      }
+    },
+    "/paid/wallet-profile": {
+      "get": {
+        "summary": "Wallet Profile",
+        "description": "Price: $0.03 USDC. Returns 402 if unpaid.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-price": "0.03"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "bazaar": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

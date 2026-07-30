@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "label": "GoldBean MCP Server",
+  "description": "10 x402-paid AI tools for agents. Pay-per-call with USDC on Base.",
+  "type": "remote",
+  "transport": "sse",
+  "url": "https://goldbean-api.xyz/sse",
+  "command": "npx",
+  "args": [
+    "goldbean-mcp"
+  ],
+  "tools": [
+    {
+      "name": "eth_price",
+      "description": "Get ETH price"
+    },
+    {
+      "name": "btc_price",
+      "description": "Get BTC price"
+    },
+    {
+      "name": "web_search",
+      "description": "Search web"
+    },
+    {
+      "name": "image_gen",
+      "description": "Generate images"
+    },
+    {
+      "name": "translate",
+      "description": "Translate text"
+    },
+    {
+      "name": "summarize",
+      "description": "Summarize text"
+    },
+    {
+      "name": "crypto_price",
+      "description": "Get crypto price"
+    },
+    {
+      "name": "weather",
+      "description": "Get weather"
+    }
+  ]
+}

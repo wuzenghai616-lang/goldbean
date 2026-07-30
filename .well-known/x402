@@ -1,0 +1,10 @@
+{
+  "x402-version": "0.1.0",
+  "discovery": "https://goldbean-api.xyz/openapi.json",
+  "payable": {
+    "default-scheme": "exact",
+    "default-network": "eip155:8453",
+    "default-asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "pay-to": "0x7484b0bca25d2ee56e9b0535572d4cf44a047d98"
+  }
+}
