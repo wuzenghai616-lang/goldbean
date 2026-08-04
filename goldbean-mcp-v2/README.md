@@ -83,6 +83,47 @@ Response headers include `MCP-Protocol-Version: 2026-07-28`.
 
 No `initialize`, no `Mcp-Session-Id`, no state — just like calling any REST API.
 
+## TypeScript Types
+
+The package ships first-class TypeScript definitions in `types.d.ts` (also published on npm).
+
+```ts
+import type {
+  ToolParamsByName,
+  ToolParams,
+  TypedCallToolParams,
+  JsonRpcRequest,
+  JsonRpcResponse,
+  ToolsCallResult,
+} from "goldbean-mcp";
+
+// Type-safe tools/call request — arguments are validated against the tool's schema
+const req: JsonRpcRequest<TypedCallToolParams<"baidu_ocr">> = {
+  jsonrpc: "2.0",
+  id: 1,
+  method: "tools/call",
+  params: { name: "baidu_ocr", arguments: { image: "base64..." } },
+};
+
+// Typed response
+const res: JsonRpcResponse<ToolsCallResult> = {
+  jsonrpc: "2.0",
+  id: 1,
+  result: { content: [{ type: "text", text: "ok" }] },
+};
+```
+
+- `ToolParamsByName` maps every tool name to its argument interface (51 tools, v9.8.0).
+- `ToolParams<T>` is a generic lookup: `ToolParams<"baidu_llm_chat">`.
+- All `inputSchema`, JSON-RPC, and `tools/list` / `tools/call` shapes are typed.
+
+### Running the type + coverage tests
+
+```bash
+npm install        # devDependency: typescript
+npm run check      # node --test (schema coverage) + tsc (compile-time shape checks)
+```
+
 ## License
 
 MIT
